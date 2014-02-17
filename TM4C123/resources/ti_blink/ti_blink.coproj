@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project version="2G - 1.7.5" name="ti_blink">
+  <Target name="ti" isCurrent="1">
+    <Device manufacturerId="1" manufacturerName="ARM" chipId="4" chipName="M4" boardId="" boardName=""/>
+    <BuildOption>
+      <Compile>
+        <Option name="OptimizationLevel" value="0"/>
+        <Option name="UseFPU" value="0"/>
+        <Option name="UserEditCompiler" value=""/>
+        <Option name="FPU" value="0"/>
+        <Includepaths>
+          <Includepath path="."/>
+        </Includepaths>
+        <DefinedSymbols>
+          <Define name="TM4C1230H6PM"/>
+          <Define name="gcc"/>
+        </DefinedSymbols>
+      </Compile>
+      <Link useDefault="0">
+        <Option name="DiscardUnusedSection" value="0"/>
+        <Option name="UserEditLinkder" value=""/>
+        <Option name="UseMemoryLayout" value="1"/>
+        <Option name="LTO" value="0"/>
+        <Option name="IsNewStartupCode" value="1"/>
+        <Option name="Library" value="Not use C Library"/>
+        <Option name="nostartfiles" value="1"/>
+        <Option name="UserEditLinker" value="--entry=main; "/>
+        <LinkedLibraries/>
+        <MemoryAreas debugInFlashNotRAM="1">
+          <Memory name="IROM1" type="ReadOnly" size="0x00040000" startValue="0x00000000"/>
+          <Memory name="IRAM1" type="ReadWrite" size="0x00008000" startValue="0x20000000"/>
+          <Memory name="IROM2" type="ReadOnly" size="" startValue=""/>
+          <Memory name="IRAM2" type="ReadWrite" size="" startValue=""/>
+        </MemoryAreas>
+        <LocateLinkFile path="../../configuration/programdata/ti_blink/arm-gcc-link.ld" type="0"/>
+      </Link>
+      <Output>
+        <Option name="OutputFileType" value="0"/>
+        <Option name="Path" value="./"/>
+        <Option name="Name" value="ti"/>
+        <Option name="HEX" value="1"/>
+        <Option name="BIN" value="1"/>
+      </Output>
+      <User>
+        <UserRun name="Run#1" type="Before" checked="0" value=""/>
+        <UserRun name="Run#1" type="After" checked="0" value=""/>
+      </User>
+    </BuildOption>
+    <DebugOption>
+      <Option name="org.coocox.codebugger.gdbjtag.core.adapter" value="ColinkEx"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.debugMode" value="SWD"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.clockDiv" value="1M"/>
+      <Option name="org.coocox.codebugger.gdbjtag.corerunToMain" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.jlinkgdbserver" value=""/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.userDefineGDBScript" value=""/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.targetEndianess" value="0"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.jlinkResetMode" value="Type 0: Normal"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.resetMode" value="SYSRESETREQ"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ifSemihost" value="0"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ifCacheRom" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ipAddress" value="127.0.0.1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.portNumber" value="2009"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.autoDownload" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.verify" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.downloadFuction" value="Erase Effected"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.defaultAlgorithm" value="./tm4c123_256.elf"/>
+      <Option name="org.coocox.codebugger.gdbjtag.coredebugInRamInitCommands" value="cd C:/CooCox/CoIDE/workspace/ti/ti/Debug/bin restore ti.elf set {unsigned int*}0xE000ED08 = 0x10000000 set $sp = {unsigned int*}0x10000000 set $pc = {unsigned int*}0x10000004 "/>
+    </DebugOption>
+    <ExcludeFile/>
+  </Target>
+  <Components path="./">
+    <Component id="30" name="C Library" path="" type="2"/>
+    <Component id="53" name="Start_Up_Code" path="" type="2"/>
+    <Component id="54" name="M4 CMSIS Core" path="" type="2"/>
+  </Components>
+  <Files>
+    <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
+    <File name="hw_gpio.h" path="hw_gpio.h" type="1"/>
+    <File name="hw_sysctl.h" path="hw_sysctl.h" type="1"/>
+    <File name="sysctl.c" path="sysctl.c" type="1"/>
+    <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
+    <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
+    <File name="hw_memmap.h" path="hw_memmap.h" type="1"/>
+    <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
+    <File name="cmsisboot" path="" type="2"/>
+    <File name="hw_flash.h" path="hw_flash.h" type="1"/>
+    <File name="gpio.c" path="gpio.c" type="1"/>
+    <File name="cpu.c" path="cpu.c" type="1"/>
+    <File name="interrupt.c" path="interrupt.c" type="1"/>
+    <File name="cmsis" path="" type="2"/>
+    <File name="gpio.h" path="gpio.h" type="1"/>
+    <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
+    <File name="hw_ints.h" path="hw_ints.h" type="1"/>
+    <File name="rom.h" path="rom.h" type="1"/>
+    <File name="debug.h" path="debug.h" type="1"/>
+    <File name="interrupt.h" path="interrupt.h" type="1"/>
+    <File name="syscalls" path="" type="2"/>
+    <File name="hw_types.h" path="hw_types.h" type="1"/>
+    <File name="cpu.h" path="cpu.h" type="1"/>
+    <File name="cmsisboot/startup/startup.c" path="cmsisboot/startup/startup.c" type="1"/>
+    <File name="cmsisboot/startup" path="" type="2"/>
+    <File name="hw_nvic.h" path="hw_nvic.h" type="1"/>
+    <File name="main.c" path="main.c" type="1"/>
+    <File name="sysctl.h" path="sysctl.h" type="1"/>
+  </Files>
+</Project>
