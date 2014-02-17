@@ -1,0 +1,133 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M4 FPU</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x1BA01477</ExpectedID>
+			<ExpectedID>0x2BA01477</ExpectedID>
+		</SWD>
+		
+		<JTAG support="true">
+			<TAP name="ARM CoreSight JTAG-DP"    irLen="4" ircapture="0x1" irmask="0xF" irIDCode="0xE" select="true">
+				<ExpectedID>0x4BA00477</ExpectedID>  <!-- datasheet -->
+			</TAP>
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" /> 
+			<SoftSysReset  support="true" select="true"/> 
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>12000000</SystemResetClkFreq> <!-- IOSC 12MHZ -->
+	</Debug>
+
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+   <!-- <Block addr="XXX"        size="XXX"      read="true"   write="true"   execute="false" name="XXX" /> -->
+		
+		<!-- Private peripheral bus -->
+		<Block addr="0xE000E000" size="0x1000"   read="true"   write="true"   execute="false" name="System Control Space" />
+		<Block addr="0xE0002000" size="0x1000"   read="true"   write="true"   execute="false" name="FPB" />
+		<Block addr="0xE0001000" size="0x1000"   read="true"   write="true"   execute="false" name="DWT" />
+		<Block addr="0xE0000000" size="0x1000"   read="true"   write="true"   execute="false" name="ITM" />
+		<Block addr="0xE0041000" size="0x1000"   read="true"   write="true"   execute="false" name="ETM" />
+		<Block addr="0xE0040000" size="0x1000"   read="true"   write="true"   execute="false" name="TPIU" />
+		
+	<!-- FiRM Peripherals -->
+		<Block addr="0x40000000" size="0x1000"   read="true"   write="true"   execute="false" name="Watchdog timer0" />
+		<Block addr="0x40001000" size="0x1000"   read="true"   write="true"   execute="false" name="Watchdog timer1" />
+		<Block addr="0x40004000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port A" />
+		<Block addr="0x40005000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port B" />
+		<Block addr="0x40006000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port C" />
+		<Block addr="0x40007000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port D" />
+		<Block addr="0x40008000" size="0x1000"   read="true"   write="true"   execute="false" name="SSI0" />
+		<Block addr="0x40009000" size="0x1000"   read="true"   write="true"   execute="false" name="SSI1" />
+		<Block addr="0x4000A000" size="0x1000"   read="true"   write="true"   execute="false" name="SSI2" />
+		<block addr="0x4000B000" size="0x1000"   read="true"   write="true"   execute="false" name="SSI3" />
+		<Block addr="0x4000C000" size="0x1000"   read="true"   write="true"   execute="false" name="UART0" />
+		<Block addr="0x4000D000" size="0x1000"   read="true"   write="true"   execute="false" name="UART1" />
+		<Block addr="0x4000E000" size="0x1000"   read="true"   write="true"   execute="false" name="UART2" />
+		<Block addr="0x4000F000" size="0x1000"   read="true"   write="true"   execute="false" name="UART3" />
+		<Block addr="0x40010000" size="0x1000"   read="true"   write="true"   execute="false" name="UART4" />
+		<Block addr="0x40011000" size="0x1000"   read="true"   write="true"   execute="false" name="UART5" />
+		<Block addr="0x40012000" size="0x1000"   read="true"   write="true"   execute="false" name="UART6" />
+		<Block addr="0x40013000" size="0x1000"   read="true"   write="true"   execute="false" name="UARE7" />
+		
+		<!-- Peripherals -->
+		<Block addr="0x40020000" size="0x800"   read="true"   write="true"   execute="false" name="I2C Master0" />
+		<Block addr="0x40020800" size="0x800"   read="true"   write="true"   execute="false" name="I2C Slave0" />
+		<Block addr="0x40021000" size="0x800"   read="true"   write="true"   execute="false" name="I2C Master1" />
+		<Block addr="0x40021800" size="0x800"   read="true"   write="true"   execute="false" name="I2C Slave1" />
+		<Block addr="0x40022000" size="0x800"   read="true"   write="true"   execute="false" name="I2C Master2" />
+		<Block addr="0x40022800" size="0x800"   read="true"   write="true"   execute="false" name="I2C Slave2" />
+		<Block addr="0x40023000" size="0x800"   read="true"   write="true"   execute="false" name="I2C Master3" />
+		<Block addr="0x40023800" size="0x800"   read="true"   write="true"   execute="false" name="I2C Slave3" />
+		<Block addr="0x40024000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port E" />
+		<Block addr="0x40025000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port F" />
+		<Block addr="0x40026000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port G" />
+		<Block addr="0x40027000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port H" />
+		<Block addr="0x40028000" size="0x1000"   read="true"   write="true"   execute="false" name="PWM0" />
+		<Block addr="0x40029000" size="0x1000"   read="true"   write="true"   execute="false" name="PWM1" />
+		<Block addr="0x4002C000" size="0x1000"   read="true"   write="true"   execute="false" name="QEI0" />
+		<Block addr="0x4002D000" size="0x1000"   read="true"   write="true"   execute="false" name="QEI1" />	
+		<Block addr="0x40030000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER0" />
+		<Block addr="0x40031000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER1" />
+		<Block addr="0x40032000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER2" />
+		<Block addr="0x40033000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER3" />
+		<Block addr="0x40034000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER4" />
+		<Block addr="0x40035000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER5" />
+		<Block addr="0x40036000" size="0x1000"   read="true"   write="true"   execute="false" name="Wide TIMER0" />
+		<Block addr="0x40037000" size="0x1000"   read="true"   write="true"   execute="false" name="Wide TIMER1" />
+		<Block addr="0x40038000" size="0x1000"   read="true"   write="true"   execute="false" name="ADC0" />
+		<Block addr="0x40039000" size="0x1000"   read="true"   write="true"   execute="false" name="ADC1" />
+		<Block addr="0x4003C000" size="0x1000"   read="true"   write="true"   execute="false" name="Analog Comparators" />
+		<Block addr="0x4003D000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port J" />
+		<Block addr="0x40040000" size="0x1000"   read="true"   write="true"   execute="false" name="CAN0" />
+		<Block addr="0x40041000" size="0x1000"   read="true"   write="true"   execute="false" name="CAN1" />
+		<Block addr="0x40042000" size="0x1000"   read="true"   write="true"   execute="false" name="CAN2" />
+		<Block addr="0x40048000" size="0x1000"   read="true"   write="true"   execute="false" name="Ethernet" />
+		<Block addr="0x4004C000" size="0x1000"   read="true"   write="true"   execute="false" name="Wide TIMER2" />
+		<Block addr="0x4004D000" size="0x1000"   read="true"   write="true"   execute="false" name="Wide TIMER3" />
+		<Block addr="0x4004E000" size="0x1000"   read="true"   write="true"   execute="false" name="Wide TIMER4" />
+		<Block addr="0x4004F000" size="0x1000"   read="true"   write="true"   execute="false" name="Wide TIMER5" />
+		<Block addr="0x40050000" size="0x1000"   read="true"   write="true"   execute="false" name="USB" />
+		<Block addr="0x40058000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port A(AHB aperture)" />
+		<Block addr="0x40059000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port B(AHB aperture)" />
+		<Block addr="0x4005A000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port C(AHB aperture)" />
+		<Block addr="0x4005B000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port D(AHB aperture)" />
+		<Block addr="0x4005C000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port E(AHB aperture)" />
+		<Block addr="0x4005D000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port F(AHB aperture)" />
+		<Block addr="0x4005E000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port G(AHB aperture)" />
+		<Block addr="0x4005F000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port H(AHB aperture)" />
+		<Block addr="0x40060000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port J(AHB aperture)" />
+		<Block addr="0x40061000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port K(AHB aperture)" />
+		<Block addr="0x40062000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port L(AHB aperture)" />
+		<Block addr="0x40063000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port M(AHB aperture)" />
+		<Block addr="0x40064000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port N(AHB aperture)" />
+		<Block addr="0x40065000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port P(AHB aperture)" />
+		<Block addr="0x40066000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port Q(AHB aperture)" />
+		<Block addr="0x400AF000" size="0x1000"   read="true"   write="true"   execute="false" name="EEPROM and Key Locker" />
+		<Block addr="0x400C0000" size="0x800"   read="true"   write="true"   execute="false" name="I2C Master4" />
+		<Block addr="0x400C0800" size="0x800"   read="true"   write="true"   execute="false" name="I2C Slave4" />
+		<Block addr="0x400C1000" size="0x800"   read="true"   write="true"   execute="false" name="I2C Master5" />
+		<Block addr="0x400C1800" size="0x800"   read="true"   write="true"   execute="false" name="I2C Slave5" />
+		<Block addr="0x400F9000" size="0x1000"   read="true"   write="true"   execute="false" name="System Exception Module" />
+		<Block addr="0x400FC000" size="0x1000"   read="true"   write="true"   execute="false" name="Hibernation Module" />
+		<Block addr="0x400FD000" size="0x1000"   read="true"   write="true"   execute="false" name="Flash Memory Control" />
+		<Block addr="0x400FE000" size="0x1000"   read="true"   write="true"   execute="false" name="System Control" />
+		<Block addr="0x400FF000" size="0x1000"   read="true"   write="true"   execute="false" name="uDMA" />
+	</MemMap>
+</Debugger>
