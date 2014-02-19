@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Device>
+	<Name>TM4C1237H6PM</Name>  
+	<Vendor>TI</Vendor> 
+	<Family>TM4C123</Family>  
+	<Arch>Cortex-M4 FPU</Arch> 
+	<Description>TI's TM4C1237H6PM operates at a maximum speed of 80MHz and features 256 Kbytes of Flash and 32 Kbytes of SRAM.</Description>
+	<Parameters>
+		<Parameter>43 GPIOs, LQFP64 Package</Parameter>
+		<Parameter>six 32-bit and six wide 64-bit general-purpose timers</Parameter>
+		<Parameter>8 UARTs</Parameter>
+		<Parameter>4 I2C modules</Parameter>
+		<Parameter>4 SSI modules supporting SPI, MICROWIRE and TI SSI</Parameter>
+		<Parameter>2 12-bit ADC with 12 inputs</Parameter>
+		<Parameter>1 USB 2.0 with USB OTG mode</Parameter>
+		<Parameter>1 CAN 2.0 module</Parameter>
+	</Parameters>
+	<ReferenceLinks>
+		<Link name="Chips Page">http://www.ti.com/product/tm4c1237h6pm</Link>
+		<Link name="Chips Datasheet">http://www.ti.com/lit/ds/symlink/tm4c1237h6pm.pdf</Link>
+	</ReferenceLinks>
+	
+	
+	<DebugSetting>$TOOLKIT_CONFIG_DIR$\debugger\TM4C123.xml</DebugSetting>
+	
+	<Flash>
+		<Block addr="0x00000000" size="0x00040000" read="true" write="false" execute="true" name="Embedded Flash" />	<!-- 256K -->
+	</Flash>
+	
+	<Ram>
+		<Block addr="0x20000000" size="0x00008000" read="true" write="true"  execute="true" name="Embedded SRAM" />	    <!-- 32K -->
+	</Ram>
+	
+	<FlashLoader>
+		<loader>$TOOLKIT_FLASH_DIR$\TM4C123_256.elf</loader>
+	</FlashLoader>
+</Device>

@@ -9,7 +9,6 @@
 		<Arch>Cortex-M4 FPU</Arch>
 		
 		<SWD support="true">
-			<ExpectedID>0x1BA01477</ExpectedID>
 			<ExpectedID>0x2BA01477</ExpectedID>
 		</SWD>
 		
