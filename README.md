@@ -27,4 +27,6 @@ Erase = working
 
 Programming = working
 
-Debugging = not working error: Remote 'g' packet reply is too long
+Debugging = working
+
+libraries = not added
