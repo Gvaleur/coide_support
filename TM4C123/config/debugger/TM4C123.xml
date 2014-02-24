@@ -24,7 +24,7 @@
 			<SoftVectReset support="true" />
 		</Reset>
 		
-		<SystemResetClkFreq>12000000</SystemResetClkFreq> <!-- IOSC 12MHZ -->
+		<SystemResetClkFreq>16000000</SystemResetClkFreq> <!-- PIOSC 16MHZ -->
 	</Debug>
 
 	<!-- 
