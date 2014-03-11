@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -108,12 +108,6 @@ _ADCIntNumberGet(uint32_t ui32Base, uint32_t ui32SequenceNum)
                   (INT_ADC0SS0_BLIZZARD + ui32SequenceNum) :
                   (INT_ADC0SS0_BLIZZARD + ui32SequenceNum));
     }
-    else if(CLASS_IS_SNOWFLAKE)
-    {
-        ui8Int = ((ui32Base == ADC0_BASE) ?
-                  (INT_ADC0SS0_SNOWFLAKE + ui32SequenceNum) :
-                  (INT_ADC1SS0_SNOWFLAKE + ui32SequenceNum));
-    }
     else
     {
         ui8Int = 0;
@@ -158,8 +152,9 @@ ADCIntRegister(uint32_t ui32Base, uint32_t ui32SequenceNum,
     //
     // Determine the interrupt to register based on the sequence number.
     //
-    ui8Int = _ADCIntNumberGet(ui32Base, ui32SequenceNum);
-    ASSERT(ui8Int != 0);
+    ui8Int = ((ui32Base == ADC0_BASE) ?
+              (INT_ADC0SS0_BLIZZARD + ui32SequenceNum) :
+              (INT_ADC1SS0_BLIZZARD + ui32SequenceNum));
 
     //
     // Register the interrupt handler.
@@ -1395,190 +1390,6 @@ ADCComparatorIntClear(uint32_t ui32Base, uint32_t ui32Status)
 
 //*****************************************************************************
 //
-//! Disables ADC interrupt sources.
-//!
-//! \param ui32Base is the base address of the ADC module.
-//! \param ui32IntFlags is the bit mask of the interrupt sources to disable.
-//!
-//! This function disables the indicated ADC interrupt sources.  Only the
-//! sources that are enabled can be reflected to the processor interrupt;
-//! disabled sources have no effect on the processor.
-//!
-//! The \e ui32IntFlags parameter is the logical OR of any of the following:
-//!
-//! - \b ADC_INT_SS0 - interrupt due to ADC sample sequence 0.
-//! - \b ADC_INT_SS1 - interrupt due to ADC sample sequence 1.
-//! - \b ADC_INT_SS2 - interrupt due to ADC sample sequence 2.
-//! - \b ADC_INT_SS3 - interrupt due to ADC sample sequence 3.
-//! - \b ADC_INT_DMA_SS0 - interrupt due to DMA on ADC sample sequence 0.
-//! - \b ADC_INT_DMA_SS1 - interrupt due to DMA on ADC sample sequence 1.
-//! - \b ADC_INT_DMA_SS2 - interrupt due to DMA on ADC sample sequence 2.
-//! - \b ADC_INT_DMA_SS3 - interrupt due to DMA on ADC sample sequence 3.
-//! - \b ADC_INT_DCON_SS0 - interrupt due to digital comparator on ADC sample
-//!   sequence 0.
-//! - \b ADC_INT_DCON_SS1 - interrupt due to digital comparator on ADC sample
-//!   sequence 1.
-//! - \b ADC_INT_DCON_SS2 - interrupt due to digital comparator on ADC sample
-//!   sequence 2.
-//! - \b ADC_INT_DCON_SS3 - interrupt due to digital comparator on ADC sample
-//!   sequence 3.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-ADCIntDisableEx(uint32_t ui32Base, uint32_t ui32IntFlags)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-
-    //
-    // Disable the requested interrupts.
-    //
-    HWREG(ui32Base + ADC_O_IM) &= ~ui32IntFlags;
-}
-
-//*****************************************************************************
-//
-//! Enables ADC interrupt sources.
-//!
-//! \param ui32Base is the base address of the ADC module.
-//! \param ui32IntFlags is the bit mask of the interrupt sources to disable.
-//!
-//! This function enables the indicated ADC interrupt sources.  Only the
-//! sources that are enabled can be reflected to the processor interrupt;
-//! disabled sources have no effect on the processor.
-//!
-//! The \e ui32IntFlags parameter is the logical OR of any of the following:
-//!
-//! - \b ADC_INT_SS0 - interrupt due to ADC sample sequence 0.
-//! - \b ADC_INT_SS1 - interrupt due to ADC sample sequence 1.
-//! - \b ADC_INT_SS2 - interrupt due to ADC sample sequence 2.
-//! - \b ADC_INT_SS3 - interrupt due to ADC sample sequence 3.
-//! - \b ADC_INT_DMA_SS0 - interrupt due to DMA on ADC sample sequence 0.
-//! - \b ADC_INT_DMA_SS1 - interrupt due to DMA on ADC sample sequence 1.
-//! - \b ADC_INT_DMA_SS2 - interrupt due to DMA on ADC sample sequence 2.
-//! - \b ADC_INT_DMA_SS3 - interrupt due to DMA on ADC sample sequence 3.
-//! - \b ADC_INT_DCON_SS0 - interrupt due to digital comparator on ADC sample
-//!   sequence 0.
-//! - \b ADC_INT_DCON_SS1 - interrupt due to digital comparator on ADC sample
-//!   sequence 1.
-//! - \b ADC_INT_DCON_SS2 - interrupt due to digital comparator on ADC sample
-//!   sequence 2.
-//! - \b ADC_INT_DCON_SS3 - interrupt due to digital comparator on ADC sample
-//!   sequence 3.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-ADCIntEnableEx(uint32_t ui32Base, uint32_t ui32IntFlags)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-
-    //
-    // Enable the requested interrupts.
-    //
-    HWREG(ui32Base + ADC_O_IM) |= ui32IntFlags;
-}
-
-//*****************************************************************************
-//
-//! Gets interrupt status for the specified ADC module.
-//!
-//! \param ui32Base is the base address of the ADC module.
-//! \param bMasked specifies whether masked or raw interrupt status is
-//! returned.
-//!
-//! If \e bMasked is set as \b true, then the masked interrupt status is
-//! returned; otherwise, the raw interrupt status is returned.
-//!
-//! \return Returns the current interrupt status for the specified ADC module.
-//! The value returned is the logical OR of the \b ADC_INT_* values that are
-//! currently active.
-//
-//*****************************************************************************
-uint32_t
-ADCIntStatusEx(uint32_t ui32Base, bool bMasked)
-{
-    uint32_t ui32Temp;
-
-    //
-    // Check the arguments.
-    //
-    ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-
-    //
-    // Return either the masked interrupt status or the raw interrupt status as
-    // requested.
-    //
-    if(bMasked)
-    {
-        ui32Temp = HWREG(ui32Base + ADC_O_ISC);
-    }
-    else
-    {
-        //
-        // Read the Raw interrupt status to see if a digital comparator
-        // interrupt is active.
-        //
-        ui32Temp = HWREG(ui32Base + ADC_O_RIS);
-
-        //
-        // Since, the raw interrupt status only indicates that any one of the
-        // digital comparators caused an interrupt, if the raw interrupt status
-        // is set then the return value is modified to indicate that all sample
-        // sequences have a pending digital comparator interrupt.
-        // This is exactly how the hardware works so the return code is
-        // modified to match this behavior.
-        //
-        if(ui32Temp & ADC_RIS_INRDC)
-        {
-            ui32Temp |= (ADC_INT_DCON_SS3 | ADC_INT_DCON_SS2 |
-                         ADC_INT_DCON_SS1 | ADC_INT_DCON_SS0);
-        }
-    }
-    return(ui32Temp);
-}
-
-//*****************************************************************************
-//
-//! Clears the specified ADC interrupt sources.
-//!
-//! \param ui32Base is the base address of the ADC port.
-//! \param ui32IntFlags is the bit mask of the interrupt sources to disable.
-//!
-//! Clears the interrupt for the specified interrupt source(s).
-//!
-//! The \e ui32IntFlags parameter is the logical OR of the \b ADC_INT_* values.
-//! See the ADCIntEnableEx() function for the list of possible \b ADC_INT*
-//! values.
-//!
-//! \note Because there is a write buffer in the Cortex-M processor, it may
-//! take several clock cycles before the interrupt source is actually cleared.
-//! Therefore, it is recommended that the interrupt source be cleared early in
-//! the interrupt handler (as opposed to the very last action) to avoid
-//! returning from the interrupt handler before the interrupt source is
-//! actually cleared.  Failure to do so may result in the interrupt handler
-//! being immediately reentered (because the interrupt controller still sees
-//! the interrupt source asserted).
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-ADCIntClearEx(uint32_t ui32Base, uint32_t ui32IntFlags)
-{
-    HWREG(ui32Base + ADC_O_ISC) |= ui32IntFlags;
-}
-
-//*****************************************************************************
-//
 //! Selects the ADC reference.
 //!
 //! \param ui32Base is the base address of the ADC module.
@@ -1722,95 +1533,6 @@ ADCPhaseDelayGet(uint32_t ui32Base)
     // Return the phase delay.
     //
     return(HWREG(ui32Base + ADC_O_SPC));
-}
-
-//*****************************************************************************
-//
-//! Enables DMA for sample sequencers.
-//!
-//! \param ui32Base is the base address of the ADC module.
-//! \param ui32SequenceNum is the sample sequence number.
-//!
-//! Allows DMA requests to be generated based on the FIFO level of the sample
-//! sequencer.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-ADCSequenceDMAEnable(uint32_t ui32Base, uint32_t ui32SequenceNum)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-    ASSERT(ui32SequenceNum < 4);
-
-    //
-    // Enable the DMA on the specified sequencer.
-    //
-    HWREG(ui32Base + ADC_O_ACTSS) |= 0x100 << ui32SequenceNum;
-}
-
-//*****************************************************************************
-//
-//! Disables DMA for sample sequencers.
-//!
-//! \param ui32Base is the base address of the ADC module.
-//! \param ui32SequenceNum is the sample sequence number.
-//!
-//! Prevents the specified sample sequencer from generating DMA requests.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-ADCSequenceDMADisable(uint32_t ui32Base, uint32_t ui32SequenceNum)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-    ASSERT(ui32SequenceNum < 4);
-
-    //
-    // Disable the DMA on the specified sequencer.
-    //
-    HWREG(ui32Base + ADC_O_ACTSS) &= ~(0x100 << ui32SequenceNum);
-}
-
-//*****************************************************************************
-//
-//! Determines whether the ADC is busy or not.
-//!
-//! \param ui32Base is the base address of the ADC.
-//!
-//! This function allows the caller to determine whether or not the ADC is
-//! currently sampling .  If \b false is returned, then the ADC is not
-//! sampling data.
-//!
-//! Use this function to detect that the ADC is finished sampling data before
-//! putting the device into deep sleep.  Before using this function, it is
-//! highly recommended that the event trigger is changed to
-//! \b ADC_TRIGGER_NEVER on all enabled sequencers to prevent the ADC from
-//! starting after checking the busy status.
-//!
-//! \return Returns \b true if the ADC is sampling or \b false if all
-//! samples are complete.
-//
-//*****************************************************************************
-bool
-ADCBusy(uint32_t ui32Base)
-{
-    //
-    // Check the argument.
-    //
-    ASSERT((ui32Base == ADC0_BASE) || (ui32Base == ADC1_BASE));
-
-    //
-    // Determine if the ADC is busy.
-    //
-    return((HWREG(ui32Base + ADC_O_ACTSS) & ADC_ACTSS_BUSY) ? true : false);
 }
 
 //*****************************************************************************

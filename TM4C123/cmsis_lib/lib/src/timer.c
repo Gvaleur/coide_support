@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -50,18 +50,9 @@
 #include "include/hw_memmap.h"
 #include "include/hw_timer.h"
 #include "include/hw_types.h"
-#include "include/hw_sysctl.h"
 #include "include/debug.h"
 #include "include/interrupt.h"
 #include "include/timer.h"
-
-//*****************************************************************************
-//
-// A macro used to determine whether the target part supports new
-// configuration and control options.
-//
-//*****************************************************************************
-#define NEW_TIMER_CONFIGURATION CLASS_IS_SNOWFLAKE
 
 //*****************************************************************************
 //
@@ -85,21 +76,6 @@ static const uint32_t g_ppui32TimerIntMap[][2] =
 };
 static const uint_fast8_t g_ui8TimerIntMapRows =
     sizeof(g_ppui32TimerIntMap) / sizeof(g_ppui32TimerIntMap[0]);
-
-static const uint32_t g_ppui32TimerIntMapSnowflake[][2] =
-{
-    { TIMER0_BASE, INT_TIMER0A_SNOWFLAKE },
-    { TIMER1_BASE, INT_TIMER1A_SNOWFLAKE },
-    { TIMER2_BASE, INT_TIMER2A_SNOWFLAKE },
-    { TIMER3_BASE, INT_TIMER3A_SNOWFLAKE },
-    { TIMER4_BASE, INT_TIMER4A_SNOWFLAKE },
-    { TIMER5_BASE, INT_TIMER5A_SNOWFLAKE },
-    { TIMER6_BASE, INT_TIMER6A_SNOWFLAKE },
-    { TIMER7_BASE, INT_TIMER7A_SNOWFLAKE },
-};
-static const uint_fast8_t g_ui8TimerIntMapRowsSnowflake =
-    sizeof(g_ppui32TimerIntMapSnowflake) /
-    sizeof(g_ppui32TimerIntMapSnowflake[0]);
 
 //*****************************************************************************
 //
@@ -155,11 +131,6 @@ _TimerIntNumberGet(uint32_t ui32Base, uint32_t ui32Timer)
     ppui32SSIIntMap = g_ppui32TimerIntMap;
     ui8Rows = g_ui8TimerIntMapRows;
 
-    if(CLASS_IS_SNOWFLAKE)
-    {
-        ppui32SSIIntMap = g_ppui32TimerIntMapSnowflake;
-        ui8Rows = g_ui8TimerIntMapRowsSnowflake;
-    }
 
     //
     // Loop through the table that maps timer base addresses to interrupt
@@ -298,44 +269,6 @@ TimerDisable(uint32_t ui32Base, uint32_t ui32Timer)
 //!   instead of down (not available on all parts)
 //! - \b TIMER_CFG_A_PWM - Half-width PWM output
 //!
-//! Some Tiva devices also allow configuring an action when the timers
-//! reach their timeout.  Please consult the data sheet for the part you are
-//! using to determine whether configuring actions on timers is available.
-//!
-//! One of the following can be combined with the  \b TIMER_CFG_* values to
-//! enable an action on timer A:
-//!
-//! - \b TIMER_CFG_A_ACT_TOINTD - masks the timeout interrupt of timer A.
-//! - \b TIMER_CFG_A_ACT_NONE - no additional action on timeout of timer A.
-//! - \b TIMER_CFG_A_ACT_TOGGLE - toggle CCP on timeout of timer A.
-//! - \b TIMER_CFG_A_ACT_SETTO - set CCP on timeout of timer A.
-//! - \b TIMER_CFG_A_ACT_CLRTO - clear CCP on timeout of timer A.
-//! - \b TIMER_CFG_A_ACT_SETTOGTO - set CCP immediately and then toggle it on
-//!      timeout of timer A.
-//! - \b TIMER_CFG_A_ACT_CLRTOGTO - clear CCP immediately and then toggle it on
-//!      timeout of timer A.
-//! - \b TIMER_CFG_A_ACT_SETCLRTO - set CCP immediately and then clear it on
-//!      timeout of timer A.
-//! - \b TIMER_CFG_A_ACT_CLRSETTO - clear CCP immediately and then set it on
-//!      timeout of timer A.
-//!
-//! One of the following can be combined with the \b TIMER_CFG_* values to
-//! enable an action on timer B:
-//!
-//! - \b TIMER_CFG_B_ACT_TOINTD - masks the timeout interrupt of timer B.
-//! - \b TIMER_CFG_B_ACT_NONE - no additional action on timeout of timer B.
-//! - \b TIMER_CFG_B_ACT_TOGGLE - toggle CCP on timeout of timer B.
-//! - \b TIMER_CFG_B_ACT_SETTO - set CCP on timeout of timer B.
-//! - \b TIMER_CFG_B_ACT_CLRTO - clear CCP on timeout of timer B.
-//! - \b TIMER_CFG_B_ACT_SETTOGTO - set CCP immediately and then toggle it on
-//!      timeout of timer B.
-//! - \b TIMER_CFG_B_ACT_CLRTOGTO - clear CCP immediately and then toggle it on
-//!      timeout of timer B.
-//! - \b TIMER_CFG_B_ACT_SETCLRTO - set CCP immediately and then clear it on
-//!      timeout of timer B.
-//! - \b TIMER_CFG_B_ACT_CLRSETTO - clear CCP immediately and then set it on
-//!      timeout of timer B.
-//!
 //! Similarly, the second timer is configured by setting \e ui32Config to
 //! the result of a logical OR operation between one of the corresponding
 //! \b TIMER_CFG_B_* values and \e ui32Config.
@@ -389,22 +322,9 @@ TimerConfigure(uint32_t ui32Base, uint32_t ui32Config)
     // Note that the B timer configuration is ignored by the hardware in 32-bit
     // modes.
     //
-    if(NEW_TIMER_CONFIGURATION)
-    {
-        HWREG(ui32Base + TIMER_O_TAMR) = (((ui32Config & 0x000f0000) >> 4) |
-                                          (ui32Config & 0xff) |
-                                          TIMER_TAMR_TAPWMIE);
-        HWREG(ui32Base + TIMER_O_TBMR) = (((ui32Config & 0x00f00000) >> 8) |
-                                          ((ui32Config >> 8) & 0xff) |
-                                          TIMER_TBMR_TBPWMIE);
-    }
-    else
-    {
-        HWREG(ui32Base + TIMER_O_TAMR) = ((ui32Config & 255) |
-                                          TIMER_TAMR_TAPWMIE);
-        HWREG(ui32Base + TIMER_O_TBMR) = (((ui32Config >> 8) & 255) |
-                                          TIMER_TBMR_TBPWMIE);
-    }
+    HWREG(ui32Base + TIMER_O_TAMR) = (ui32Config & 255) | TIMER_TAMR_TAPWMIE;
+    HWREG(ui32Base + TIMER_O_TBMR) = (((ui32Config >> 8) & 255) |
+                                      TIMER_TBMR_TBPWMIE);
 }
 
 //*****************************************************************************
@@ -470,31 +390,6 @@ TimerControlTrigger(uint32_t ui32Base, uint32_t ui32Timer,
     ASSERT(_TimerBaseValid(ui32Base));
     ASSERT((ui32Timer == TIMER_A) || (ui32Timer == TIMER_B) ||
            (ui32Timer == TIMER_BOTH));
-
-    //
-    // On newer devices the Timer time out ADC trigger enable must also
-    // be set.
-    //
-    if(NEW_TIMER_CONFIGURATION)
-    {
-        uint32_t ui32Val;
-
-        //
-        // Determine which bits to set or clear in GPTMADCEV.
-        //
-        ui32Val = (TIMER_ADCEV_TATOADCEN | TIMER_ADCEV_TBTOADCEN);
-        ui32Val &= ui32Timer;
-
-        //
-        // Write the GPTM ADC Event register to enable or disable the trigger
-        // to the ADC.
-        //
-        HWREG(ui32Base + TIMER_O_ADCEV) = (bEnable ?
-                                           (HWREG(ui32Base + TIMER_O_ADCEV) |
-                                            ui32Val) :
-                                           (HWREG(ui32Base + TIMER_O_ADCEV) &
-                                            ~(ui32Val)));
-    }
 
     //
     // Set the trigger output as requested.
@@ -694,72 +589,6 @@ TimerRTCDisable(uint32_t ui32Base)
     // Disable RTC counting.
     //
     HWREG(ui32Base + TIMER_O_CTL) &= ~(TIMER_CTL_RTCEN);
-}
-
-//*****************************************************************************
-//
-//! Sets the clock source for the specified timer module.
-//!
-//! \param ui32Base is the base address of the timer module.
-//! \param ui32Source is the clock source for the timer module.
-//!
-//! This function sets the clock source for both timer A and timer B for the
-//! given timer module.  The possible clock sources are the system clock
-//! (\b TIMER_CLOCK_SYSTEM) or the precision internal oscillator
-//! (\b TIMER_CLOCK_PIOSC).
-//!
-//! \note The ability to specify the timer clock source varies with the
-//! Tiva part in use.  Please consult the data sheet for the part you are
-//! using to determine whether this support is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-TimerClockSourceSet(uint32_t ui32Base, uint32_t ui32Source)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_TimerBaseValid(ui32Base));
-    ASSERT((ui32Source == TIMER_CLOCK_SYSTEM) ||
-           (ui32Source == TIMER_CLOCK_PIOSC));
-
-    //
-    // Set the timer clock source.
-    //
-    HWREG(ui32Base + TIMER_O_CC) = ui32Source;
-}
-
-//*****************************************************************************
-//
-//! Returns the clock source for the specified timer module.
-//!
-//! \param ui32Base is the base address of the timer module.
-//!
-//! This function returns the clock source for the specified timer module.  The
-//! possible clock sources are the system clock (\b TIMER_CLOCK_SYSTEM) or
-//! the precision internal oscillator (\b TIMER_CLOCK_PIOSC).
-//!
-//! \note The ability to specify the timer clock source varies with the
-//! Tiva part in use.  Please consult the data sheet for the part you are
-//! using to determine whether this support is available.
-//!
-//! \return Returns either \b TIMER_CLOCK_SYSTEM or \b TIMER_CLOCK_PIOSC.
-//
-//*****************************************************************************
-uint32_t
-TimerClockSourceGet(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_TimerBaseValid(ui32Base));
-
-    //
-    // Return the timer clock source.
-    //
-    return(HWREG(ui32Base + TIMER_O_CC));
 }
 
 //*****************************************************************************
@@ -1447,8 +1276,6 @@ TimerIntUnregister(uint32_t ui32Base, uint32_t ui32Timer)
 //! The \e ui32IntFlags parameter must be the logical OR of any combination of
 //! the following:
 //!
-//! - \b TIMER_TIMB_DMA - Timer B DMA complete
-//! - \b TIMER_TIMA_DMA - Timer A DMA complete
 //! - \b TIMER_CAPB_EVENT  - Capture B event interrupt
 //! - \b TIMER_CAPB_MATCH  - Capture B match interrupt
 //! - \b TIMER_TIMB_TIMEOUT  - Timer B timeout interrupt
@@ -1637,196 +1464,6 @@ TimerSynchronize(uint32_t ui32Base, uint32_t ui32Timers)
     // Synchronize the specified timers.
     //
     HWREG(ui32Base + TIMER_O_SYNC) = ui32Timers;
-}
-
-//*****************************************************************************
-//
-//! Enables the events that can cause an ADC trigger event.
-//!
-//! \param ui32Base is the base address of the timer module.
-//! \param ui32ADCEvent is a bit mask of the events that can cause an ADC
-//!        trigger event.
-//!
-//! This function enables the timer events that can cause an ADC trigger event.
-//! The ADC trigger events are specified in the \e ui32ADCEvent parameter by
-//! passing in the logical OR of any of the following values:
-//!
-//! - \b TIMER_ADC_MODEMATCH_B - Enables the mode match ADC trigger for timer
-//!   B.
-//! - \b TIMER_ADC_CAPEVENT_B - Enables the capture event ADC trigger for
-//!   timer B.
-//! - \b TIMER_ADC_CAPMATCH_B - Enables the capture match ADC trigger for
-//!   timer B.
-//! - \b TIMER_ADC_TIMEOUT_B - Enables the timeout ADC trigger for timer B.
-//! - \b TIMER_ADC_MODEMATCH_A - Enables the mode match ADC trigger for timer
-//!   A.
-//! - \b TIMER_ADC_RTC_A - Enables the RTC ADC trigger for timer A.
-//! - \b TIMER_ADC_CAPEVENT_A - Enables the capture event ADC trigger for
-//!   timer A.
-//! - \b TIMER_ADC_CAPMATCH_A - Enables the capture match ADC trigger for
-//!   timer A.
-//! - \b TIMER_ADC_TIMEOUT_A - Enables the timeout ADC trigger for timer A.
-//!
-//! \note The ability to specify ADC event triggers varies with the Tiva
-//! part in use.  Please consult the data sheet for the part you are
-//! using to determine whether this support is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-TimerADCEventSet(uint32_t ui32Base, uint32_t ui32ADCEvent)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_TimerBaseValid(ui32Base));
-
-    //
-    // Set the ADC triggers.
-    //
-    HWREG(ui32Base + TIMER_O_ADCEV) = ui32ADCEvent;
-}
-
-//*****************************************************************************
-//
-//! Returns the events that can cause an ADC trigger event.
-//!
-//! \param ui32Base is the base address of the timer module.
-//!
-//! This function returns the timer events that can cause an ADC trigger event.
-//! The ADC trigger events are the logical OR of any of the following values:
-//!
-//! - \b TIMER_ADC_MODEMATCH_B - The mode match ADC trigger for timer B is
-//!   enabled.
-//! - \b TIMER_ADC_CAPEVENT_B - The capture event ADC trigger for timer B is
-//!   enabled.
-//! - \b TIMER_ADC_CAPMATCH_B - The capture match ADC trigger for timer B is
-//!   enabled.
-//! - \b TIMER_ADC_TIMEOUT_B - The timeout ADC trigger for timer B is enabled.
-//! - \b TIMER_ADC_MODEMATCH_A - The mode match ADC trigger for timer A is
-//!   enabled.
-//! - \b TIMER_ADC_RTC_A - The RTC ADC trigger for timer A is enabled.
-//! - \b TIMER_ADC_CAPEVENT_A - The capture event ADC trigger for timer A is
-//!   enabled.
-//! - \b TIMER_ADC_CAPMATCH_A - The capture match ADC trigger for timer A is
-//!   enabled.
-//! - \b TIMER_ADC_TIMEOUT_A - The timeout ADC trigger for timer A is enabled.
-//!
-//! \note The ability to specify ADC event triggers varies with the Tiva
-//! part in use.  Please consult the data sheet for the part you are
-//! using to determine whether this support is available.
-//!
-//! \return The timer events that trigger the ADC.
-//
-//*****************************************************************************
-uint32_t
-TimerADCEventGet(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_TimerBaseValid(ui32Base));
-
-    //
-    // Return the current ADC triggers.
-    //
-    return(HWREG(ui32Base + TIMER_O_ADCEV));
-}
-
-//*****************************************************************************
-//
-//! Enables the events that can trigger a DMA request.
-//!
-//! \param ui32Base is the base address of the timer module.
-//! \param ui32DMAEvent is a bit mask of the events that can trigger DMA.
-//!
-//! This function enables the timer events that can trigger the start of a DMA
-//! sequence.  The DMA trigger events are specified in the \e ui32DMAEvent
-//! parameter by passing in the logical OR of the following values:
-//!
-//! - \b TIMER_DMA_MODEMATCH_B - The mode match DMA trigger for timer B is
-//!   enabled.
-//! - \b TIMER_DMA_CAPEVENT_B - The capture event DMA trigger for timer B is
-//!   enabled.
-//! - \b TIMER_DMA_CAPMATCH_B - The capture match DMA trigger for timer B is
-//!   enabled.
-//! - \b TIMER_DMA_TIMEOUT_B - The timeout DMA trigger for timer B is enabled.
-//! - \b TIMER_DMA_MODEMATCH_A - The mode match DMA trigger for timer A is
-//!   enabled.
-//! - \b TIMER_DMA_RTC_A - The RTC DMA trigger for timer A is enabled.
-//! - \b TIMER_DMA_CAPEVENT_A - The capture event DMA trigger for timer A is
-//!   enabled.
-//! - \b TIMER_DMA_CAPMATCH_A - The capture match DMA trigger for timer A is
-//!   enabled.
-//! - \b TIMER_DMA_TIMEOUT_A - The timeout DMA trigger for timer A is enabled.
-//!
-//! \note The ability to specify DMA event triggers varies with the Tiva
-//! part in use.  Please consult the data sheet for the part you are
-//! using to determine whether this support is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-TimerDMAEventSet(uint32_t ui32Base, uint32_t ui32DMAEvent)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_TimerBaseValid(ui32Base));
-
-    //
-    // Set the DMA triggers.
-    //
-    HWREG(ui32Base + TIMER_O_DMAEV) = ui32DMAEvent;
-}
-
-//*****************************************************************************
-//
-//! Returns the events that can trigger a DMA request.
-//!
-//! \param ui32Base is the base address of the timer module.
-//!
-//! This function returns the timer events that can trigger the start of a DMA
-//! sequence.  The DMA trigger events are the logical OR of the following
-//! values:
-//!
-//! - \b TIMER_DMA_MODEMATCH_B - Enables the mode match DMA trigger for timer
-//!   B.
-//! - \b TIMER_DMA_CAPEVENT_B - Enables the capture event DMA trigger for
-//!   timer B.
-//! - \b TIMER_DMA_CAPMATCH_B - Enables the capture match DMA trigger for
-//!   timer B.
-//! - \b TIMER_DMA_TIMEOUT_B - Enables the timeout DMA trigger for timer B.
-//! - \b TIMER_DMA_MODEMATCH_A - Enables the mode match DMA trigger for timer
-//!   A.
-//! - \b TIMER_DMA_RTC_A - Enables the RTC DMA trigger for timer A.
-//! - \b TIMER_DMA_CAPEVENT_A - Enables the capture event DMA trigger for
-//!   timer A.
-//! - \b TIMER_DMA_CAPMATCH_A - Enables the capture match DMA trigger for
-//!   timer A.
-//! - \b TIMER_DMA_TIMEOUT_A - Enables the timeout DMA trigger for timer A.
-//!
-//! \note The ability to specify DMA event triggers varies with the Tiva
-//! part in use.  Please consult the data sheet for the part you are
-//! using to determine whether this support is available.
-//!
-//! \return The timer events that trigger the uDMA.
-//
-//*****************************************************************************
-uint32_t
-TimerDMAEventGet(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_TimerBaseValid(ui32Base));
-
-    //
-    // Return the current DMA triggers.
-    //
-    return(HWREG(ui32Base + TIMER_O_DMAEV));
 }
 
 //*****************************************************************************

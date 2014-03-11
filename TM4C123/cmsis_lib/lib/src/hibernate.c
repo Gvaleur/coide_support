@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -69,22 +69,6 @@
 //
 //*****************************************************************************
 #define LOOP_CYCLES             3
-
-//*****************************************************************************
-//
-// A macro used to determine whether the target part supports Wake from IO
-// pins.
-//
-//*****************************************************************************
-#define HIBERNATE_WAKE_IO       CLASS_IS_SNOWFLAKE
-
-//*****************************************************************************
-//
-// A macro used to determine whether the target part supports Wake from IO
-// pins.
-//
-//*****************************************************************************
-#define HIBERNATE_CLOCK_OUTPUT  CLASS_IS_SNOWFLAKE
 
 //*****************************************************************************
 //
@@ -189,30 +173,6 @@ HibernateDisable(void)
 //! - \b HIBERNATE_OSC_LOWDRIVE specifies a lower drive strength when a 12pF
 //! filter capacitor is used with a crystal.
 //!
-//! On some devices, there is an option to use an internal low frequency
-//! oscillator (LFIOSC) as the clock source for the hibernation module.
-//! Because of the low accuracy of this oscillator, this option should not be
-//! used when the system requires a real time counter.  Adding the
-//! \b HIBERNATE_OSC_LFIOSC value enables the LFIOSC as the clock source to
-//! the hibernation module.
-//!
-//! - \b HIBERNATE_OSC_LFIOSC enables the hibernation module's internal low
-//! frequency oscillator as the clock to the hibernation module.
-//!
-//! This \e ui32Config also configures how the clock output from the
-//! hibernation is used to clock other peripherals in the system.  The ALT
-//! clock settings allow clocking a subset of the peripherals.  See the
-//! hibernate section in the datasheet to determine which peripherals can be
-//! clocked by the ALT clock outputs from the hibernation module.
-//! The \e ui32Config parameter can have any combination of the
-//! following values:
-//!
-//! - \b HIBERNATE_OUT_SYSCLK enables the hibernate clock output to the system
-//!      clock.
-//! - \b HIBERNATE_OUT_ALT1CLK enables the hibernate clock output to the
-//!      LPC module to allow the LPC and the hibernation module RTC to use the
-//!      same 32.768-kHz clock.
-//!
 //! The \b HIBERNATE_OSC_DISABLE option is used to disable and power down the
 //! internal oscillator if an external clock source or no clock source is used
 //! instead of a 32.768-kHz crystal.  In the case where an external crystal is
@@ -238,24 +198,14 @@ HibernateClockConfig(uint32_t ui32Config)
     // Clear the current configuration bits.
     //
     ui32HIBCtl &= ~(HIBERNATE_OSC_HIGHDRIVE | HIBERNATE_OSC_LOWDRIVE |
-                    HIBERNATE_OSC_LFIOSC | HIBERNATE_OSC_DISABLE);
+                    HIBERNATE_OSC_DISABLE);
 
     //
     // Set the new configuration bits.
     //
     ui32HIBCtl |= ui32Config & (HIBERNATE_OSC_HIGHDRIVE |
                                 HIBERNATE_OSC_LOWDRIVE |
-                                HIBERNATE_OSC_LFIOSC |
                                 HIBERNATE_OSC_DISABLE);
-
-    //
-    // Must be sure that the 32KHz clock is enabled if the hibernate is about
-    // to switch to it.
-    //
-    if(ui32Config & HIBERNATE_OSC_LFIOSC)
-    {
-        ui32HIBCtl |= HIB_CTL_CLK32EN;
-    }
 
     //
     // Set the hibernation clocking configuration.
@@ -266,16 +216,6 @@ HibernateClockConfig(uint32_t ui32Config)
     // Wait for write completion
     //
     _HibernateWriteComplete();
-
-    //
-    // Write the output clock configuration for devices that support
-    // controlling the output clocks from the hibernate module.
-    //
-    if(HIBERNATE_CLOCK_OUTPUT)
-    {
-        HWREG(HIB_CC) = ui32Config & (HIBERNATE_OUT_SYSCLK |
-                                      HIBERNATE_OUT_ALT1CLK);
-    }
 }
 
 //*****************************************************************************
@@ -364,10 +304,10 @@ HibernateBatCheckStart(void)
 
 //*****************************************************************************
 //
-//! Determines whether or not a forced battery check has completed.
+//! Returns if a forced battery check has completed.
 //!
-//! This function determines whether the forced battery check initiated by a
-//! call to the HibernateBatCheckStart() function has completed.  This function
+//! This function returns if the forced battery check initiated by a call to
+//! the HibernateBatCheckStart() function has completed.  This function
 //! returns a non-zero value until the battery level check has completed.  Once
 //! this function returns a value of zero, the hibernation module has completed
 //! the battery check and the HibernateIntStatus() function can be used to
@@ -382,7 +322,7 @@ uint32_t
 HibernateBatCheckDone(void)
 {
     //
-    // Read the current state of the battery check.
+    // Read the current state of the batter check.
     //
     return(HWREG(HIB_CTL) & HIB_CTL_BATCHK);
 }
@@ -401,20 +341,6 @@ HibernateBatCheckDone(void)
 //! - \b HIBERNATE_WAKE_RTC - wake when the RTC match occurs.
 //! - \b HIBERNATE_WAKE_LOW_BAT - wake from hibernate due to a low-battery
 //! level being detected.
-//! - \b HIBERNATE_WAKE_GPIO - wake when a GPIO pin is asserted.
-//! - \b HIBERNATE_WAKE_RESET - wake when a reset pin is asserted.
-//!
-//! If the \b HIBERNATE_WAKE_GPIO flag is set, then one of the GPIO
-//! configuration functions GPIOPinTypeWakeHigh() or GPIOPinTypeWakeLow() must
-//! be called to properly configure and enable a GPIO as a wake source for
-//! hibernation.
-//!
-//! \note The \b HIBERNATE_WAKE_GPIO and \b HIBERNATE_WAKE_RESET parameters are
-//! only available on some Tiva devices.
-//!
-//! \note On some Tiva devices a tamper event acts as a wake source for the
-//! hibernation module.  Refer the function \b HibernateTamperEventsConfig() to
-//! wake from hibernation on a tamper event.
 //!
 //! \return None.
 //
@@ -426,7 +352,6 @@ HibernateWakeSet(uint32_t ui32WakeFlags)
     // Check the arguments.
     //
     ASSERT(!(ui32WakeFlags & ~(HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC |
-                               HIBERNATE_WAKE_GPIO | HIBERNATE_WAKE_RESET |
                                HIBERNATE_WAKE_LOW_BAT)));
 
     //
@@ -442,48 +367,6 @@ HibernateWakeSet(uint32_t ui32WakeFlags)
     //
     _HibernateWriteComplete();
 
-    //
-    // Write the hibernate IO register if requested.
-    //
-    if(HIBERNATE_WAKE_IO)
-    {
-        //
-        // If the reset or GPIOs are begin used as a wake source then the
-        // the VDD3ON needs to be set to allow the pads to remained
-        // powered.
-        //
-        if((ui32WakeFlags & (HIBERNATE_WAKE_RESET | HIBERNATE_WAKE_GPIO)) &&
-           ((HWREG(HIB_CTL) & HIB_CTL_VDD3ON) == 0))
-        {
-            //
-            // Make sure that VDD3ON mode is enabled so that the pads can
-            // retain their state.
-            //
-            HWREG(HIB_CTL) |= HIB_CTL_VDD3ON;
-
-            //
-            // Wait for write completion
-            //
-            _HibernateWriteComplete();
-        }
-
-        //
-        // Set the requested flags.
-        //
-        HWREG(HIB_IO) = (ui32WakeFlags >> 16) | HIB_IO_WUUNLK;
-
-        //
-        // Spin until the write complete bit is set.
-        //
-        while((HWREG(HIB_IO) & HIB_IO_IOWRC) == 0)
-        {
-        }
-
-        //
-        // Clear the write unlock bit.
-        //
-        HWREG(HIB_IO) &= ~HIB_IO_WUUNLK;
-    }
 }
 
 //*****************************************************************************
@@ -498,15 +381,9 @@ HibernateWakeSet(uint32_t ui32WakeFlags)
 //! - \b HIBERNATE_WAKE_RTC - wake when the RTC matches occurs
 //! - \b HIBERNATE_WAKE_LOW_BAT - wake from hibernation due to a low-battery
 //! level being detected
-//! - \b HIBERNATE_WAKE_GPIO - wake when a GPIO pin is asserted
-//! - \b HIBERNATE_WAKE_RESET - wake when a reset pin is asserted
 //!
-//! \note The \b HIBERNATE_WAKE_LOW_BAT, \b HIBERNATE_WAKE_GPIO, and
-//! \b HIBERNATE_WAKE_RESET parameters are only available on some Tiva devices.
-//!
-//! \note On some Tiva devices a tamper event acts as a wake source for the
-//! hibernation module.  Refer the function \b HibernateTamperEventsConfig() to
-//! wake from hibernation on a tamper event.
+//! \note The \b HIBERNATE_WAKE_LOW_BAT parameter is only available on some
+//! Tiva devices.
 //!
 //! \return Returns flags indicating the configured wake conditions.
 //
@@ -514,25 +391,12 @@ HibernateWakeSet(uint32_t ui32WakeFlags)
 uint32_t
 HibernateWakeGet(void)
 {
-    uint32_t ui32Ctrl;
-
     //
     // Read the wake bits from the control register and return those bits to
     // the caller.
     //
-    if(HIBERNATE_WAKE_IO)
-    {
-        ui32Ctrl = HWREG(HIB_CTL);
-        return((ui32Ctrl & (HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC |
-                            HIBERNATE_WAKE_LOW_BAT)) |
-               ((HWREG(HIB_IO) << 16) & (HIBERNATE_WAKE_RESET |
-                                         HIBERNATE_WAKE_GPIO)));
-    }
-    else
-    {
-        return(HWREG(HIB_CTL) & (HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC |
-                                 HIBERNATE_WAKE_LOW_BAT));
-    }
+    return(HWREG(HIB_CTL) & (HIBERNATE_WAKE_PIN | HIBERNATE_WAKE_RTC |
+                             HIBERNATE_WAKE_LOW_BAT));
 }
 
 //*****************************************************************************
@@ -633,12 +497,6 @@ void
 HibernateRTCSet(uint32_t ui32RTCValue)
 {
     //
-    // Load register requires unlock.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
     // Write the new RTC value to the RTC load register.
     //
     HWREG(HIB_RTCLD) = ui32RTCValue;
@@ -646,12 +504,6 @@ HibernateRTCSet(uint32_t ui32RTCValue)
     //
     // Wait for write completion
     //
-    _HibernateWriteComplete();
-
-    //
-    // Unlock.
-    //
-    HWREG(HIB_LOCK) = 0;
     _HibernateWriteComplete();
 }
 
@@ -1017,14 +869,6 @@ HibernateRequest(void)
 //! - \b HIBERNATE_INT_PIN_WAKE - wake from pin interrupt
 //! - \b HIBERNATE_INT_LOW_BAT - low-battery interrupt
 //! - \b HIBERNATE_INT_RTC_MATCH_0 - RTC match 0 interrupt
-//! - \b HIBERNATE_INT_VDDFAIL - supply failure interrupt.
-//! - \b HIBERNATE_INT_RESET_WAKE - wake from reset pin interrupt
-//! - \b HIBERNATE_INT_GPIO_WAKE - wake from GPIO pin interrupt
-//!
-//! \note The \b HIBERNATE_INT_RESET_WAKE, \b HIBERNATE_INT_GPIO_WAKE, and
-//! \b HIBERNATE_INT_VDDFAIL settings are not available on all Tiva devices.
-//! Please consult the data sheet for the Tiva device that you are using to
-//! determine if these interrupt sources are available.
 //!
 //! \return None.
 //
@@ -1036,9 +880,6 @@ HibernateIntEnable(uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(!(ui32IntFlags & ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT |
-                              HIBERNATE_INT_VDDFAIL |
-                              HIBERNATE_INT_RESET_WAKE |
-                              HIBERNATE_INT_GPIO_WAKE |
                               HIBERNATE_INT_RTC_MATCH_0 |
                               HIBERNATE_INT_WR_COMPLETE)));
 
@@ -1075,9 +916,6 @@ HibernateIntDisable(uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(!(ui32IntFlags & ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT |
-                              HIBERNATE_INT_VDDFAIL |
-                              HIBERNATE_INT_RESET_WAKE |
-                              HIBERNATE_INT_GPIO_WAKE |
                               HIBERNATE_INT_RTC_MATCH_0 |
                               HIBERNATE_INT_WR_COMPLETE)));
 
@@ -1110,13 +948,13 @@ _HibernateIntNumberGet(void)
     //
     // Find the valid interrupt number for the hibernate module.
     //
-    if(CLASS_IS_SNOWFLAKE)
+    if(CLASS_IS_BLIZZARD)
     {
-        ui32Int = INT_HIBERNATE_SNOWFLAKE;
+        ui32Int = INT_HIBERNATE_BLIZZARD;
     }
     else
     {
-        ui32Int = INT_HIBERNATE_BLIZZARD;
+        ui32Int = 0;
     }
 
     return(ui32Int);
@@ -1223,11 +1061,11 @@ HibernateIntStatus(bool bMasked)
     //
     if(bMasked == true)
     {
-        return(HWREG(HIB_MIS));
+        return(HWREG(HIB_MIS) & 0x1f);
     }
     else
     {
-        return(HWREG(HIB_RIS));
+        return(HWREG(HIB_RIS) & 0x1f);
     }
 }
 
@@ -1263,9 +1101,6 @@ HibernateIntClear(uint32_t ui32IntFlags)
     // Check the arguments.
     //
     ASSERT(!(ui32IntFlags & ~(HIBERNATE_INT_PIN_WAKE | HIBERNATE_INT_LOW_BAT |
-                              HIBERNATE_INT_VDDFAIL |
-                              HIBERNATE_INT_RESET_WAKE |
-                              HIBERNATE_INT_GPIO_WAKE |
                               HIBERNATE_INT_RTC_MATCH_0 |
                               HIBERNATE_INT_WR_COMPLETE)));
 
@@ -1333,9 +1168,9 @@ void
 HibernateGPIORetentionEnable(void)
 {
     //
-    // Enable power to the pads and enable GPIO retention during hibernate.
+    // Enable power to the pads so that pin state can be retained.
     //
-    HWREG(HIB_CTL) |= HIB_CTL_VDD3ON | HIB_CTL_RETCLR;
+    HWREG(HIB_CTL) |= HIB_CTL_VDD3ON;
 
     //
     // Wait for write completion
@@ -1364,10 +1199,9 @@ void
 HibernateGPIORetentionDisable(void)
 {
     //
-    // Reset the GPIO configuration after waking from hibernate and disable
-    // the hibernate power to the pads.
+    // Disable the hibernate power to the pads.
     //
-    HWREG(HIB_CTL) &= ~(HIB_CTL_RETCLR | HIB_CTL_VDD3ON);
+    HWREG(HIB_CTL) &= ~HIB_CTL_VDD3ON;
 
     //
     // Wait for write completion
@@ -1396,1150 +1230,10 @@ HibernateGPIORetentionGet(void)
     //
     // Read the current GPIO retention configuration.
     //
-    if((HWREG(HIB_CTL) & (HIB_CTL_RETCLR | HIB_CTL_VDD3ON)) ==
-       (HIB_CTL_RETCLR | HIB_CTL_VDD3ON))
+    if(HWREG(HIB_CTL) & HIB_CTL_VDD3ON)
     {
         return(true);
     }
-    return(false);
-}
-
-//*****************************************************************************
-//
-//! Configures the Hibernation module's internal counter mode.
-//!
-//! \param ui32Config is the configuration to use for the hibernation module's
-//! counter.
-//!
-//! This function configures the Hibernate module's counter mode to operate
-//! as a standard RTC counter or to operate in a calendar mode.  The
-//! \e ui32Config parameter is used to provide the configuration for
-//! the counter and must include only one of the following values:
-//!
-//! - \b HIBERNATE_COUNTER_24HR specifies 24-hour calendar mode.
-//! - \b HIBERNATE_COUNTER_12HR specifies 12-hour AM/PM calendar mode.
-//! - \b HIBERNATE_COUNTER_RTC specifies RTC counter mode.
-//!
-//! The HibernateCalendar functions can only be called when either
-//! \b HIBERNATE_COUNTER_24HR or \b HIBERNATE_COUNTER_12HR is specified.
-//!
-//! \b Example: Configure hibernate counter to 24-hour calendar mode.
-//!
-//! \verbatim
-//!
-//! //
-//! // Configure the hibernate module counter to 24-hour calendar mode.
-//! //
-//! HibernateCounterMode(HIBERNATE_COUNTER_24HR);
-//!
-//! \endverbatim
-//!
-//! \note The hibernate calendar mode is not available on all Tiva
-//! devices.  Please consult the data sheet to determine if the device you are
-//! using supports this feature in the Hibernation module.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateCounterMode(uint32_t ui32Config)
-{
-    //
-    // Set the requested configuration.
-    //
-    HWREG(HIB_CALCTL) = ui32Config;
-
-    //
-    // Wait for write completion
-    //
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-// Internal function to parse the time structure to set the calendar fields.
-//
-//*****************************************************************************
-static void
-_HibernateCalendarSet(uint32_t ui32Reg, struct tm *psTime)
-{
-    uint32_t ui32Time, ui32Date;
-
-    ASSERT(HWREG(HIB_CALCTL) & HIB_CALCTL_CALEN);
-
-    //
-    // Minutes and seconds are consistent in all modes.
-    //
-    ui32Time = (((psTime->tm_min << HIB_CALLD0_MIN_S) & HIB_CALLD0_MIN_M) |
-                ((psTime->tm_sec << HIB_CALLD0_SEC_S) & HIB_CALLD0_SEC_M));
-
-    //
-    // 24 Hour time is used directly for Calendar set.
-    //
-    if(HWREG(HIB_CALCTL) & HIB_CALCTL_CAL24)
-    {
-        ui32Time |= (psTime->tm_hour << HIB_CALLD0_HR_S);
-
-        //
-        // for Calendar match, if it is every hour, AMPM bit should be clear
-        //
-        if((ui32Reg == HIB_CALM0) && (psTime->tm_hour == 0xFF) )
-        {
-            //
-            // clear AMPM bit
-            //
-            ui32Time &= ~HIB_CAL0_AMPM;
-        }
-    }
-    else
-    {
-        //
-        // In AM/PM time hours have to be capped at 12.
-        // If the hours are all 1s, it means the match for the hour is
-        // always true.  We need to set 1F in the hw field.
-        //
-        if(psTime->tm_hour == 0xFF)
-        {
-            //
-            // Match every hour.
-            //
-            ui32Time |= HIB_CALLD0_HR_M;
-        }
-        else if(psTime->tm_hour >= 12)
-        {
-            //
-            // Need to set the PM bit if it is noon or later.
-            //
-            ui32Time |= (((psTime->tm_hour - 12) << HIB_CALLD0_HR_S) |
-                         HIB_CAL0_AMPM);
-        }
-        else
-        {
-            //
-            // All other times are normal and AM.
-            //
-            ui32Time |= (psTime->tm_hour << HIB_CALLD0_HR_S);
-        }
-    }
-
-    //
-    // Create the date in the correct register format.
-    //
-    if(ui32Reg == HIB_CAL0)
-    {
-        //
-        // We must add 1 to the month, since the time structure lists
-        // the month from 0 to 11 and the HIB lists it from 1 to 12.
-        //
-        ui32Date = ((psTime->tm_mday << HIB_CAL1_DOM_S) |
-                    ((psTime->tm_mon + 1) << HIB_CAL1_MON_S) |
-                    (psTime->tm_wday << HIB_CAL1_DOW_S) |
-                    ((psTime->tm_year - 100) << HIB_CAL1_YEAR_S));
-    }
-    else
-    {
-        //
-        // Wday, month and year are not included in the match
-        // Functionality.
-        //
-        if(psTime->tm_mday == 0xFF)
-        {
-            //
-            // program 0 to match every day
-            //
-            ui32Date = 0 << HIB_CAL1_DOM_M;
-        }
-        else
-        {
-            ui32Date = (psTime->tm_mday << HIB_CAL1_DOM_S);
-        }
-    }
-
-    //
-    // Load register requires unlock.
-    //
-    if(ui32Reg == HIB_CAL0)
-    {
-        //
-        // Unlock the hibernate counter load registers.
-        //
-        HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-        _HibernateWriteComplete();
-    }
-
-    //
-    // Set the requested time and date.
-    //
-    if(ui32Reg == HIB_CAL0)
-    {
-        HWREG(HIB_CALLD0) = ui32Time;
-        _HibernateWriteComplete();
-        HWREG(HIB_CALLD1) = ui32Date;
-        _HibernateWriteComplete();
-    }
-    else
-    {
-        HWREG(HIB_CALM0) = ui32Time;
-        _HibernateWriteComplete();
-        HWREG(HIB_CALM1) = ui32Date;
-        _HibernateWriteComplete();
-    }
-
-    //
-    // Load register requires unlock.
-    //
-    if(ui32Reg == HIB_CAL0)
-    {
-        //
-        // Lock the hibernate counter load registers.
-        //
-        HWREG(HIB_LOCK) = 0;
-        _HibernateWriteComplete();
-    }
-}
-
-//*****************************************************************************
-//
-//! Sets the Hibernation module's date and time in calendar mode.
-//!
-//! \param psTime is the structure that holds the information for the current
-//! date and time.
-//!
-//! This function uses the \e psTime parameter to set the current date and
-//! time when the Hibernation module is in calendar mode.  Regardless of
-//! whether 24-hour or 12-hour mode is in use, the \e psTime structure uses a
-//! 24-hour representation of the time.  This function can only be called when
-//! the hibernate counter is configured in calendar mode using the
-//! HibernateCounterMode() function with one of the calendar modes.
-//!
-//! \note The hibernate calendar mode is not available on all Tiva
-//! devices.  Please consult the data sheet to determine if the device you are
-//! using supports this feature in the Hibernation module.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateCalendarSet(struct tm *psTime)
-{
-    //
-    // Load a new date/time.
-    //
-    _HibernateCalendarSet(HIB_CAL0, psTime);
-}
-
-//*****************************************************************************
-//
-//! Returns the Hibernation module's date and time in calendar mode.
-//!
-//! \param psTime is the structure that is filled with the current date and
-//! time.
-//!
-//! This function returns the current date and time in the structure provided
-//! by the \e psTime parameter.  Regardless of the calendar mode, the
-//! \e psTime parameter uses a 24-hour representation of the time.  This
-//! function can only be called when the Hibernation module is configured in
-//! calendar mode using the HibernateCounterMode() function with one of the
-//! calendar modes.
-//!
-//! The only case where this function fails and returns a non-zero value is
-//! when the function detects that the counter is passing from the last second
-//! of the day to the first second of the next day.  This exception must be
-//! handled in the application by waiting at least one second before calling
-//! again to get the updated calendar information.
-//!
-//! \note The hibernate calendar mode is not available on all Tiva
-//! devices.  Please consult the data sheet to determine if the device you are
-//! using supports this feature in the Hibernation module.
-//!
-//! \return Returns zero if the time and date were read successfully and
-//! returns a non-zero value if the \e psTime structure was not updated.
-//
-//*****************************************************************************
-int
-HibernateCalendarGet(struct tm *psTime)
-{
-    uint32_t ui32Date, ui32Time;
-
-    ASSERT(HWREG(HIB_CALCTL) & HIB_CALCTL_CALEN);
-
-    //
-    // Wait for the value to be valid, this should never be more than a few
-    // loops and should never hang.
-    //
-    do
-    {
-        ui32Date = HWREG(HIB_CAL1);
-    }
-    while((ui32Date & HIB_CAL1_VALID) == 0);
-
-    //
-    // Wait for the value to be valid, this should never be more than a few
-    // loops and should never hang.
-    //
-    do
-    {
-        ui32Time = HWREG(HIB_CAL0);
-    }
-    while((ui32Time & HIB_CAL0_VALID) == 0);
-
-    //
-    // The date changed after reading the time so fail this call and let the
-    // application call again since it knows how int32_t to wait until another
-    // second passes.
-    //
-    if(ui32Date != HWREG(HIB_CAL1))
-    {
-        return(-1);
-    }
-
-    //
-    // Populate the date and time fields in the psTime structure.
-    // We must subtract 1 from the month, since the time structure lists
-    // the month from 0 to 11 and the HIB lists it from 1 to 12.
-    //
-    psTime->tm_min = (ui32Time & HIB_CAL0_MIN_M) >> HIB_CAL0_MIN_S;
-    psTime->tm_sec = (ui32Time & HIB_CAL0_SEC_M) >> HIB_CAL0_SEC_S;
-    psTime->tm_mon = (((ui32Date & HIB_CAL1_MON_M) >> HIB_CAL1_MON_S) - 1);
-    psTime->tm_mday = (ui32Date & HIB_CAL1_DOM_M) >> HIB_CAL1_DOM_S;
-    psTime->tm_wday = (ui32Date & HIB_CAL1_DOW_M) >> HIB_CAL1_DOW_S;
-    psTime->tm_year = ((ui32Date & HIB_CAL1_YEAR_M) >> HIB_CAL1_YEAR_S) + 100;
-    psTime->tm_hour = (ui32Time & HIB_CAL0_HR_M) >> HIB_CAL0_HR_S;
-
-    //
-    // Fix up the hour in the non-24-hour mode and the time is in PM.
-    //
-    if(((HWREG(HIB_CALCTL) & HIB_CALCTL_CAL24) == 0) &&
-       (ui32Time & HIB_CAL0_AMPM))
-    {
-        psTime->tm_hour += 12;
-    }
-
-    return(0);
-}
-
-//*****************************************************************************
-//
-//! Sets the Hibernation module's date and time match value in calendar mode.
-//!
-//! \param ui32Index indicates which match register to access.
-//! \param psTime is the structure that holds all of the information to set
-//! the current date and time match values.
-//!
-//! This function uses the \e psTime parameter to set the current date and time
-//! match value in the Hibernation module's calendar.  Regardless of the mode,
-//! the \e psTime parameter uses a 24-hour clock representation of time.
-//! This function can only be called when the Hibernation module is
-//! configured in calendar mode using the HibernateCounterMode()
-//! function.  The \e ui32Index value is reserved for future use and should
-//! always be zero.
-//! Calendar match can be enabled for every day, every hour, every minute or
-//! every second, setting any of these fields to 0xFF causes a match for
-//! that field.  For example, setting the day of month field to 0xFF
-//! results in a calendar match daily at the same time.
-//!
-//! \note The hibernate calendar mode is not available on all Tiva
-//! devices.  Please consult the data sheet to determine if the device you are
-//! using supports this feature in the Hibernation module.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateCalendarMatchSet(uint32_t ui32Index, struct tm *psTime)
-{
-    //
-    // Set the Match value.
-    //
-    _HibernateCalendarSet(HIB_CALM0, psTime);
-}
-
-//*****************************************************************************
-//
-//! Returns the Hibernation module's date and time match value in calendar
-//! mode.
-//!
-//! \param ui32Index indicates which match register to access.
-//! \param psTime is the structure to fill with the current date and time
-//! match value.
-//!
-//! This function returns the current date and time match value in the
-//! structure provided by the \e psTime parameter.  Regardless of the mode, the
-//! \e psTime parameter uses a 24-hour clock representation of time.
-//! This function can only be called when the Hibernation module is configured
-//! in calendar mode using the HibernateCounterMode() function.
-//! The \e ui32Index value is reserved for future use and should always be
-//! zero.
-//!
-//! \note The hibernate calendar mode is not available on all Tiva
-//! devices.  Please consult the data sheet to determine if the device you are
-//! using supports this feature in the Hibernation module.
-//!
-//! \return Returns zero if the time and date match value were read
-//! successfully and returns a non-zero value if the psTime structure was not
-//! updated.
-//
-//*****************************************************************************
-void
-HibernateCalendarMatchGet(uint32_t ui32Index, struct tm *psTime)
-{
-    uint32_t ui32Date, ui32Time;
-
-    ASSERT(HWREG(HIB_CALCTL) & HIB_CALCTL_CALEN);
-
-    //
-    // Get the date field.
-    //
-    ui32Date = HWREG(HIB_CALM1);
-
-    //
-    // Get the time field.
-    //
-    ui32Time = HWREG(HIB_CALM0);
-
-    //
-    // Populate the date and time fields in the psTime structure.
-    //
-    if((ui32Time & HIB_CAL0_MIN_M) == HIB_CAL0_MIN_M)
-    {
-        //
-        // Match every minute
-        //
-        psTime->tm_min = 0xFF;
-    }
-    else
-    {
-        psTime->tm_min = (ui32Time & HIB_CAL0_MIN_M) >> HIB_CAL0_MIN_S;
-    }
-
-    if((ui32Time & HIB_CAL0_SEC_M) == HIB_CAL0_SEC_M)
-    {
-        //
-        // Match every second
-        //
-        psTime->tm_sec = 0xFF;
-    }
-    else
-    {
-        psTime->tm_sec = (ui32Time & HIB_CAL0_SEC_M) >> HIB_CAL0_SEC_S;
-    }
-
-    if((ui32Time & HIB_CAL0_HR_M) == HIB_CAL0_HR_M)
-    {
-        //
-        // Match every hour
-        //
-        psTime->tm_hour = 0xFF;
-    }
-    else
-    {
-        psTime->tm_hour = (ui32Time & HIB_CAL0_HR_M) >> HIB_CAL0_HR_S;
-    }
-
-    if((ui32Date & HIB_CAL1_DOM_M) == 0)
-    {
-        //
-        // Match every day
-        //
-        psTime->tm_mday = 0xFF;
-    }
-    else
-    {
-        psTime->tm_mday = (ui32Date & HIB_CAL1_DOM_M) >> HIB_CAL1_DOM_S;
-    }
-
-    //
-    // Fix up the hour in the non-24-hour mode and the time is in PM.
-    //
-    if(((HWREG(HIB_CALCTL) & HIB_CALCTL_CAL24) == 0) &&
-       (ui32Time & HIB_CAL0_AMPM))
-    {
-        psTime->tm_hour += 12;
-    }
-}
-
-//*****************************************************************************
-//
-//! Configures the tamper feature event response.
-//!
-//! \param ui32Config specifies the configuration options for tamper events.
-//!
-//! This function is used to configure the event response options for the
-//! tamper feature.  The \e ui32Config parameter provides a combination of the
-//! \b HIBERNATE_TAMPER_EVENTS_* features to set these options.  The
-//! application should choose from the following set of defines to determine
-//! what happens to the system when a tamper event occurs:
-//!
-//! - \b HIBERNATE_TAMPER_EVENTS_ERASE_ALL_HIB_MEM all of the Hibernation
-//! module's battery-backed RAM is cleared due to a tamper event
-//! - \b HIBERNATE_TAMPER_EVENTS_ERASE_HIGH_HIB_MEM the upper half of the
-//! Hibernation module's battery-backed RAM is cleared due to a tamper event
-//! - \b HIBERNATE_TAMPER_EVENTS_ERASE_LOW_HIB_MEM the lower half of the
-//! Hibernation module's battery-backed RAM is cleared due to a tamper event
-//! - \b HIBERNATE_TAMPER_EVENTS_ERASE_NO_HIB_MEM the Hibernation module's
-//! battery-backed RAM is not changed due to a tamper event
-//! - \b HIBERNATE_TAMPER_EVENTS_HIB_WAKE a tamper event wakes the MCU from
-//! hibernation
-//! - \b HIBERNATE_TAMPER_EVENTS_NO_HIB_WAKE a tamper event does not wake the
-//! MCU from hibernation
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperEventsConfig(uint32_t ui32Config)
-{
-    uint32_t ui32Temp;
-
-    //
-    // Mask out the on-event configuration options.
-    //
-    ui32Temp = (HWREG(HIB_TPCTL) & ~HIB_TPCTL_MEMCLR_M);
-
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
-    // Set the on-event configuration.
-    //
-    HWREG(HIB_TPCTL) = (ui32Temp | ui32Config);
-
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Enables the tamper feature.
-//!
-//! This function is used to enable the tamper feature functionality.  This
-//! function should only be called after the global configuration is set with
-//! a call to HibernateTamperEventsConfig() and the tamper inputs have been
-//! configured with a call to HibernateTamperIOEnable().
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperEnable(void)
-{
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
-    // Set the tamper enable bit.
-    //
-    HWREG(HIB_TPCTL) |= HIB_TPCTL_TPEN;
-
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Disables the tamper feature.
-//!
-//! This function is used to disable the tamper feature functionality.  All
-//! other configuration settings are left unmodified, allowing a call to
-//! HibernateTamperEnable() to quickly enable the tamper feature with its
-//! previous configuration.
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperDisable(void)
-{
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
-    // Clear the tamper enable bit.
-    //
-    HWREG(HIB_TPCTL) &= ~HIB_TPCTL_TPEN;
-
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Configures an input to the tamper feature.
-//!
-//! \param ui32Input is the tamper input to configure.
-//! \param ui32Config holds the configuration options for a given input to the
-//! tamper feature.
-//!
-//! This function is used to configure an input to the tamper feature.  The
-//! \e ui32Input parameter specifies the tamper signal to configure and has a
-//! valid range of 0-3.  The \e ui32Config parameter provides the set of tamper
-//! features in the \b HIBERNATE_TAMPER_IO_* values.  The values that are valid
-//! in the \e ui32Config parameter are:
-//!
-//! - \b HIBERNATE_TAMPER_IO_MATCH_SHORT configures the trigger to match after
-//! 2 hibernation clocks
-//! - \b HIBERNATE_TAMPER_IO_MATCH_LONG configures the trigger to match after
-//! 3071 hibernation clocks
-//! - \b HIBERNATE_TAMPER_IO_WPU_ENABLED turns on an internal weak pull up
-//! - \b HIBERNATE_TAMPER_IO_WPU_DISABLED turns off an internal weak pull up
-//! - \b HIBERNATE_TAMPER_IO_TRIGGER_HIGH sets the tamper event to active high
-//! - \b HIBERNATE_TAMPER_IO_TRIGGER_LOW sets the tamper event to active low
-//!
-//! \note None of the GPIO API functions are needed to configure the tamper
-//! pins.  The tamper pins configured by using this function overrides any
-//! configuration by GPIO APIs.
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperIOEnable(uint32_t ui32Input, uint32_t ui32Config)
-{
-    uint32_t ui32Temp, ui32Mask;
-
-    //
-    // Verify parameters.
-    //
-    ASSERT(ui32Input < 4);
-
-    //
-    // Read the current tamper I/O configuration.
-    //
-    ui32Temp = HWREG(HIB_TPIO);
-
-    //
-    // Mask out configuration options for the requested input.
-    //
-    ui32Mask = (ui32Temp & (~((HIB_TPIO_GFLTR0 | HIB_TPIO_PUEN0 |
-                               HIB_TPIO_LEV0 | HIB_TPIO_EN0) <<
-                              (ui32Input << 3))));
-
-    //
-    // Set tamper I/O configuration for the requested input.
-    //
-    ui32Temp |= (ui32Mask | ((ui32Config | HIB_TPIO_EN0) << (ui32Input << 3)));
-
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
-    // Write to the register.
-    //
-    HWREG(HIB_TPIO) = ui32Temp;
-
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Disables an input to the tamper feature.
-//!
-//! \param ui32Input is the tamper input to disable.
-//!
-//! This function is used to disable an input to the tamper feature.  The
-//! \e ui32Input parameter specifies the tamper signal to disable and has a
-//! valid range of 0-3.
-//!
-//! \note None of the GPIO API functions are needed to configure the tamper
-//! pins.  The tamper pins configured by using this function overrides any
-//! configuration by GPIO APIs.
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperIODisable(uint32_t ui32Input)
-{
-    //
-    // Verify parameters.
-    //
-    ASSERT(ui32Input < 4);
-
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
-    // Clear the I/O enable bit.
-    //
-    HWREG(HIB_TPIO) &= ((~HIB_TPIO_EN0) << (ui32Input << 3));
-
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Clears the tamper feature events.
-//!
-//! This function is used to clear all tamper events.  This function always
-//! clears the tamper feature event state indicator along with all tamper log
-//! entries.  Logged event data should be retrieved with
-//! HibernateTamperEventsGet() prior to requesting a event clear.
-//!
-//! HibernateTamperEventsClear() should be called prior to clearing the system
-//! control NMI that resulted from the tamper event.
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperEventsClear(void)
-{
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
-    // Set the tamper event clear bit.
-    //
-    HWREG(HIB_TPCTL) |= HIB_TPCTL_TPCLR;
-
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Clears the tamper feature events without Unlock and Lock.
-//!
-//! This function is used to clear all tamper events without unlock/locking
-//! the tamper control registers, so API HibernateTamperUnLock() should be
-//! called before this function, and API HibernateTamperLock() should be
-//! called after to ensure that tamper control registers are locked.
-//!
-//! This function doesn't block until the write is complete.
-//! Therefore, care must be taken to ensure the next immediate write will
-//! occure only after the write complete bit is set.
-//!
-//! This function is used to implement a software workaround in NMI interrupt
-//! handler to fix an issue when a new tamper event could be missed during
-//! the clear of current tamper event.
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperEventsClearNoLock(void)
-{
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    //
-    // Set the tamper event clear bit.
-    //
-    HWREG(HIB_TPCTL) |= HIB_TPCTL_TPCLR;
-
-}
-
-//*****************************************************************************
-//
-//! Unlock temper registers.
-//!
-//! This function is used to unlock the temper control registers.  This
-//! function should be only used before calling API
-//! HibernateTamperEventsClearNoLock().
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperUnLock(void)
-{
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Lock temper registers.
-//!
-//! This function is used to lock the temper control registers.  This
-//! function should be used after calling API
-//! HibernateTamperEventsClearNoLock().
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperLock(void)
-{
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Returns the current tamper feature status.
-//!
-//! This function is used to return the tamper feature status.  This function
-//! returns one of the values from this group of options:
-//!
-//! - \b HIBERNATE_TAMPER_STATUS_INACTIVE indicates tamper detection is
-//! disabled
-//! - \b HIBERNATE_TAMPER_STATUS_ACTIVE indicates tamper detection is enabled
-//! and ready
-//! - \b HIBERNATE_TAMPER_STATUS_EVENT indicates tamper event was detected
-//!
-//! In addition, one of the values is included from this group:
-//!
-//! - \b HIBERNATE_TAMPER_STATUS_EXT_OSC_INACTIVE indicates the external
-//! oscillator is not active
-//! - \b HIBERNATE_TAMPER_STATUS_EXT_OSC_ACTIVE indicates the external
-//! oscillator is active
-//!
-//! And one of the values is included from this group:
-//!
-//! - \b HIBERNATE_TAMPER_STATUS_EXT_OSC_FAILED indicates the external
-//! oscillator signal has transitioned from valid to invalid
-//! - \b HIBERNATE_TAMPER_STATUS_EXT_OSC_VALID indicates the external
-//! oscillator is providing a valid signal
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return Returns a combination of the \b HIBERNATE_TAMPER_STATUS_* values.
-//
-//*****************************************************************************
-uint32_t
-HibernateTamperStatusGet(void)
-{
-    uint32_t ui32Status, ui32Reg;
-
-    //
-    // Retrieve the raw register value.
-    //
-    ui32Reg = HWREG(HIB_TPSTAT);
-
-    //
-    // Setup the oscillator status indicators.
-    //
-    ui32Status = (ui32Reg & (HIB_TPSTAT_XOSCST | HIB_TPSTAT_XOSCFAIL));
-    ui32Status |= ((ui32Reg & HIB_TPSTAT_XOSCST) ? 0 :
-                   HIBERNATE_TAMPER_STATUS_EXT_OSC_ACTIVE);
-    ui32Status |= ((ui32Reg & HIB_TPSTAT_XOSCFAIL) ? 0 :
-                   HIBERNATE_TAMPER_STATUS_EXT_OSC_VALID);
-
-    //
-    // Retrieve the tamper status indicators.
-    //
-    ui32Status |= ((ui32Reg & HIB_TPSTAT_STATE_M) << 3);
-
-    //
-    // The HW shows "disabled" with a zero value, use bit[0] as a flag
-    // for this purpose.
-    //
-    if((ui32Reg & HIB_TPSTAT_STATE_M) == 0)
-    {
-        ui32Status |= HIBERNATE_TAMPER_STATUS_INACTIVE;
-    }
-
-    //
-    // Return the API status flags.
-    //
-    return(ui32Status);
-}
-
-//*****************************************************************************
-//
-//! Returns a tamper log entry.
-//!
-//! \param ui32Index is the index of the log entry to return.
-//! \param pui32RTC is a pointer to the memory to store the logged RTC data.
-//! \param pui32Event is a pointer to the memory to store the logged tamper
-//! event.
-//!
-//! This function is used to return a tamper log entry from the hibernate
-//! feature.  The \e ui32Index specifies the zero-based index of the log entry
-//! to query and has a valid range of 0-3.
-//!
-//! When this function returns, the \e pui32RTC value contains the time value
-//! and \e pui32Event  parameter contains the tamper I/O event that triggered
-//! this log.
-//!
-//! The format of the returned \e pui32RTC data is dependent on the
-//! configuration of the RTC within the Hibernation module.  If the RTC is
-//! configured for counter mode, the returned data contains counted seconds
-//! from the RTC enable.  If the RTC is configured for calendar mode, the data
-//! returned is formatted as follows:
-//!
-//! \verbatim
-//! +----------------------------------------------------------------------+
-//! |  31:26  |  25:22  |     21:17      |  16:12  |   11:6    |    5:0    |
-//! +----------------------------------------------------------------------+
-//! |  year   |  month  |  day of month  |  hours  |  minutes  |  seconds  |
-//! +----------------------------------------------------------------------+
-//! \endverbatim
-//!
-//! The data returned in the \e pui32Events parameter could include any of the
-//! following flags:
-//!
-//! - \b HIBERNATE_TAMPER_EVENT_0 indicates a tamper event was triggered on I/O
-//! signal 0
-//! - \b HIBERNATE_TAMPER_EVENT_1 indicates a tamper event was triggered on I/O
-//! signal 1
-//! - \b HIBERNATE_TAMPER_EVENT_2 indicates a tamper event was triggered on I/O
-//! signal 2
-//! - \b HIBERNATE_TAMPER_EVENT_3 indicates a tamper event was triggered on I/O
-//! signal 3
-//! - \b HIBERNATE_TAMPER_EVENT_XOSC indicates an external oscillator failure
-//! triggered the tamper event
-//!
-//! \note Tamper event logs are not consumed when read and remain available
-//! until cleared.  Events are only logged if unused log space is available.
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return Returns \b true if the \e pui32RTC and \e pui32Events were updated
-//! successfully and returns \b false if the values were not updated.
-//
-//*****************************************************************************
-bool
-HibernateTamperEventsGet(uint32_t ui32Index, uint32_t *pui32RTC,
-                         uint32_t *pui32Event)
-{
-    uint32_t ui32Reg;
-
-    //
-    // Verify parameters.
-    //
-    ASSERT(pui32RTC);
-    ASSERT(pui32Event);
-    ASSERT(ui32Index < 4);
-
-    //
-    // Retrieve the event log data for the requested index if available.
-    //
-    ui32Reg = HWREG(HIB_TPLOG0 + ((ui32Index << 3) + 4));
-    if(ui32Reg == 0)
-    {
-        //
-        // No event data is available for this index.
-        //
-        return(false);
-    }
-
-    //
-    // Store the event data in the provided location.
-    //
-    *pui32Event = ui32Reg;
-
-    //
-    // Retrieve the calendar information.
-    //
-    *pui32RTC = HWREG(HIB_TPLOG0 + (ui32Index << 3));
-
-    //
-    // Convert the hour to 24hr mode if the Calendar is enabled
-    // and in 24hr mode.
-    //
-    if((HWREG(HIB_CALCTL) & (HIB_CALCTL_CALEN | HIB_CALCTL_CAL24)) ==
-       (HIB_CALCTL_CALEN | HIB_CALCTL_CAL24))
-    {
-        if(HWREG(HIB_CAL0) & HIB_CAL0_AMPM)
-        {
-            //
-            // Add 12 hour since it is PM
-            //
-            ui32Reg = ((*pui32RTC & 0X0001f000) + (12<<12)) & 0X0001f000;
-            *pui32RTC &= ~0X0001f000;
-            *pui32RTC |= ui32Reg;
-        }
-    }
-
-    //
-    // Return success.
-    //
-    return(true);
-}
-
-//*****************************************************************************
-//
-//! Attempts to recover the external oscillator.
-//!
-//! This function is used to attempt to recover the external oscillator after a
-//! \b HIBERNATE_TAMPER_STATUS_EXT_OSC_FAILED status is reported.  This
-//! function must not be called if the external oscillator is not used as
-//! the hibernation clock input.  HibernateTamperExtOscValid() should be called
-//! before calling this function.
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-HibernateTamperExtOscRecover(void)
-{
-    //
-    // Unlock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = HIB_LOCK_HIBLOCK_KEY;
-    _HibernateWriteComplete();
-
-    //
-    // Set the XOSCFAIL clear bit.
-    //
-    HWREG(HIB_TPSTAT) |= HIB_TPSTAT_XOSCFAIL;
-
-    //
-    // Wait for write completion.
-    //
-    _HibernateWriteComplete();
-
-    //
-    // Lock the tamper registers.
-    //
-    HWREG(HIB_LOCK) = 0;
-    _HibernateWriteComplete();
-}
-
-//*****************************************************************************
-//
-//! Reports if the external oscillator signal is active and stable.
-//!
-//! This function should be used to verify the external oscillator is active
-//! and valid before attempting to recover from a
-//! \b HIBERNATE_TAMPER_STATUS_EXT_OSC_FAILED status by calling
-//! HibernateTamperExtOscRecover().
-//!
-//! \note The hibernate tamper feature is not available on all Tiva
-//! devices.  Please consult the data sheet for the Tiva device that you
-//! are using to determine if this feature is available.
-//!
-//! \return Returns \b true if the external oscillator is both active and
-//! stable, otherwise a \b false indicator is returned.
-//
-//*****************************************************************************
-bool
-HibernateTamperExtOscValid(void)
-{
-    if(HibernateTamperStatusGet() & (HIBERNATE_TAMPER_STATUS_EXT_OSC_ACTIVE |
-                                     HIBERNATE_TAMPER_STATUS_EXT_OSC_VALID))
-    {
-        return(true);
-    }
-
     return(false);
 }
 

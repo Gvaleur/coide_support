@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -65,19 +65,7 @@ static const uint32_t g_pui32FMPPERegs[] =
     FLASH_FMPPE0,
     FLASH_FMPPE1,
     FLASH_FMPPE2,
-    FLASH_FMPPE3,
-    FLASH_FMPPE4,
-    FLASH_FMPPE5,
-    FLASH_FMPPE6,
-    FLASH_FMPPE7,
-    FLASH_FMPPE8,
-    FLASH_FMPPE9,
-    FLASH_FMPPE10,
-    FLASH_FMPPE11,
-    FLASH_FMPPE12,
-    FLASH_FMPPE13,
-    FLASH_FMPPE14,
-    FLASH_FMPPE15,
+    FLASH_FMPPE3
 };
 
 //*****************************************************************************
@@ -91,19 +79,7 @@ static const uint32_t g_pui32FMPRERegs[] =
     FLASH_FMPRE0,
     FLASH_FMPRE1,
     FLASH_FMPRE2,
-    FLASH_FMPRE3,
-    FLASH_FMPRE4,
-    FLASH_FMPRE5,
-    FLASH_FMPRE6,
-    FLASH_FMPRE7,
-    FLASH_FMPRE8,
-    FLASH_FMPRE9,
-    FLASH_FMPRE10,
-    FLASH_FMPRE11,
-    FLASH_FMPRE12,
-    FLASH_FMPRE13,
-    FLASH_FMPRE14,
-    FLASH_FMPRE15,
+    FLASH_FMPRE3
 };
 
 //*****************************************************************************
@@ -115,11 +91,6 @@ static const uint32_t g_pui32FMPRERegs[] =
 //! This function erases a 1-kB block of the on-chip flash.  After erasing,
 //! the block is filled with 0xFF bytes.  Read-only and execute-only blocks
 //! cannot be erased.
-//!
-//! The flash block size is device-class dependent.  All Blizzard-class TM4C
-//! devices use 1KB blocks but Snowflake-class TM4C devices use 16KB blocks.
-//! Please consult the datasheet for your device to determine the block size in
-//! use.
 //!
 //! This function does not return until the block has been erased.
 //!

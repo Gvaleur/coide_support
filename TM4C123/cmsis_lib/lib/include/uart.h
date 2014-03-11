@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -57,8 +57,6 @@ extern "C"
 // as the ui32IntFlags parameter, and returned from UARTIntStatus.
 //
 //*****************************************************************************
-#define UART_INT_DMATX          0x20000     // DMA TX interrupt
-#define UART_INT_DMARX          0x10000     // DMA RX interrupt
 #define UART_INT_9BIT           0x1000      // 9-bit address match interrupt
 #define UART_INT_OE             0x400       // Overrun Error Interrupt Mask
 #define UART_INT_BE             0x200       // Break Error Interrupt Mask

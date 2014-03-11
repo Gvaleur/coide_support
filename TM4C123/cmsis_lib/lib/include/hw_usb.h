@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Firmware Development Package.
+// This is part of revision 1.1 of the Tiva Firmware Development Package.
 //
 //*****************************************************************************
 
@@ -65,22 +65,13 @@
 #define USB_O_FIFO6             0x00000038  // USB FIFO Endpoint 6
 #define USB_O_FIFO7             0x0000003C  // USB FIFO Endpoint 7
 #define USB_O_DEVCTL            0x00000060  // USB Device Control
-#define USB_O_CCONF             0x00000061  // USB Common Configuration
 #define USB_O_TXFIFOSZ          0x00000062  // USB Transmit Dynamic FIFO Sizing
 #define USB_O_RXFIFOSZ          0x00000063  // USB Receive Dynamic FIFO Sizing
 #define USB_O_TXFIFOADD         0x00000064  // USB Transmit FIFO Start Address
 #define USB_O_RXFIFOADD         0x00000066  // USB Receive FIFO Start Address
-#define USB_O_ULPIVBUSCTL       0x00000070  // USB ULPI VBUS Control
-#define USB_O_ULPIREGDATA       0x00000074  // USB ULPI Register Data
-#define USB_O_ULPIREGADDR       0x00000075  // USB ULPI Register Address
-#define USB_O_ULPIREGCTL        0x00000076  // USB ULPI Register Control
-#define USB_O_ULPIRAWDATA       0x00000077  // USB ULPI Raw Data
 #define USB_O_EPINFO            0x00000078  // USB Endpoint Information
-#define USB_O_RAMINFO           0x00000079  // USB RAM Information
 #define USB_O_CONTIM            0x0000007A  // USB Connect Timing
 #define USB_O_VPLEN             0x0000007B  // USB OTG VBUS Pulse Timing
-#define USB_O_HSEOF             0x0000007C  // USB High-Speed Last Transaction
-                                            // to End of Frame Timing
 #define USB_O_FSEOF             0x0000007D  // USB Full-Speed Last Transaction
                                             // to End of Frame Timing
 #define USB_O_LSEOF             0x0000007E  // USB Low-Speed Last Transaction
@@ -322,31 +313,6 @@
                                             // Endpoint 7
 #define USB_O_RXINTERVAL7       0x0000017D  // USB Host Receive Polling
                                             // Interval Endpoint 7
-#define USB_O_DMAINTR           0x00000200  // USB DMA Interrupt
-#define USB_O_DMACTL0           0x00000204  // USB DMA Control 0
-#define USB_O_DMAADDR0          0x00000208  // USB DMA Address 0
-#define USB_O_DMACOUNT0         0x0000020C  // USB DMA Count 0
-#define USB_O_DMACTL1           0x00000214  // USB DMA Control 1
-#define USB_O_DMAADDR1          0x00000218  // USB DMA Address 1
-#define USB_O_DMACOUNT1         0x0000021C  // USB DMA Count 1
-#define USB_O_DMACTL2           0x00000224  // USB DMA Control 2
-#define USB_O_DMAADDR2          0x00000228  // USB DMA Address 2
-#define USB_O_DMACOUNT2         0x0000022C  // USB DMA Count 2
-#define USB_O_DMACTL3           0x00000234  // USB DMA Control 3
-#define USB_O_DMAADDR3          0x00000238  // USB DMA Address 3
-#define USB_O_DMACOUNT3         0x0000023C  // USB DMA Count 3
-#define USB_O_DMACTL4           0x00000244  // USB DMA Control 4
-#define USB_O_DMAADDR4          0x00000248  // USB DMA Address 4
-#define USB_O_DMACOUNT4         0x0000024C  // USB DMA Count 4
-#define USB_O_DMACTL5           0x00000254  // USB DMA Control 5
-#define USB_O_DMAADDR5          0x00000258  // USB DMA Address 5
-#define USB_O_DMACOUNT5         0x0000025C  // USB DMA Count 5
-#define USB_O_DMACTL6           0x00000264  // USB DMA Control 6
-#define USB_O_DMAADDR6          0x00000268  // USB DMA Address 6
-#define USB_O_DMACOUNT6         0x0000026C  // USB DMA Count 6
-#define USB_O_DMACTL7           0x00000274  // USB DMA Control 7
-#define USB_O_DMAADDR7          0x00000278  // USB DMA Address 7
-#define USB_O_DMACOUNT7         0x0000027C  // USB DMA Count 7
 #define USB_O_RQPKTCOUNT1       0x00000304  // USB Request Packet Count in
                                             // Block Transfer Endpoint 1
 #define USB_O_RQPKTCOUNT2       0x00000308  // USB Request Packet Count in
@@ -365,15 +331,6 @@
                                             // Disable
 #define USB_O_TXDPKTBUFDIS      0x00000342  // USB Transmit Double Packet
                                             // Buffer Disable
-#define USB_O_CTO               0x00000344  // USB Chirp Timeout
-#define USB_O_HHSRTN            0x00000346  // USB High Speed to UTM Operating
-                                            // Delay
-#define USB_O_HSBT              0x00000348  // USB High Speed Time-out Adder
-#define USB_O_LPMATTR           0x00000360  // USB LPM Attributes
-#define USB_O_LPMCNTRL          0x00000362  // USB LPM Control
-#define USB_O_LPMIM             0x00000363  // USB LPM Interrupt Mask
-#define USB_O_LPMRIS            0x00000364  // USB LPM Raw Interrupt Status
-#define USB_O_LPMFADDR          0x00000365  // USB LPM Function Address
 #define USB_O_EPC               0x00000400  // USB External Power Control
 #define USB_O_EPCRIS            0x00000404  // USB External Power Control Raw
                                             // Interrupt Status
@@ -403,8 +360,6 @@
                                             // Status and Clear
 #define USB_O_DMASEL            0x00000450  // USB DMA Select
 #define USB_O_PP                0x00000FC0  // USB Peripheral Properties
-#define USB_O_PC                0x00000FC4  // USB Peripheral Configuration
-#define USB_O_CC                0x00000FC8  // USB Clock Configuration
 
 //*****************************************************************************
 //
@@ -421,8 +376,6 @@
 //*****************************************************************************
 #define USB_POWER_ISOUP         0x00000080  // Isochronous Update
 #define USB_POWER_SOFTCONN      0x00000040  // Soft Connect/Disconnect
-#define USB_POWER_HSENAB        0x00000020  // High Speed Enable
-#define USB_POWER_HSMODE        0x00000010  // High Speed Enable
 #define USB_POWER_RESET         0x00000008  // RESET Signaling
 #define USB_POWER_RESUME        0x00000004  // RESUME Signaling
 #define USB_POWER_SUSPEND       0x00000002  // SUSPEND Mode
@@ -537,11 +490,6 @@
 #define USB_TEST_FORCEH         0x00000080  // Force Host Mode
 #define USB_TEST_FIFOACC        0x00000040  // FIFO Access
 #define USB_TEST_FORCEFS        0x00000020  // Force Full-Speed Mode
-#define USB_TEST_FORCEHS        0x00000010  // Force High-Speed Mode
-#define USB_TEST_TESTPKT        0x00000008  // Test Packet Mode Enable
-#define USB_TEST_TESTK          0x00000004  // Test_K Mode Enable
-#define USB_TEST_TESTJ          0x00000002  // Test_J Mode Enable
-#define USB_TEST_TESTSE0NAK     0x00000001  // Test_SE0_NAK Test Mode Enable
 
 //*****************************************************************************
 //
@@ -626,14 +574,6 @@
 
 //*****************************************************************************
 //
-// The following are defines for the bit fields in the USB_O_CCONF register.
-//
-//*****************************************************************************
-#define USB_CCONF_TXEDMA        0x00000002  // TX Early DMA Enable
-#define USB_CCONF_RXEDMA        0x00000001  // TX Early DMA Enable
-
-//*****************************************************************************
-//
 // The following are defines for the bit fields in the USB_O_TXFIFOSZ register.
 //
 //*****************************************************************************
@@ -686,58 +626,6 @@
 
 //*****************************************************************************
 //
-// The following are defines for the bit fields in the USB_O_ULPIVBUSCTL
-// register.
-//
-//*****************************************************************************
-#define USB_ULPIVBUSCTL_USEEXTVBUSIND                                         \
-                                0x00000002  // Use External VBUS Indicator
-#define USB_ULPIVBUSCTL_USEEXTVBUS                                            \
-                                0x00000001  // Use External VBUS
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_ULPIREGDATA
-// register.
-//
-//*****************************************************************************
-#define USB_ULPIREGDATA_REGDATA_M                                             \
-                                0x000000FF  // Register Data
-#define USB_ULPIREGDATA_REGDATA_S                                             \
-                                0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_ULPIREGADDR
-// register.
-//
-//*****************************************************************************
-#define USB_ULPIREGADDR_ADDR_M  0x000000FF  // Register Address
-#define USB_ULPIREGADDR_ADDR_S  0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_ULPIREGCTL
-// register.
-//
-//*****************************************************************************
-#define USB_ULPIREGCTL_RDWR     0x00000004  // Read/Write Control
-#define USB_ULPIREGCTL_REGCMPLT 0x00000002  // Register Access Complete
-#define USB_ULPIREGCTL_REGACC   0x00000001  // Initiate Register Access
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_ULPIRAWDATA
-// register.
-//
-//*****************************************************************************
-#define USB_ULPIRAWDATA_WTCON_M 0x000000F0  // Connect Wait
-#define USB_ULPIRAWDATA_WTID_M  0x0000000F  // Wait ID
-#define USB_ULPIRAWDATA_WTCON_S 4
-#define USB_ULPIRAWDATA_WTID_S  0
-
-//*****************************************************************************
-//
 // The following are defines for the bit fields in the USB_O_EPINFO register.
 //
 //*****************************************************************************
@@ -745,16 +633,6 @@
 #define USB_EPINFO_TXEP_M       0x0000000F  // TX Endpoints
 #define USB_EPINFO_RXEP_S       4
 #define USB_EPINFO_TXEP_S       0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_RAMINFO register.
-//
-//*****************************************************************************
-#define USB_RAMINFO_DMACHAN_M   0x000000F0  // DMA Channels
-#define USB_RAMINFO_RAMBITS_M   0x0000000F  // RAM Address Bus Width
-#define USB_RAMINFO_DMACHAN_S   4
-#define USB_RAMINFO_RAMBITS_S   0
 
 //*****************************************************************************
 //
@@ -773,14 +651,6 @@
 //*****************************************************************************
 #define USB_VPLEN_VPLEN_M       0x000000FF  // VBUS Pulse Length
 #define USB_VPLEN_VPLEN_S       0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_HSEOF register.
-//
-//*****************************************************************************
-#define USB_HSEOF_HSEOFG_M      0x000000FF  // HIgh-Speed End-of-Frame Gap
-#define USB_HSEOF_HSEOFG_S      0
 
 //*****************************************************************************
 //
@@ -1227,7 +1097,6 @@
 // The following are defines for the bit fields in the USB_O_CSRH0 register.
 //
 //*****************************************************************************
-#define USB_CSRH0_DISPING       0x00000008  // PING Disable
 #define USB_CSRH0_DTWE          0x00000004  // Data Toggle Write Enable
 #define USB_CSRH0_DT            0x00000002  // Data Toggle
 #define USB_CSRH0_FLUSH         0x00000001  // Flush FIFO
@@ -1246,7 +1115,6 @@
 //
 //*****************************************************************************
 #define USB_TYPE0_SPEED_M       0x000000C0  // Operating Speed
-#define USB_TYPE0_SPEED_HIGH    0x00000040  // High
 #define USB_TYPE0_SPEED_FULL    0x00000080  // Full
 #define USB_TYPE0_SPEED_LOW     0x000000C0  // Low
 
@@ -1335,8 +1203,6 @@
 #define USB_RXCSRH1_DMAMOD      0x00000008  // DMA Request Mode
 #define USB_RXCSRH1_DTWE        0x00000004  // Data Toggle Write Enable
 #define USB_RXCSRH1_DT          0x00000002  // Data Toggle
-#define USB_RXCSRH1_INCOMPRX    0x00000001  // Incomplete RX Transmission
-                                            // Status
 
 //*****************************************************************************
 //
@@ -1353,7 +1219,6 @@
 //*****************************************************************************
 #define USB_TXTYPE1_SPEED_M     0x000000C0  // Operating Speed
 #define USB_TXTYPE1_SPEED_DFLT  0x00000000  // Default
-#define USB_TXTYPE1_SPEED_HIGH  0x00000040  // High
 #define USB_TXTYPE1_SPEED_FULL  0x00000080  // Full
 #define USB_TXTYPE1_SPEED_LOW   0x000000C0  // Low
 #define USB_TXTYPE1_PROTO_M     0x00000030  // Protocol
@@ -1386,7 +1251,6 @@
 //*****************************************************************************
 #define USB_RXTYPE1_SPEED_M     0x000000C0  // Operating Speed
 #define USB_RXTYPE1_SPEED_DFLT  0x00000000  // Default
-#define USB_RXTYPE1_SPEED_HIGH  0x00000040  // High
 #define USB_RXTYPE1_SPEED_FULL  0x00000080  // Full
 #define USB_RXTYPE1_SPEED_LOW   0x000000C0  // Low
 #define USB_RXTYPE1_PROTO_M     0x00000030  // Protocol
@@ -1489,8 +1353,6 @@
 #define USB_RXCSRH2_DMAMOD      0x00000008  // DMA Request Mode
 #define USB_RXCSRH2_DTWE        0x00000004  // Data Toggle Write Enable
 #define USB_RXCSRH2_DT          0x00000002  // Data Toggle
-#define USB_RXCSRH2_INCOMPRX    0x00000001  // Incomplete RX Transmission
-                                            // Status
 
 //*****************************************************************************
 //
@@ -1507,7 +1369,6 @@
 //*****************************************************************************
 #define USB_TXTYPE2_SPEED_M     0x000000C0  // Operating Speed
 #define USB_TXTYPE2_SPEED_DFLT  0x00000000  // Default
-#define USB_TXTYPE2_SPEED_HIGH  0x00000040  // High
 #define USB_TXTYPE2_SPEED_FULL  0x00000080  // Full
 #define USB_TXTYPE2_SPEED_LOW   0x000000C0  // Low
 #define USB_TXTYPE2_PROTO_M     0x00000030  // Protocol
@@ -1540,7 +1401,6 @@
 //*****************************************************************************
 #define USB_RXTYPE2_SPEED_M     0x000000C0  // Operating Speed
 #define USB_RXTYPE2_SPEED_DFLT  0x00000000  // Default
-#define USB_RXTYPE2_SPEED_HIGH  0x00000040  // High
 #define USB_RXTYPE2_SPEED_FULL  0x00000080  // Full
 #define USB_RXTYPE2_SPEED_LOW   0x000000C0  // Low
 #define USB_RXTYPE2_PROTO_M     0x00000030  // Protocol
@@ -1643,8 +1503,6 @@
 #define USB_RXCSRH3_DMAMOD      0x00000008  // DMA Request Mode
 #define USB_RXCSRH3_DTWE        0x00000004  // Data Toggle Write Enable
 #define USB_RXCSRH3_DT          0x00000002  // Data Toggle
-#define USB_RXCSRH3_INCOMPRX    0x00000001  // Incomplete RX Transmission
-                                            // Status
 
 //*****************************************************************************
 //
@@ -1661,7 +1519,6 @@
 //*****************************************************************************
 #define USB_TXTYPE3_SPEED_M     0x000000C0  // Operating Speed
 #define USB_TXTYPE3_SPEED_DFLT  0x00000000  // Default
-#define USB_TXTYPE3_SPEED_HIGH  0x00000040  // High
 #define USB_TXTYPE3_SPEED_FULL  0x00000080  // Full
 #define USB_TXTYPE3_SPEED_LOW   0x000000C0  // Low
 #define USB_TXTYPE3_PROTO_M     0x00000030  // Protocol
@@ -1694,7 +1551,6 @@
 //*****************************************************************************
 #define USB_RXTYPE3_SPEED_M     0x000000C0  // Operating Speed
 #define USB_RXTYPE3_SPEED_DFLT  0x00000000  // Default
-#define USB_RXTYPE3_SPEED_HIGH  0x00000040  // High
 #define USB_RXTYPE3_SPEED_FULL  0x00000080  // Full
 #define USB_RXTYPE3_SPEED_LOW   0x000000C0  // Low
 #define USB_RXTYPE3_PROTO_M     0x00000030  // Protocol
@@ -1797,8 +1653,6 @@
 #define USB_RXCSRH4_DMAMOD      0x00000008  // DMA Request Mode
 #define USB_RXCSRH4_DTWE        0x00000004  // Data Toggle Write Enable
 #define USB_RXCSRH4_DT          0x00000002  // Data Toggle
-#define USB_RXCSRH4_INCOMPRX    0x00000001  // Incomplete RX Transmission
-                                            // Status
 
 //*****************************************************************************
 //
@@ -1815,7 +1669,6 @@
 //*****************************************************************************
 #define USB_TXTYPE4_SPEED_M     0x000000C0  // Operating Speed
 #define USB_TXTYPE4_SPEED_DFLT  0x00000000  // Default
-#define USB_TXTYPE4_SPEED_HIGH  0x00000040  // High
 #define USB_TXTYPE4_SPEED_FULL  0x00000080  // Full
 #define USB_TXTYPE4_SPEED_LOW   0x000000C0  // Low
 #define USB_TXTYPE4_PROTO_M     0x00000030  // Protocol
@@ -1848,7 +1701,6 @@
 //*****************************************************************************
 #define USB_RXTYPE4_SPEED_M     0x000000C0  // Operating Speed
 #define USB_RXTYPE4_SPEED_DFLT  0x00000000  // Default
-#define USB_RXTYPE4_SPEED_HIGH  0x00000040  // High
 #define USB_RXTYPE4_SPEED_FULL  0x00000080  // Full
 #define USB_RXTYPE4_SPEED_LOW   0x000000C0  // Low
 #define USB_RXTYPE4_PROTO_M     0x00000030  // Protocol
@@ -1951,8 +1803,6 @@
 #define USB_RXCSRH5_DMAMOD      0x00000008  // DMA Request Mode
 #define USB_RXCSRH5_DTWE        0x00000004  // Data Toggle Write Enable
 #define USB_RXCSRH5_DT          0x00000002  // Data Toggle
-#define USB_RXCSRH5_INCOMPRX    0x00000001  // Incomplete RX Transmission
-                                            // Status
 
 //*****************************************************************************
 //
@@ -1969,7 +1819,6 @@
 //*****************************************************************************
 #define USB_TXTYPE5_SPEED_M     0x000000C0  // Operating Speed
 #define USB_TXTYPE5_SPEED_DFLT  0x00000000  // Default
-#define USB_TXTYPE5_SPEED_HIGH  0x00000040  // High
 #define USB_TXTYPE5_SPEED_FULL  0x00000080  // Full
 #define USB_TXTYPE5_SPEED_LOW   0x000000C0  // Low
 #define USB_TXTYPE5_PROTO_M     0x00000030  // Protocol
@@ -2002,7 +1851,6 @@
 //*****************************************************************************
 #define USB_RXTYPE5_SPEED_M     0x000000C0  // Operating Speed
 #define USB_RXTYPE5_SPEED_DFLT  0x00000000  // Default
-#define USB_RXTYPE5_SPEED_HIGH  0x00000040  // High
 #define USB_RXTYPE5_SPEED_FULL  0x00000080  // Full
 #define USB_RXTYPE5_SPEED_LOW   0x000000C0  // Low
 #define USB_RXTYPE5_PROTO_M     0x00000030  // Protocol
@@ -2105,8 +1953,6 @@
 #define USB_RXCSRH6_DMAMOD      0x00000008  // DMA Request Mode
 #define USB_RXCSRH6_DTWE        0x00000004  // Data Toggle Write Enable
 #define USB_RXCSRH6_DT          0x00000002  // Data Toggle
-#define USB_RXCSRH6_INCOMPRX    0x00000001  // Incomplete RX Transmission
-                                            // Status
 
 //*****************************************************************************
 //
@@ -2123,7 +1969,6 @@
 //*****************************************************************************
 #define USB_TXTYPE6_SPEED_M     0x000000C0  // Operating Speed
 #define USB_TXTYPE6_SPEED_DFLT  0x00000000  // Default
-#define USB_TXTYPE6_SPEED_HIGH  0x00000040  // High
 #define USB_TXTYPE6_SPEED_FULL  0x00000080  // Full
 #define USB_TXTYPE6_SPEED_LOW   0x000000C0  // Low
 #define USB_TXTYPE6_PROTO_M     0x00000030  // Protocol
@@ -2156,7 +2001,6 @@
 //*****************************************************************************
 #define USB_RXTYPE6_SPEED_M     0x000000C0  // Operating Speed
 #define USB_RXTYPE6_SPEED_DFLT  0x00000000  // Default
-#define USB_RXTYPE6_SPEED_HIGH  0x00000040  // High
 #define USB_RXTYPE6_SPEED_FULL  0x00000080  // Full
 #define USB_RXTYPE6_SPEED_LOW   0x000000C0  // Low
 #define USB_RXTYPE6_PROTO_M     0x00000030  // Protocol
@@ -2259,8 +2103,6 @@
 #define USB_RXCSRH7_DMAMOD      0x00000008  // DMA Request Mode
 #define USB_RXCSRH7_DTWE        0x00000004  // Data Toggle Write Enable
 #define USB_RXCSRH7_DT          0x00000002  // Data Toggle
-#define USB_RXCSRH7_INCOMPRX    0x00000001  // Incomplete RX Transmission
-                                            // Status
 
 //*****************************************************************************
 //
@@ -2277,7 +2119,6 @@
 //*****************************************************************************
 #define USB_TXTYPE7_SPEED_M     0x000000C0  // Operating Speed
 #define USB_TXTYPE7_SPEED_DFLT  0x00000000  // Default
-#define USB_TXTYPE7_SPEED_HIGH  0x00000040  // High
 #define USB_TXTYPE7_SPEED_FULL  0x00000080  // Full
 #define USB_TXTYPE7_SPEED_LOW   0x000000C0  // Low
 #define USB_TXTYPE7_PROTO_M     0x00000030  // Protocol
@@ -2310,7 +2151,6 @@
 //*****************************************************************************
 #define USB_RXTYPE7_SPEED_M     0x000000C0  // Operating Speed
 #define USB_RXTYPE7_SPEED_DFLT  0x00000000  // Default
-#define USB_RXTYPE7_SPEED_HIGH  0x00000040  // High
 #define USB_RXTYPE7_SPEED_FULL  0x00000080  // Full
 #define USB_RXTYPE7_SPEED_LOW   0x000000C0  // Low
 #define USB_RXTYPE7_PROTO_M     0x00000030  // Protocol
@@ -2335,316 +2175,6 @@
                                 0
 #define USB_RXINTERVAL7_TXPOLL_S                                              \
                                 0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAINTR register.
-//
-//*****************************************************************************
-#define USB_DMAINTR_CH7         0x00000080  // Channel 8 DMA Interrupt
-#define USB_DMAINTR_CH6         0x00000040  // Channel 7 DMA Interrupt
-#define USB_DMAINTR_CH5         0x00000020  // Channel 6 DMA Interrupt
-#define USB_DMAINTR_CH4         0x00000010  // Channel 5 DMA Interrupt
-#define USB_DMAINTR_CH3         0x00000008  // Channel 4 DMA Interrupt
-#define USB_DMAINTR_CH2         0x00000004  // Channel 3 DMA Interrupt
-#define USB_DMAINTR_CH1         0x00000002  // Channel 2 DMA Interrupt
-#define USB_DMAINTR_CH0         0x00000001  // Channel 1 DMA Interrupt
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL0 register.
-//
-//*****************************************************************************
-#define USB_DMACTL0_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL0_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL0_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL0_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL0_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL0_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL0_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL0_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL0_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL0_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL0_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL0_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR0 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR0_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR0_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT0
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT0_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT0_COUNT_S   2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL1 register.
-//
-//*****************************************************************************
-#define USB_DMACTL1_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL1_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL1_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL1_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL1_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL1_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL1_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL1_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL1_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL1_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL1_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL1_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR1 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR1_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR1_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT1
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT1_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT1_COUNT_S   2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL2 register.
-//
-//*****************************************************************************
-#define USB_DMACTL2_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL2_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL2_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL2_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL2_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL2_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL2_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL2_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL2_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL2_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL2_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL2_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR2 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR2_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR2_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT2
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT2_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT2_COUNT_S   2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL3 register.
-//
-//*****************************************************************************
-#define USB_DMACTL3_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL3_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL3_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL3_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL3_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL3_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL3_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL3_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL3_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL3_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL3_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL3_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR3 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR3_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR3_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT3
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT3_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT3_COUNT_S   2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL4 register.
-//
-//*****************************************************************************
-#define USB_DMACTL4_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL4_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL4_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL4_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL4_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL4_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL4_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL4_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL4_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL4_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL4_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL4_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR4 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR4_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR4_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT4
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT4_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT4_COUNT_S   2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL5 register.
-//
-//*****************************************************************************
-#define USB_DMACTL5_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL5_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL5_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL5_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL5_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL5_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL5_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL5_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL5_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL5_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL5_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL5_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR5 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR5_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR5_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT5
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT5_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT5_COUNT_S   2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL6 register.
-//
-//*****************************************************************************
-#define USB_DMACTL6_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL6_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL6_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL6_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL6_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL6_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL6_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL6_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL6_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL6_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL6_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL6_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR6 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR6_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR6_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT6
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT6_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT6_COUNT_S   2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACTL7 register.
-//
-//*****************************************************************************
-#define USB_DMACTL7_BRSTM_M     0x00000600  // Burst Mode
-#define USB_DMACTL7_BRSTM_ANY   0x00000000  // Bursts of unspecified length
-#define USB_DMACTL7_BRSTM_INC4  0x00000200  // INCR4 or unspecified length
-#define USB_DMACTL7_BRSTM_INC8  0x00000400  // INCR8, INCR4 or unspecified
-                                            // length
-#define USB_DMACTL7_BRSTM_INC16 0x00000600  // INCR16, INCR8, INCR4 or
-                                            // unspecified length
-#define USB_DMACTL7_ERR         0x00000100  // Bus Error Bit
-#define USB_DMACTL7_EP_M        0x000000F0  // Endpoint number
-#define USB_DMACTL7_IE          0x00000008  // DMA Interrupt Enable
-#define USB_DMACTL7_MODE        0x00000004  // DMA Transfer Mode
-#define USB_DMACTL7_DIR         0x00000002  // DMA Direction
-#define USB_DMACTL7_ENABLE      0x00000001  // DMA Transfer Enable
-#define USB_DMACTL7_EP_S        4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMAADDR7 register.
-//
-//*****************************************************************************
-#define USB_DMAADDR7_ADDR_M     0xFFFFFFFC  // DMA Address
-#define USB_DMAADDR7_ADDR_S     2
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_DMACOUNT7
-// register.
-//
-//*****************************************************************************
-#define USB_DMACOUNT7_COUNT_M   0xFFFFFFFC  // DMA Count
-#define USB_DMACOUNT7_COUNT_S   2
 
 //*****************************************************************************
 //
@@ -2753,102 +2283,6 @@
 
 //*****************************************************************************
 //
-// The following are defines for the bit fields in the USB_O_CTO register.
-//
-//*****************************************************************************
-#define USB_CTO_CCTV_M          0x0000FFFF  // Configurable Chirp Timeout Value
-#define USB_CTO_CCTV_S          0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_HHSRTN register.
-//
-//*****************************************************************************
-#define USB_HHSRTN_HHSRTN_M     0x0000FFFF  // High Speed to UTM Operating
-                                            // Delay
-#define USB_HHSRTN_HHSRTN_S     0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_HSBT register.
-//
-//*****************************************************************************
-#define USB_HSBT_HSBT_M         0x0000000F  // High Speed Timeout Adder
-#define USB_HSBT_HSBT_S         0
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_LPMATTR register.
-//
-//*****************************************************************************
-#define USB_LPMATTR_ENDPT_M     0x0000F000  // Endpoint
-#define USB_LPMATTR_RMTWAK      0x00000100  // Remote Wake
-#define USB_LPMATTR_HIRD_M      0x000000F0  // Host Initiated Resume Duration
-#define USB_LPMATTR_LS_M        0x0000000F  // Link State
-#define USB_LPMATTR_LS_L1       0x00000001  // Sleep State (L1)
-#define USB_LPMATTR_ENDPT_S     12
-#define USB_LPMATTR_HIRD_S      4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_LPMCNTRL register.
-//
-//*****************************************************************************
-#define USB_LPMCNTRL_NAK        0x00000010  // LPM NAK
-#define USB_LPMCNTRL_EN_M       0x0000000C  // LPM Enable
-#define USB_LPMCNTRL_EN_NONE    0x00000000  // LPM and Extended transactions
-                                            // are not supported. In this case,
-                                            // the USB does not respond to LPM
-                                            // transactions and LPM
-                                            // transactions cause a timeout
-#define USB_LPMCNTRL_EN_EXT     0x00000004  // LPM is not supported but
-                                            // extended transactions are
-                                            // supported. In this case, the USB
-                                            // does respond to an LPM
-                                            // transaction with a STALL
-#define USB_LPMCNTRL_EN_LPMEXT  0x0000000C  // The USB supports LPM extended
-                                            // transactions. In this case, the
-                                            // USB responds with a NYET or an
-                                            // ACK as determined by the value
-                                            // of TXLPM and other conditions
-#define USB_LPMCNTRL_RES        0x00000002  // LPM Resume
-#define USB_LPMCNTRL_TXLPM      0x00000001  // Transmit LPM Transaction Enable
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_LPMIM register.
-//
-//*****************************************************************************
-#define USB_LPMIM_ERR           0x00000020  // LPM Error Interrupt Mask
-#define USB_LPMIM_RES           0x00000010  // LPM Resume Interrupt Mask
-#define USB_LPMIM_NC            0x00000008  // LPM NC Interrupt Mask
-#define USB_LPMIM_ACK           0x00000004  // LPM ACK Interrupt Mask
-#define USB_LPMIM_NY            0x00000002  // LPM NY Interrupt Mask
-#define USB_LPMIM_STALL         0x00000001  // LPM STALL Interrupt Mask
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_LPMRIS register.
-//
-//*****************************************************************************
-#define USB_LPMRIS_ERR          0x00000020  // LPM Error Interrupt Status
-#define USB_LPMRIS_RES          0x00000010  // LPM Resume Interrupt Status
-#define USB_LPMRIS_NC           0x00000008  // LPM No Completion Interrupt
-                                            // Status
-#define USB_LPMRIS_ACK          0x00000004  // LPM ACK Interrupt Status
-#define USB_LPMRIS_NY           0x00000002  // LPM NY Interrupt Status
-#define USB_LPMRIS_LPMST        0x00000001  // LPM STALL Interrupt Status
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_LPMFADDR register.
-//
-//*****************************************************************************
-#define USB_LPMFADDR_ADDR_M     0x0000007F  // LPM Function Address
-#define USB_LPMFADDR_ADDR_S     0
-
-//*****************************************************************************
-//
 // The following are defines for the bit fields in the USB_O_EPC register.
 //
 //*****************************************************************************
@@ -2917,15 +2351,6 @@
 // The following are defines for the bit fields in the USB_O_GPCS register.
 //
 //*****************************************************************************
-#define USB_GPCS_DEVMOD_M       0x00000007  // Device Mode
-#define USB_GPCS_DEVMOD_OTG     0x00000000  // Use USB0VBUS and USB0ID pin
-#define USB_GPCS_DEVMOD_HOST    0x00000002  // Force USB0VBUS and USB0ID low
-#define USB_GPCS_DEVMOD_DEV     0x00000003  // Force USB0VBUS and USB0ID high
-#define USB_GPCS_DEVMOD_HOSTVBUS                                              \
-                                0x00000004  // Use USB0VBUS and force USB0ID
-                                            // low
-#define USB_GPCS_DEVMOD_DEVVBUS 0x00000005  // Use USB0VBUS and force USB0ID
-                                            // high
 #define USB_GPCS_DEVMODOTG      0x00000002  // Enable Device Mode
 #define USB_GPCS_DEVMOD         0x00000001  // Device Mode
 
@@ -3009,33 +2434,10 @@
 #define USB_PP_USB_DEVICE       0x00000040  // DEVICE
 #define USB_PP_USB_HOSTDEVICE   0x00000080  // HOST
 #define USB_PP_USB_OTG          0x000000C0  // OTG
-#define USB_PP_ULPI             0x00000020  // ULPI Present
 #define USB_PP_PHY              0x00000010  // PHY Present
 #define USB_PP_TYPE_M           0x0000000F  // Controller Type
 #define USB_PP_TYPE_0           0x00000000  // The first-generation USB
                                             // controller
-#define USB_PP_TYPE_1           0x00000001  // Second-generation USB
-                                            // controller.The controller
-                                            // implemented in post Icestorm
-                                            // devices that use the 3.0 version
-                                            // of the Mentor controller
 #define USB_PP_ECNT_S           8
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_PC register.
-//
-//*****************************************************************************
-#define USB_PC_ULPIEN           0x00010000  // ULPI Enable
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the USB_O_CC register.
-//
-//*****************************************************************************
-#define USB_CC_CLKEN            0x00000200  // USB Clock Enable
-#define USB_CC_CSD              0x00000100  // Clock Source/Direction
-#define USB_CC_CLKDIV_M         0x0000000F  // PLL Clock Divisor
-#define USB_CC_CLKDIV_S         0
 
 #endif // __HW_USB_H__

@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Firmware Development Package.
+// This is part of revision 1.1 of the Tiva Firmware Development Package.
 //
 //*****************************************************************************
 
@@ -59,10 +59,7 @@
 #define EEPROM_EEPASS1          0x400AF038  // EEPROM Password
 #define EEPROM_EEPASS2          0x400AF03C  // EEPROM Password
 #define EEPROM_EEINT            0x400AF040  // EEPROM Interrupt
-#define EEPROM_EEHIDE0          0x400AF050  // EEPROM Block 0 Hide
 #define EEPROM_EEHIDE           0x400AF050  // EEPROM Block Hide
-#define EEPROM_EEHIDE1          0x400AF054  // EEPROM Block Hide 1
-#define EEPROM_EEHIDE2          0x400AF058  // EEPROM Block Hide 2
 #define EEPROM_EEDBGME          0x400AF080  // EEPROM Debug Mass Erase
 #define EEPROM_PP               0x400AFFC0  // EEPROM Peripheral Properties
 
@@ -198,31 +195,10 @@
 
 //*****************************************************************************
 //
-// The following are defines for the bit fields in the EEPROM_EEHIDE0 register.
-//
-//*****************************************************************************
-#define EEPROM_EEHIDE0_HN_M     0xFFFFFFFE  // Hide Block
-
-//*****************************************************************************
-//
 // The following are defines for the bit fields in the EEPROM_EEHIDE register.
 //
 //*****************************************************************************
 #define EEPROM_EEHIDE_HN_M      0xFFFFFFFE  // Hide Block
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the EEPROM_EEHIDE1 register.
-//
-//*****************************************************************************
-#define EEPROM_EEHIDE1_HN_M     0xFFFFFFFF  // Hide Block
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the EEPROM_EEHIDE2 register.
-//
-//*****************************************************************************
-#define EEPROM_EEHIDE2_HN_M     0xFFFFFFFF  // Hide Block
 
 //*****************************************************************************
 //
@@ -238,17 +214,7 @@
 // The following are defines for the bit fields in the EEPROM_PP register.
 //
 //*****************************************************************************
-#define EEPROM_PP_SIZE_M        0x0000FFFF  // EEPROM Size
-#define EEPROM_PP_SIZE_64       0x00000000  // 64 bytes of EEPROM
-#define EEPROM_PP_SIZE_128      0x00000001  // 128 bytes of EEPROM
-#define EEPROM_PP_SIZE_256      0x00000003  // 256 bytes of EEPROM
-#define EEPROM_PP_SIZE_512      0x00000007  // 512 bytes of EEPROM
-#define EEPROM_PP_SIZE_1K       0x0000000F  // 1 KB of EEPROM
-#define EEPROM_PP_SIZE_2K       0x0000001F  // 2 KB of EEPROM
-#define EEPROM_PP_SIZE_3K       0x0000003F  // 3 KB of EEPROM
-#define EEPROM_PP_SIZE_4K       0x0000007F  // 4 KB of EEPROM
-#define EEPROM_PP_SIZE_5K       0x000000FF  // 5 KB of EEPROM
-#define EEPROM_PP_SIZE_6K       0x000001FF  // 6 KB of EEPROM
+#define EEPROM_PP_SIZE_M        0x0000001F  // EEPROM Size
 #define EEPROM_PP_SIZE_S        0
 
 #endif // __HW_EEPROM_H__

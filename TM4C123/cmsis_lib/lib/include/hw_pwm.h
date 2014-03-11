@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Firmware Development Package.
+// This is part of revision 1.1 of the Tiva Firmware Development Package.
 //
 //*****************************************************************************
 
@@ -141,7 +141,6 @@
 #define PWM_O_3_FLTSTAT0        0x00000984  // PWM3 Fault Status 0
 #define PWM_O_3_FLTSTAT1        0x00000988  // PWM3 Fault Status 1
 #define PWM_O_PP                0x00000FC0  // PWM Peripheral Properties
-#define PWM_O_CC                0x00000FC8  // PWM Clock Configuration
 
 //*****************************************************************************
 //
@@ -1541,20 +1540,6 @@
 #define PWM_PP_ONE              0x00000400  // One-Shot Mode
 #define PWM_PP_GCNT_S           0
 #define PWM_PP_FCNT_S           4
-
-//*****************************************************************************
-//
-// The following are defines for the bit fields in the PWM_O_CC register.
-//
-//*****************************************************************************
-#define PWM_CC_USEPWM           0x00000100  // Use PWM Clock Divisor
-#define PWM_CC_PWMDIV_M         0x00000007  // PWM Clock Divider
-#define PWM_CC_PWMDIV_2         0x00000000  // /2
-#define PWM_CC_PWMDIV_4         0x00000001  // /4
-#define PWM_CC_PWMDIV_8         0x00000002  // /8
-#define PWM_CC_PWMDIV_16        0x00000003  // /16
-#define PWM_CC_PWMDIV_32        0x00000004  // /32
-#define PWM_CC_PWMDIV_64        0x00000005  // /64
 
 //*****************************************************************************
 //

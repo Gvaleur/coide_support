@@ -25,6 +25,7 @@
         <Option name="Library" value="Not use C Library"/>
         <Option name="nostartfiles" value="1"/>
         <Option name="UserEditLinker" value="--entry=main; "/>
+        <Option name="DiscardUnusedSections" value="1"/>
         <LinkedLibraries/>
         <MemoryAreas debugInFlashNotRAM="1">
           <Memory name="IROM1" type="ReadOnly" size="0x00040000" startValue="0x00000000"/>
@@ -50,7 +51,7 @@
       <Option name="org.coocox.codebugger.gdbjtag.core.adapter" value="ColinkEx"/>
       <Option name="org.coocox.codebugger.gdbjtag.core.debugMode" value="SWD"/>
       <Option name="org.coocox.codebugger.gdbjtag.core.clockDiv" value="1M"/>
-      <Option name="org.coocox.codebugger.gdbjtag.corerunToMain" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.corerunToMain" value="0"/>
       <Option name="org.coocox.codebugger.gdbjtag.core.jlinkgdbserver" value=""/>
       <Option name="org.coocox.codebugger.gdbjtag.core.userDefineGDBScript" value=""/>
       <Option name="org.coocox.codebugger.gdbjtag.core.targetEndianess" value="0"/>
@@ -74,33 +75,24 @@
     <Component id="54" name="M4 CMSIS Core" path="" type="2"/>
   </Components>
   <Files>
-    <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
-    <File name="hw_gpio.h" path="hw_gpio.h" type="1"/>
-    <File name="hw_sysctl.h" path="hw_sysctl.h" type="1"/>
-    <File name="sysctl.c" path="sysctl.c" type="1"/>
-    <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
-    <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
-    <File name="hw_memmap.h" path="hw_memmap.h" type="1"/>
-    <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
-    <File name="cmsisboot" path="" type="2"/>
-    <File name="hw_flash.h" path="hw_flash.h" type="1"/>
-    <File name="gpio.c" path="gpio.c" type="1"/>
-    <File name="cpu.c" path="cpu.c" type="1"/>
-    <File name="interrupt.c" path="interrupt.c" type="1"/>
     <File name="cmsis" path="" type="2"/>
-    <File name="gpio.h" path="gpio.h" type="1"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
-    <File name="hw_ints.h" path="hw_ints.h" type="1"/>
-    <File name="rom.h" path="rom.h" type="1"/>
-    <File name="debug.h" path="debug.h" type="1"/>
-    <File name="interrupt.h" path="interrupt.h" type="1"/>
+    <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
+    <File name="src/sysctl.c" path="src/sysctl.c" type="1"/>
     <File name="syscalls" path="" type="2"/>
-    <File name="hw_types.h" path="hw_types.h" type="1"/>
-    <File name="cpu.h" path="cpu.h" type="1"/>
-    <File name="cmsisboot/startup/startup.c" path="cmsisboot/startup/startup.c" type="1"/>
+    <File name="include/gpio.h" path="include/gpio.h" type="1"/>
+    <File name="src" path="" type="2"/>
+    <File name="src/gpio.c" path="src/gpio.c" type="1"/>
+    <File name="include/rom.h" path="include/rom.h" type="1"/>
+    <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
+    <File name="include/debug.h" path="include/debug.h" type="1"/>
+    <File name="include" path="" type="2"/>
+    <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
+    <File name="cmsisboot" path="" type="2"/>
+    <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
     <File name="cmsisboot/startup" path="" type="2"/>
-    <File name="hw_nvic.h" path="hw_nvic.h" type="1"/>
     <File name="main.c" path="main.c" type="1"/>
-    <File name="sysctl.h" path="sysctl.h" type="1"/>
+    <File name="include/sysctl.h" path="include/sysctl.h" type="1"/>
+    <File name="cmsisboot/startup/startup_tm4c.c" path="cmsisboot/startup/startup_tm4c.c" type="1"/>
   </Files>
 </Project>

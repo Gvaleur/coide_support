@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -67,7 +67,6 @@ extern "C"
 #define ADC_TRIGGER_PWM1        0x00000007  // PWM1 event
 #define ADC_TRIGGER_PWM2        0x00000008  // PWM2 event
 #define ADC_TRIGGER_PWM3        0x00000009  // PWM3 event
-#define ADC_TRIGGER_NEVER       0x0000000E  // Never Trigger
 #define ADC_TRIGGER_ALWAYS      0x0000000F  // Always event
 
 //*****************************************************************************
@@ -274,13 +273,6 @@ extern void ADCComparatorIntEnable(uint32_t ui32Base,
                                    uint32_t ui32SequenceNum);
 extern uint32_t ADCComparatorIntStatus(uint32_t ui32Base);
 extern void ADCComparatorIntClear(uint32_t ui32Base, uint32_t ui32Status);
-extern void ADCIntDisableEx(uint32_t ui32Base, uint32_t ui32IntFlags);
-extern void ADCIntEnableEx(uint32_t ui32Base, uint32_t ui32IntFlags);
-extern uint32_t ADCIntStatusEx(uint32_t ui32Base, bool bMasked);
-extern void ADCIntClearEx(uint32_t ui32Base, uint32_t ui32IntFlags);
-extern void ADCSequenceDMAEnable(uint32_t ui32Base, uint32_t ui32SequenceNum);
-extern void ADCSequenceDMADisable(uint32_t ui32Base, uint32_t ui32SequenceNum);
-extern bool ADCBusy(uint32_t ui32Base);
 extern void ADCReferenceSet(uint32_t ui32Base, uint32_t ui32Ref);
 extern uint32_t ADCReferenceGet(uint32_t ui32Base);
 extern void ADCPhaseDelaySet(uint32_t ui32Base, uint32_t ui32Phase);

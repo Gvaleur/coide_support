@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -82,38 +82,6 @@ extern "C"
 #define TIMER_CFG_B_CAP_TIME     0x00000700  // Timer B event timer
 #define TIMER_CFG_B_CAP_TIME_UP  0x00001700  // Timer B event up-count timer
 #define TIMER_CFG_B_PWM          0x00000A00  // Timer B PWM output
-#define TIMER_CFG_A_ACT_TOINTD   0x00010000  // Timer A compare action disable
-                                             // time-out interrupt.
-#define TIMER_CFG_A_ACT_NONE     0x00000000  // Timer A compare action none.
-#define TIMER_CFG_A_ACT_TOGGLE   0x00020000  // Timer A compare action toggle.
-#define TIMER_CFG_A_ACT_CLRTO    0x00040000  // Timer A compare action CCP
-                                             // clear on time-out.
-#define TIMER_CFG_A_ACT_SETTO    0x00060000  // Timer A compare action CCP set
-                                             // on time-out.
-#define TIMER_CFG_A_ACT_SETTOGTO 0x00080000  // Timer A compare action set CCP
-                                             // toggle on time-out.
-#define TIMER_CFG_A_ACT_CLRTOGTO 0x000A0000  // Timer A compare action clear
-                                             // CCP toggle on time-out.
-#define TIMER_CFG_A_ACT_SETCLRTO 0x000C0000  // Timer A compare action set CCP
-                                             // clear on time-out.
-#define TIMER_CFG_A_ACT_CLRSETTO 0x000E0000  // Timer A compare action clear
-                                             // CCP set on time-out.
-#define TIMER_CFG_B_ACT_TOINTD   0x00100000  // Timer B compare action disable
-                                             // time-out interrupt.
-#define TIMER_CFG_B_ACT_NONE     0x00000000  // Timer A compare action none.
-#define TIMER_CFG_B_ACT_TOGGLE   0x00200000  // Timer A compare action toggle.
-#define TIMER_CFG_B_ACT_CLRTO    0x00400000  // Timer A compare action CCP
-                                             // clear on time-out.
-#define TIMER_CFG_B_ACT_SETTO    0x00600000  // Timer A compare action CCP set
-                                             // on time-out.
-#define TIMER_CFG_B_ACT_SETTOGTO 0x00800000  // Timer A compare action set CCP
-                                             // toggle on time-out.
-#define TIMER_CFG_B_ACT_CLRTOGTO 0x00A00000  // Timer A compare action clear
-                                             // CCP toggle on time-out.
-#define TIMER_CFG_B_ACT_SETCLRTO 0x00C00000  // Timer A compare action set CCP
-                                             // clear on time-out.
-#define TIMER_CFG_B_ACT_CLRSETTO 0x0000E000  // Timer A compare action clear
-                                             // CCP set on time-out.
 
 //*****************************************************************************
 //
@@ -122,12 +90,10 @@ extern "C"
 // TimerIntStatus.
 //
 //*****************************************************************************
-#define TIMER_TIMB_DMA          0x00002000 // TimerB DMA Complete Interrupt.
 #define TIMER_TIMB_MATCH        0x00000800  // TimerB match interrupt
 #define TIMER_CAPB_EVENT        0x00000400  // CaptureB event interrupt
 #define TIMER_CAPB_MATCH        0x00000200  // CaptureB match interrupt
 #define TIMER_TIMB_TIMEOUT      0x00000100  // TimerB time out interrupt
-#define TIMER_TIMA_DMA          0x00000020 // TimerA DMA Complete Interrupt.
 #define TIMER_TIMA_MATCH        0x00000010  // TimerA match interrupt
 #define TIMER_RTC_MATCH         0x00000008  // RTC interrupt mask
 #define TIMER_CAPA_EVENT        0x00000004  // CaptureA event interrupt
@@ -185,47 +151,6 @@ extern "C"
 
 //*****************************************************************************
 //
-// Values that can be passed to TimerClockSourceSet() or returned from
-// TimerClockSourceGet().
-//
-//*****************************************************************************
-#define TIMER_CLOCK_SYSTEM      0x00000000
-#define TIMER_CLOCK_PIOSC       0x00000001
-
-//*****************************************************************************
-//
-// Values that can be passed to TimerDMAEventSet() or returned from
-// TimerDMAEventGet().
-//
-//*****************************************************************************
-#define TIMER_DMA_MODEMATCH_B   0x00000800
-#define TIMER_DMA_CAPEVENT_B    0x00000400
-#define TIMER_DMA_CAPMATCH_B    0x00000200
-#define TIMER_DMA_TIMEOUT_B     0x00000100
-#define TIMER_DMA_MODEMATCH_A   0x00000010
-#define TIMER_DMA_RTC_A         0x00000008
-#define TIMER_DMA_CAPEVENT_A    0x00000004
-#define TIMER_DMA_CAPMATCH_A    0x00000002
-#define TIMER_DMA_TIMEOUT_A     0x00000001
-
-//*****************************************************************************
-//
-// Values that can be passed to TimerADCEventSet() or returned from
-// TimerADCEventGet().
-//
-//*****************************************************************************
-#define TIMER_ADC_MODEMATCH_B   0x00000800
-#define TIMER_ADC_CAPEVENT_B    0x00000400
-#define TIMER_ADC_CAPMATCH_B    0x00000200
-#define TIMER_ADC_TIMEOUT_B     0x00000100
-#define TIMER_ADC_MODEMATCH_A   0x00000010
-#define TIMER_ADC_RTC_A         0x00000008
-#define TIMER_ADC_CAPEVENT_A    0x00000004
-#define TIMER_ADC_CAPMATCH_A    0x00000002
-#define TIMER_ADC_TIMEOUT_A     0x00000001
-
-//*****************************************************************************
-//
 // Prototypes for the APIs.
 //
 //*****************************************************************************
@@ -270,12 +195,6 @@ extern void TimerIntDisable(uint32_t ui32Base, uint32_t ui32IntFlags);
 extern uint32_t TimerIntStatus(uint32_t ui32Base, bool bMasked);
 extern void TimerIntClear(uint32_t ui32Base, uint32_t ui32IntFlags);
 extern void TimerSynchronize(uint32_t ui32Base, uint32_t ui32Timers);
-extern uint32_t TimerClockSourceGet(uint32_t ui32Base);
-extern void TimerClockSourceSet(uint32_t ui32Base, uint32_t ui32Source);
-extern uint32_t TimerADCEventGet(uint32_t ui32Base);
-extern void TimerADCEventSet(uint32_t ui32Base, uint32_t ui32ADCEvent);
-extern uint32_t TimerDMAEventGet(uint32_t ui32Base);
-extern void TimerDMAEventSet(uint32_t ui32Base, uint32_t ui32DMAEvent);
 
 //*****************************************************************************
 //

@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Firmware Development Package.
+// This is part of revision 1.1 of the Tiva Firmware Development Package.
 //
 //*****************************************************************************
 
@@ -375,8 +375,6 @@
 #define UDMA_CHCTL_SRCSIZE_8    0x00000000  // Byte
 #define UDMA_CHCTL_SRCSIZE_16   0x01000000  // Half-word
 #define UDMA_CHCTL_SRCSIZE_32   0x02000000  // Word
-#define UDMA_CHCTL_DSTPROT0     0x00200000  // Destination Privilege Access
-#define UDMA_CHCTL_SRCPROT0     0x00040000  // Source Privilege Access
 #define UDMA_CHCTL_ARBSIZE_M    0x0003C000  // Arbitration Size
 #define UDMA_CHCTL_ARBSIZE_1    0x00000000  // 1 Transfer
 #define UDMA_CHCTL_ARBSIZE_2    0x00004000  // 2 Transfers

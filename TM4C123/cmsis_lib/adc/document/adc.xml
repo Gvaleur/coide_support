@@ -7,21 +7,24 @@
   <Tags>ADC</Tags>
   
   <files>
-    <File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\adc.h</File>
-	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\hw_adc.h</File>
+    <File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\hw_adc.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\hw_memmap.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\adc.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\debug.h</File>
     <File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\src\adc.c</File>
   </files>
   
   <CoIDEFiles>
-    <File>$PROJECT_ROOT$cmsis_lib\include\adc.h</File>
-	<File>$PROJECT_ROOT$cmsis_lib\include\hw_adc.h</File>
+    <File>$PROJECT_ROOT$cmsis_lib\include\hw_adc.h</File>
+	<File>$PROJECT_ROOT$cmsis_lib\include\hw_memmap.h</File>
+	<File>$PROJECT_ROOT$cmsis_lib\include\adc.h</File>
+	<File>$PROJECT_ROOT$cmsis_lib\include\debug.h</File>
     <File>$PROJECT_ROOT$cmsis_lib\source\adc.c</File>
   </CoIDEFiles>
   
   <Dependencys>
     <Dependency>CMSIS_BOOT</Dependency>
-    <Dependency>HW_Files</Dependency>
-	<Dependency>Sysctl</Dependency>
+    <Dependency>Watchdog</Dependency>
     <Dependency>Interrupt</Dependency>
   </Dependencys>
   

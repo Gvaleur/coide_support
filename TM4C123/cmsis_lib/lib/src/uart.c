@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -81,20 +81,6 @@ static const uint32_t g_ppui32UARTIntMap[][2] =
 };
 static const uint_fast8_t g_ui8UARTIntMapRows =
     sizeof(g_ppui32UARTIntMap) / sizeof(g_ppui32UARTIntMap[0]);
-static const uint32_t g_ppui32UARTIntMapSnowflake[][2] =
-{
-    { UART0_BASE, INT_UART0_SNOWFLAKE },
-    { UART1_BASE, INT_UART1_SNOWFLAKE },
-    { UART2_BASE, INT_UART2_SNOWFLAKE },
-    { UART3_BASE, INT_UART3_SNOWFLAKE },
-    { UART4_BASE, INT_UART4_SNOWFLAKE },
-    { UART5_BASE, INT_UART5_SNOWFLAKE },
-    { UART6_BASE, INT_UART6_SNOWFLAKE },
-    { UART7_BASE, INT_UART7_SNOWFLAKE },
-};
-static const uint_fast8_t g_ui8UARTIntMapRowsSnowflake =
-    sizeof(g_ppui32UARTIntMapSnowflake) /
-    sizeof(g_ppui32UARTIntMapSnowflake[0]);
 
 //*****************************************************************************
 //
@@ -144,12 +130,6 @@ _UARTIntNumberGet(uint32_t ui32Base)
     //
     ppui32UARTIntMap = g_ppui32UARTIntMap;
     ui8Rows = g_ui8UARTIntMapRows;
-
-    if(CLASS_IS_SNOWFLAKE)
-    {
-        ppui32UARTIntMap = g_ppui32UARTIntMapSnowflake;
-        ui8Rows = g_ui8UARTIntMapRowsSnowflake;
-    }
 
     //
     // Loop through the table that maps UART base addresses to interrupt

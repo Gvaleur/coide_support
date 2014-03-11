@@ -1,9 +1,10 @@
 #include <stdbool.h>
 #include <stdint.h>
-#include "hw_memmap.h"
-#include "debug.h"
-#include "gpio.h"
-#include "sysctl.h"
+#include "include/hw_memmap.h"
+#include "include/debug.h"
+#include "include/gpio.h"
+#include "include/rom.h"
+#include "include/sysctl.h"
 
 int main(void)
 {

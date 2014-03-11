@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Firmware Development Package.
+// This is part of revision 1.1 of the Tiva Firmware Development Package.
 //
 //*****************************************************************************
 
@@ -196,11 +196,7 @@
 // The following are defines for the bit fields in the UART_O_IM register.
 //
 //*****************************************************************************
-#define UART_IM_DMATXIM         0x00020000  // Transmit DMA Interrupt Mask
-#define UART_IM_DMARXIM         0x00010000  // Receive DMA Interrupt Mask
 #define UART_IM_9BITIM          0x00001000  // 9-Bit Mode Interrupt Mask
-#define UART_IM_EOTIM           0x00000800  // End of Transmission Interrupt
-                                            // Mask
 #define UART_IM_OEIM            0x00000400  // UART Overrun Error Interrupt
                                             // Mask
 #define UART_IM_BEIM            0x00000200  // UART Break Error Interrupt Mask
@@ -225,12 +221,7 @@
 // The following are defines for the bit fields in the UART_O_RIS register.
 //
 //*****************************************************************************
-#define UART_RIS_DMATXRIS       0x00020000  // Transmit DMA Raw Interrupt
-                                            // Status
-#define UART_RIS_DMARXRIS       0x00010000  // Receive DMA Raw Interrupt Status
 #define UART_RIS_9BITRIS        0x00001000  // 9-Bit Mode Raw Interrupt Status
-#define UART_RIS_EOTRIS         0x00000800  // End of Transmission Raw
-                                            // Interrupt Status
 #define UART_RIS_OERIS          0x00000400  // UART Overrun Error Raw Interrupt
                                             // Status
 #define UART_RIS_BERIS          0x00000200  // UART Break Error Raw Interrupt
@@ -259,14 +250,8 @@
 // The following are defines for the bit fields in the UART_O_MIS register.
 //
 //*****************************************************************************
-#define UART_MIS_DMATXMIS       0x00020000  // Transmit DMA Masked Interrupt
-                                            // Status
-#define UART_MIS_DMARXMIS       0x00010000  // Receive DMA Masked Interrupt
-                                            // Status
 #define UART_MIS_9BITMIS        0x00001000  // 9-Bit Mode Masked Interrupt
                                             // Status
-#define UART_MIS_EOTMIS         0x00000800  // End of Transmission Masked
-                                            // Interrupt Status
 #define UART_MIS_OEMIS          0x00000400  // UART Overrun Error Masked
                                             // Interrupt Status
 #define UART_MIS_BEMIS          0x00000200  // UART Break Error Masked
@@ -295,11 +280,7 @@
 // The following are defines for the bit fields in the UART_O_ICR register.
 //
 //*****************************************************************************
-#define UART_ICR_DMATXIC        0x00020000  // Transmit DMA Interrupt Clear
-#define UART_ICR_DMARXIC        0x00010000  // Receive DMA Interrupt Clear
 #define UART_ICR_9BITIC         0x00001000  // 9-Bit Mode Interrupt Clear
-#define UART_ICR_EOTIC          0x00000800  // End of Transmission Interrupt
-                                            // Clear
 #define UART_ICR_OEIC           0x00000400  // Overrun Error Interrupt Clear
 #define UART_ICR_BEIC           0x00000200  // Break Error Interrupt Clear
 #define UART_ICR_PEIC           0x00000100  // Parity Error Interrupt Clear
@@ -349,8 +330,6 @@
 // The following are defines for the bit fields in the UART_O_PP register.
 //
 //*****************************************************************************
-#define UART_PP_MSE             0x00000008  // Modem Support Extended
-#define UART_PP_MS              0x00000004  // Modem Support
 #define UART_PP_NB              0x00000002  // 9-Bit Support
 #define UART_PP_SC              0x00000001  // Smart Card Support
 

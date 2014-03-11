@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -218,32 +218,6 @@ extern "C"
 
 //*****************************************************************************
 //
-// Defines that can be passed to the PWMClockSet() API as the ui32Config
-// parameter, and can be returned by the PWMClockGet() API.
-//
-//*****************************************************************************
-#define PWM_SYSCLK_DIV_1        0x00000000  // PWM clock is system clock
-#define PWM_SYSCLK_DIV_2        0x00000100  // PWM clock is system clock /2
-#define PWM_SYSCLK_DIV_4        0x00000101  // PWM clock is system clock /4
-#define PWM_SYSCLK_DIV_8        0x00000102  // PWM clock is system clock /8
-#define PWM_SYSCLK_DIV_16       0x00000103  // PWM clock is system clock /16
-#define PWM_SYSCLK_DIV_32       0x00000104  // PWM clock is system clock /32
-#define PWM_SYSCLK_DIV_64       0x00000105  // PWM clock is system clock /64
-
-//*****************************************************************************
-//
-// Defines passed to PWMOutputUpdateMode() to identify the synchronization mode
-// to use when enabling or disabling outputs using PWMOutputState().
-//
-//*****************************************************************************
-#define PWM_OUTPUT_MODE_NO_SYNC 0x00000000 // Updates to occur immediately
-#define PWM_OUTPUT_MODE_SYNC_LOCAL \
-                                0x00000002 // Updates are locally synchronized
-#define PWM_OUTPUT_MODE_SYNC_GLOBAL \
-                                0x00000003 // Updates are globally synchronized
-
-//*****************************************************************************
-//
 // API Function prototypes
 //
 //*****************************************************************************
@@ -308,11 +282,6 @@ extern uint32_t PWMGenFaultStatus(uint32_t ui32Base,
 extern void PWMGenFaultClear(uint32_t ui32Base, uint32_t ui32Gen,
                              uint32_t ui32Group,
                              uint32_t ui32FaultTriggers);
-extern void PWMClockSet(uint32_t ui32Base, uint32_t ui32Config);
-extern uint32_t PWMClockGet(uint32_t ui32Base);
-extern void PWMOutputUpdateMode(uint32_t ui32Base,
-                                uint32_t ui32PWMOutBits,
-                                uint32_t ui32Mode);
 
 //*****************************************************************************
 //

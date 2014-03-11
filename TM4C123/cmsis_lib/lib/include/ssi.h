@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -57,9 +57,6 @@ extern "C"
 // as the ui32IntFlags parameter, and returned by SSIIntStatus.
 //
 //*****************************************************************************
-#define SSI_TXEOT               0x00000040  // Transmit FIFO is empty
-#define SSI_DMATX               0x00000020  // DMA Transmit complete
-#define SSI_DMARX               0x00000010  // DMA Receive complete
 #define SSI_TXFF                0x00000008  // TX FIFO half full or less
 #define SSI_RXFF                0x00000004  // RX FIFO half full or more
 #define SSI_RXTO                0x00000002  // RX timeout
@@ -100,19 +97,6 @@ extern "C"
 
 //*****************************************************************************
 //
-// Values that can be passed to SSIAdvModeSet().
-//
-//*****************************************************************************
-#define SSI_ADV_MODE_LEGACY     0x00000000
-#define SSI_ADV_MODE_READ_WRITE 0x000001c0
-#define SSI_ADV_MODE_WRITE      0x000000c0
-#define SSI_ADV_MODE_BI_READ    0x00000140
-#define SSI_ADV_MODE_BI_WRITE   0x00000040
-#define SSI_ADV_MODE_QUAD_READ  0x00000180
-#define SSI_ADV_MODE_QUAD_WRITE 0x00000080
-
-//*****************************************************************************
-//
 // Prototypes for the APIs.
 //
 //*****************************************************************************
@@ -138,12 +122,6 @@ extern void SSIDMADisable(uint32_t ui32Base, uint32_t ui32DMAFlags);
 extern bool SSIBusy(uint32_t ui32Base);
 extern void SSIClockSourceSet(uint32_t ui32Base, uint32_t ui32Source);
 extern uint32_t SSIClockSourceGet(uint32_t ui32Base);
-extern void SSIAdvModeSet(uint32_t ui32Base, uint32_t ui32Mode);
-extern void SSIAdvDataPutFrameEnd(uint32_t ui32Base, uint32_t ui32Data);
-extern int32_t SSIAdvDataPutFrameEndNonBlocking(uint32_t ui32Base,
-                                             uint32_t ui32Data);
-extern void SSIAdvFrameHoldEnable(uint32_t ui32Base);
-extern void SSIAdvFrameHoldDisable(uint32_t ui32Base);
 
 //*****************************************************************************
 //

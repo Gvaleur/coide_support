@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<Component>
+  <Name>USB</Name>
+  <Description>Driver for the USB Interface</Description>
+  <Category>Peripheral</Category>
+  <Version>1.0.0</Version>
+  <Tags>USB</Tags>
+  
+  <files>
+    <File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\hw_memmap.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\hw_usb.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\debug.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\usb.h</File>
+    <File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\src\usb.c</File>
+  </files>
+  
+  <CoIDEFiles>
+    <File>$PROJECT_ROOT$cmsis_lib\include\hw_memmap.h</File>
+    <File>$PROJECT_ROOT$cmsis_lib\include\hw_usb.h</File>
+	<File>$PROJECT_ROOT$cmsis_lib\include\debug.h</File>
+	<File>$PROJECT_ROOT$cmsis_lib\include\usb.h</File>
+    <File>$PROJECT_ROOT$cmsis_lib\source\usb.c</File>
+  </CoIDEFiles>
+  
+  <Dependencys>
+    <Dependency>CMSIS_BOOT</Dependency>
+    <Dependency>Interrupt</Dependency>
+	<Dependency>Sysctl</Dependency>
+	<Dependency>uDMA</Dependency>
+  </Dependencys>
+  
+  <SupportDevices>
+    <Device>TM4C123FE6PM, TM4C123FH6PM, TM4C123GE6PM, TM4C123GE6PZ, TM4C123GH6PGE, TM4C123GH6PM, TM4C123GH6PZ, TM4C123GH6ZRB, TM4C1232C3PM, TM4C1232D5PM, TM4C1232E6PM, TM4C1232H6PM, TM4C1233C3PM, TM4C1233D5PM, 
+	TM4C1233D5PZ, TM4C1233E6PM, TM4C1233E6PZ, TM4C1233H6PGE, TM4C1233H6PM, TM4C1233H6PZ, TM4C1236D5PM, TM4C1236E6PM, TM4C1236H6PM, TM4C1237D5PM, TM4C1237D5PZ, TM4C1237E6PM, TM4C1237E6PZ, TM4C1237H6PGE, TM4C1237H6PM, TM4C1237H6PZ</Device>
+  </SupportDevices>
+
+   
+</Component>

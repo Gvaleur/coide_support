@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -434,17 +434,6 @@ _QEIIntNumberGet(uint32_t ui32Base)
         else
         {
             ui32Int = INT_QEI1_BLIZZARD;
-        }
-    }
-    else if(CLASS_IS_SNOWFLAKE)
-    {
-        if(ui32Base == QEI0_BASE)
-        {
-            ui32Int = INT_QEI0_SNOWFLAKE;
-        }
-        else
-        {
-            ui32Int = 0;
         }
     }
     else

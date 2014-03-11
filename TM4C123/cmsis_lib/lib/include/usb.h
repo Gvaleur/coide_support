@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -157,7 +157,6 @@ extern "C"
 //
 //*****************************************************************************
 #define USB_UNDEF_SPEED         0x80000000  // Current speed is undefined
-#define USB_HIGH_SPEED          0x00000002  // Current speed is High Speed
 #define USB_FULL_SPEED          0x00000001  // Current speed is Full Speed
 #define USB_LOW_SPEED           0x00000000  // Current speed is Low Speed
 
@@ -168,7 +167,7 @@ extern "C"
 // USB_DEV_* values are used when the USB controller is in device mode.
 //
 //*****************************************************************************
-#define USB_HOST_IN_STATUS      0x114F0000  // Mask of all host IN interrupts
+#define USB_HOST_IN_STATUS      0xFFFF0000  // Mask of all host IN interrupts
 #define USB_HOST_IN_PID_ERROR   0x10000000  // Stall on this endpoint received
 #define USB_HOST_IN_NOT_COMP    0x01000000  // Device failed to respond
 #define USB_HOST_IN_STALL       0x00400000  // Stall on this endpoint received
@@ -180,7 +179,7 @@ extern "C"
                                             // device
 #define USB_HOST_IN_FIFO_FULL   0x00020000  // RX FIFO full
 #define USB_HOST_IN_PKTRDY      0x00010000  // Data packet ready
-#define USB_HOST_OUT_STATUS     0x000000A7  // Mask of all host OUT interrupts
+#define USB_HOST_OUT_STATUS     0x0000FFFF  // Mask of all host OUT interrupts
 #define USB_HOST_OUT_NAK_TO     0x00000080  // NAK received for more than the
                                             // specified timeout period
 #define USB_HOST_OUT_NOT_COMP   0x00000080  // No response from device
@@ -228,9 +227,6 @@ extern "C"
 #define USB_EP_AUTO_CLEAR       0x00000004  // Auto clear feature enabled
 #define USB_EP_DMA_MODE_0       0x00000008  // Enable DMA access using mode 0
 #define USB_EP_DMA_MODE_1       0x00000010  // Enable DMA access using mode 1
-#define USB_EP_DIS_NYET         0x00000020  // Disable NYET response for
-                                            // high-speed Bulk and Interrupt
-                                            // endpoints in device mode.
 #define USB_EP_MODE_ISOC        0x00000000  // Isochronous endpoint
 #define USB_EP_MODE_BULK        0x00000100  // Bulk endpoint
 #define USB_EP_MODE_INT         0x00000200  // Interrupt endpoint
@@ -238,7 +234,6 @@ extern "C"
 #define USB_EP_MODE_MASK        0x00000300  // Mode Mask
 #define USB_EP_SPEED_LOW        0x00000000  // Low Speed
 #define USB_EP_SPEED_FULL       0x00001000  // Full Speed
-#define USB_EP_SPEED_HIGH       0x00004000  // High Speed
 #define USB_EP_HOST_IN          0x00000000  // Host IN endpoint
 #define USB_EP_HOST_OUT         0x00002000  // Host OUT endpoint
 #define USB_EP_DEV_IN           0x00002000  // Device IN endpoint
@@ -261,66 +256,6 @@ extern "C"
 #define USB_HOST_PWREN_AUTOLOW  0x00000002
 #define USB_HOST_PWREN_AUTOHIGH 0x00000003
 #define USB_HOST_PWREN_FILTER   0x00010000
-
-//*****************************************************************************
-//
-// The following are the valid values that can be passed to the
-// USBHostLPMConfig() function in the ui32Config parameter.
-//
-//*****************************************************************************
-#define USB_HOST_LPM_RMTWAKE    0x00000100
-#define USB_HOST_LPM_L1         0x00000001
-
-//*****************************************************************************
-//
-// The following are the valid values that can be passed to the
-// USBDevLPMConfig() function in the ui32Config parameter.
-//
-//*****************************************************************************
-#define USB_DEV_LPM_NAK         0x00000010
-#define USB_DEV_LPM_NONE        0x00000000
-#define USB_DEV_LPM_EN          0x0000000c
-#define USB_DEV_LPM_EXTONLY     0x00000004
-
-//*****************************************************************************
-//
-// The following are the valid values that are returned from the
-// USBLPMLinkStateGet() function.
-//
-//*****************************************************************************
-#define USB_DEV_LPM_LS_RMTWAKE  0x00000100
-#define USB_DEV_LPM_LS_L1       0x00000001
-
-//*****************************************************************************
-//
-// The following are the valid values that are passed to the USBLPMIntEnable()
-// or USBLPMIntDisable() functions or are returned from the USBLPMIntStatus()
-// function.
-//
-//*****************************************************************************
-#define USB_INTLPM_ERROR        0x00000020
-#define USB_INTLPM_RESUME       0x00000010
-#define USB_INTLPM_INCOMPLETE   0x00000008
-#define USB_INTLPM_ACK          0x00000004
-#define USB_INTLPM_NYET         0x00000002
-#define USB_INTLPM_STALL        0x00000001
-
-//*****************************************************************************
-//
-// The following are the valid values that are passed to the USBClockEnable()
-// functions.
-//
-//*****************************************************************************
-#define USB_CLOCK_INTERNAL      0x00000200
-#define USB_CLOCK_EXTERNAL      0x00000300
-
-//*****************************************************************************
-//
-// The configuration options used with the USBULPIConfig() API.
-//
-//*****************************************************************************
-#define USB_ULPI_EXTVBUS        0x00000001
-#define USB_ULPI_EXTVBUS_IND    0x00000002
 
 //*****************************************************************************
 //
@@ -433,67 +368,6 @@ extern "C"
 
 //*****************************************************************************
 //
-// The values for the USBDMAChannelIntEnable() and USBDMAChannelIntStatus()
-// APIs.
-//
-//*****************************************************************************
-#define USB_DMA_INT_CH8         0x00000080
-#define USB_DMA_INT_CH7         0x00000040
-#define USB_DMA_INT_CH6         0x00000020
-#define USB_DMA_INT_CH5         0x00000010
-#define USB_DMA_INT_CH4         0x00000008
-#define USB_DMA_INT_CH3         0x00000004
-#define USB_DMA_INT_CH2         0x00000002
-#define USB_DMA_INT_CH1         0x00000001
-
-//*****************************************************************************
-//
-// The values for the USBDMAChannelStatus() API.
-//
-//*****************************************************************************
-#define USB_DMA_STATUS_ERROR    0x00000100
-
-//*****************************************************************************
-//
-// The valid return values for the USBControllerVersion() API.
-//
-//*****************************************************************************
-#define USB_CONTROLLER_VER_0    0x00000000  // This is for Blizzard class
-                                            // devices.
-#define USB_CONTROLLER_VER_1    0x00000001  // This is for Snowflake class
-                                            // devices.
-
-//*****************************************************************************
-//
-// The valid return values for the USBDMAModeSet() and USBDMAModeGet() APIs or
-// USBDMAChannelConfig().
-//
-//*****************************************************************************
-#define USB_DMA_CFG_BURST_NONE  0x00000000
-#define USB_DMA_CFG_BURST_4     0x00000200
-#define USB_DMA_CFG_BURST_8     0x00000400
-#define USB_DMA_CFG_BURST_16    0x00000600
-#define USB_DMA_CFG_INT_EN      0x00000008
-#define USB_DMA_CFG_MODE_0      0x00000000
-#define USB_DMA_CFG_MODE_1      0x00000004
-#define USB_DMA_CFG_DIR_RX      0x00000000
-#define USB_DMA_CFG_DIR_TX      0x00000002
-#define USB_DMA_CFG_EN          0x00000001
-
-//*****************************************************************************
-//
-// The following are values that can be passed to USBModeConfig() as the
-// ui3Mode parameter.
-//
-//*****************************************************************************
-#define USB_MODE_HOST_VBUS      0x00000004
-#define USB_MODE_HOST           0x00000002
-#define USB_MODE_DEV_VBUS       0x00000005
-#define USB_MODE_DEV            0x00000003
-#define USB_MODE_OTG            0x00000000
-
-//*****************************************************************************
-//
 // Prototypes for the APIs.
 //
 //*****************************************************************************
@@ -588,60 +462,9 @@ extern void USBOTGSessionRequest(uint32_t ui32Base, bool bStart);
 extern uint32_t USBModeGet(uint32_t ui32Base);
 extern void USBEndpointDMAChannel(uint32_t ui32Base, uint32_t ui32Endpoint,
                                   uint32_t ui32Channel);
-extern uint32_t USBControllerVersion(uint32_t ui32Base);
-extern uint32_t USBDMAChannelIntStatus(uint32_t ui32Base);
-extern void USBDMAChannelConfigSet(uint32_t ui32Base, uint32_t ui32Channel,
-                                   uint32_t ui32Endpoint, uint32_t ui32Config);
-extern void USBDMAChannelAddressSet(uint32_t ui32Base, uint32_t ui32Channel,
-                                    void *pvAddress);
-extern void *USBDMAChannelAddressGet(uint32_t ui32Base, uint32_t ui32Channel);
-extern void USBDMAChannelCountSet(uint32_t ui32Base, uint32_t ui32Count,
-                                  uint32_t ui32Channel);
-extern uint32_t USBDMAChannelCountGet(uint32_t ui32Base, uint32_t ui32Channel);
-extern uint32_t USBDMANumChannels(uint32_t ui32Base);
-extern void USBDMAChannelAssign(uint32_t ui32Base, uint32_t ui32Endpoint,
-                                uint32_t ui32Channel, uint32_t ui32Flags);
-extern void USBDMAChannelIntEnable(uint32_t ui32Base, uint32_t ui32Channel);
-extern void USBDMAChannelIntDisable(uint32_t ui32Base, uint32_t ui32Channel);
-extern void USBDMAChannelEnable(uint32_t ui32Base, uint32_t ui32Channel);
-extern void USBDMAChannelDisable(uint32_t ui32Base, uint32_t ui32Channel);
-extern uint32_t USBDMAChannelStatus(uint32_t ui32Base, uint32_t ui32Channel);
-extern void USBDMAChannelStatusClear(uint32_t ui32Base, uint32_t ui32Channel,
-                                     uint32_t ui32Status);
-extern void USBHostEndpointSpeed(uint32_t ui32Base, uint32_t ui32Endpoint,
-                                 uint32_t ui32Flags);
-extern void USBHostEndpointPing(uint32_t ui32Base, uint32_t ui32Endpoint,
-                                bool bEnable);
-extern void USBHostLPMSend(uint32_t ui32Base, uint32_t ui32Address,
-                           uint32_t uiEndpoint);
-extern void USBHostLPMConfig(uint32_t ui32Base, uint32_t ui32ResumeTime,
-                             uint32_t ui32Config);
-extern bool USBLPMRemoteWakeEnabled(uint32_t ui32Base);
-extern void USBHostLPMResume(uint32_t ui32Base);
-extern void USBDevLPMRemoteWake(uint32_t ui32Base);
-extern void USBDevLPMConfig(uint32_t ui32Base, uint32_t ui32Config);
-extern void USBDevLPMEnable(uint32_t ui32Base);
-extern void USBDevLPMDisable(uint32_t ui32Base);
-extern uint32_t USBLPMLinkStateGet(uint32_t ui32Base);
-extern uint32_t USBLPMEndpointGet(uint32_t ui32Base);
-extern uint32_t USBLPMIntStatus(uint32_t ui32Base);
-extern void USBLPMIntDisable(uint32_t ui32Base, uint32_t ui32Ints);
-extern void USBLPMIntEnable(uint32_t ui32Base, uint32_t ui32Ints);
-extern void USBHighSpeed(uint32_t ui32Base, bool bEnable);
-extern uint32_t USBDevSpeedGet(uint32_t ui32Base);
-extern void USBClockEnable(uint32_t ui32Base, uint32_t ui32Div,
-                           uint32_t ui32Flags);
-extern void USBClockDisable(uint32_t ui32Base);
-extern void USBULPIConfig(uint32_t ui32Base, uint32_t ui32Config);
-extern void USBULPIEnable(uint32_t ui32Base);
-extern void USBULPIDisable(uint32_t ui32Base);
-extern uint8_t USBULPIRegRead(uint32_t ui32Base, uint8_t ui8Reg);
-extern void USBULPIRegWrite(uint32_t ui32Base, uint8_t ui8Reg,
-                            uint8_t ui8Data);
 extern void USBHostMode(uint32_t ui32Base);
 extern void USBDevMode(uint32_t ui32Base);
 extern void USBOTGMode(uint32_t ui32Base);
-extern void USBModeConfig(uint32_t ui32Base, uint32_t ui32Mode);
 extern void USBPHYPowerOff(uint32_t ui32Base);
 extern void USBPHYPowerOn(uint32_t ui32Base);
 extern uint32_t USBNumEndpointsGet(uint32_t ui32Base);

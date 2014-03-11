@@ -33,7 +33,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // 
-// This is part of revision 2.0.1.11577 of the Tiva Peripheral Driver Library.
+// This is part of revision 1.1 of the Tiva Peripheral Driver Library.
 //
 //*****************************************************************************
 
@@ -73,22 +73,6 @@ static const uint32_t g_ppui32I2CIntMap[][2] =
 static const int_fast8_t g_i8I2CIntMapRows =
     sizeof(g_ppui32I2CIntMap) / sizeof(g_ppui32I2CIntMap[0]);
 
-static const uint32_t g_ppui32I2CIntMapSnowflake[][2] =
-{
-    { I2C0_BASE, INT_I2C0_SNOWFLAKE },
-    { I2C1_BASE, INT_I2C1_SNOWFLAKE },
-    { I2C2_BASE, INT_I2C2_SNOWFLAKE },
-    { I2C3_BASE, INT_I2C3_SNOWFLAKE },
-    { I2C4_BASE, INT_I2C4_SNOWFLAKE },
-    { I2C5_BASE, INT_I2C5_SNOWFLAKE },
-    { I2C6_BASE, INT_I2C6_SNOWFLAKE },
-    { I2C7_BASE, INT_I2C7_SNOWFLAKE },
-    { I2C8_BASE, INT_I2C8_SNOWFLAKE },
-    { I2C9_BASE, INT_I2C9_SNOWFLAKE },
-};
-static const int_fast8_t g_i8I2CIntMapSnowflakeRows =
-    sizeof(g_ppui32I2CIntMapSnowflake) / sizeof(g_ppui32I2CIntMapSnowflake[0]);
-
 //*****************************************************************************
 //
 //! \internal
@@ -108,9 +92,7 @@ _I2CBaseValid(uint32_t ui32Base)
 {
     return((ui32Base == I2C0_BASE) || (ui32Base == I2C1_BASE) ||
            (ui32Base == I2C2_BASE) || (ui32Base == I2C3_BASE) ||
-           (ui32Base == I2C4_BASE) || (ui32Base == I2C5_BASE) ||
-           (ui32Base == I2C6_BASE) || (ui32Base == I2C7_BASE) ||
-           (ui32Base == I2C8_BASE) || (ui32Base == I2C9_BASE));
+           (ui32Base == I2C4_BASE) || (ui32Base == I2C5_BASE));
 }
 #endif
 
@@ -140,12 +122,6 @@ _I2CIntNumberGet(uint32_t ui32Base)
 
     ppui32I2CIntMap = g_ppui32I2CIntMap;
     i8Rows = g_i8I2CIntMapRows;
-
-    if(CLASS_IS_SNOWFLAKE)
-    {
-        ppui32I2CIntMap = g_ppui32I2CIntMapSnowflake;
-        i8Rows = g_i8I2CIntMapSnowflakeRows;
-    }
 
     //
     // Loop through the table that maps I2C base addresses to interrupt
@@ -579,16 +555,6 @@ I2CMasterIntEnable(uint32_t ui32Base)
 //!
 //! The \e ui32IntFlags parameter is the logical OR of any of the following:
 //!
-//! - \b I2C_MASTER_INT_RX_FIFO_FULL - RX FIFO Full interrupt
-//! - \b I2C_MASTER_INT_TX_FIFO_EMPTY - TX FIFO Empty interrupt
-//! - \b I2C_MASTER_INT_RX_FIFO_REQ - RX FIFO Request interrupt
-//! - \b I2C_MASTER_INT_TX_FIFO_REQ - TX FIFO Request interrupt
-//! - \b I2C_MASTER_INT_ARB_LOST - Arbitration Lost interrupt
-//! - \b I2C_MASTER_INT_STOP - Stop Condition interrupt
-//! - \b I2C_MASTER_INT_START - Start Condition interrupt
-//! - \b I2C_MASTER_INT_NACK - Address/Data NACK interrupt
-//! - \b I2C_MASTER_INT_TX_DMA_DONE - TX DMA Complete interrupt
-//! - \b I2C_MASTER_INT_RX_DMA_DONE - RX DMA Complete interrupt
 //! - \b I2C_MASTER_INT_TIMEOUT - Clock Timeout interrupt
 //! - \b I2C_MASTER_INT_DATA - Data interrupt
 //!
@@ -651,12 +617,6 @@ I2CSlaveIntEnable(uint32_t ui32Base)
 //!
 //! The \e ui32IntFlags parameter is the logical OR of any of the following:
 //!
-//! - \b I2C_SLAVE_INT_RX_FIFO_FULL - RX FIFO Full interrupt
-//! - \b I2C_SLAVE_INT_TX_FIFO_EMPTY - TX FIFO Empty interrupt
-//! - \b I2C_SLAVE_INT_RX_FIFO_REQ - RX FIFO Request interrupt
-//! - \b I2C_SLAVE_INT_TX_FIFO_REQ - TX FIFO Request interrupt
-//! - \b I2C_SLAVE_INT_TX_DMA_DONE - TX DMA Complete interrupt
-//! - \b I2C_SLAVE_INT_RX_DMA_DONE - RX DMA Complete interrupt
 //! - \b I2C_SLAVE_INT_STOP - Stop condition detected interrupt
 //! - \b I2C_SLAVE_INT_START - Start condition detected interrupt
 //! - \b I2C_SLAVE_INT_DATA - Data interrupt
@@ -1262,20 +1222,6 @@ I2CMasterBusBusy(uint32_t ui32Base)
 //! - \b I2C_MASTER_CMD_BURST_RECEIVE_ERROR_STOP
 //! - \b I2C_MASTER_CMD_QUICK_COMMAND
 //! - \b I2C_MASTER_CMD_HS_MASTER_CODE_SEND
-//! - \b I2C_MASTER_CMD_FIFO_SINGLE_SEND
-//! - \b I2C_MASTER_CMD_FIFO_SINGLE_RECEIVE
-//! - \b I2C_MASTER_CMD_FIFO_BURST_SEND_START
-//! - \b I2C_MASTER_CMD_FIFO_BURST_SEND_CONT
-//! - \b I2C_MASTER_CMD_FIFO_BURST_SEND_FINISH
-//! - \b I2C_MASTER_CMD_FIFO_BURST_SEND_ERROR_STOP
-//! - \b I2C_MASTER_CMD_FIFO_BURST_RECEIVE_START
-//! - \b I2C_MASTER_CMD_FIFO_BURST_RECEIVE_CONT
-//! - \b I2C_MASTER_CMD_FIFO_BURST_RECEIVE_FINISH
-//! - \b I2C_MASTER_CMD_FIFO_BURST_RECEIVE_ERROR_STOP
-//!
-//! \note Not all Tiva devices have an I2C FIFO and support the FIFO
-//! commands.  Please consult the device data sheet to determine if this
-//! feature is supported.
 //!
 //! \return None.
 //
@@ -1298,16 +1244,6 @@ I2CMasterControl(uint32_t ui32Base, uint32_t ui32Cmd)
            (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_FINISH) ||
            (ui32Cmd == I2C_MASTER_CMD_BURST_RECEIVE_ERROR_STOP) ||
            (ui32Cmd == I2C_MASTER_CMD_QUICK_COMMAND) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_SINGLE_SEND) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_SINGLE_RECEIVE) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_START) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_CONT) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_FINISH) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_SEND_ERROR_STOP) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_START) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_CONT) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_FINISH) ||
-           (ui32Cmd == I2C_MASTER_CMD_FIFO_BURST_RECEIVE_ERROR_STOP) ||
            (ui32Cmd == I2C_MASTER_CMD_HS_MASTER_CODE_SEND));
 
     //
@@ -1621,518 +1557,6 @@ I2CSlaveDataGet(uint32_t ui32Base)
     // Read a byte.
     //
     return(HWREG(ui32Base + I2C_O_SDR));
-}
-
-//*****************************************************************************
-//
-//! Configures the I2C transmit (TX) FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//! \param ui32Config is the configuration of the FIFO using specified macros.
-//!
-//! This configures the I2C peripheral's transmit FIFO.  The transmit FIFO can
-//! be used by the master or slave, but not both.  The following macros are
-//! used to configure the TX FIFO behavior for master or slave, with or without
-//! DMA:
-//!
-//! \b I2C_FIFO_CFG_TX_MASTER, \b I2C_FIFO_CFG_TX_SLAVE,
-//! \b I2C_FIFO_CFG_TX_MASTER_DMA, \b I2C_FIFO_CFG_TX_SLAVE_DMA
-//!
-//! To select the trigger level, one of the following macros should be used:
-//!
-//! \b I2C_FIFO_CFG_TX_TRIG_1, \b I2C_FIFO_CFG_TX_TRIG_2,
-//! \b I2C_FIFO_CFG_TX_TRIG_3, \b I2C_FIFO_CFG_TX_TRIG_4,
-//! \b I2C_FIFO_CFG_TX_TRIG_5, \b I2C_FIFO_CFG_TX_TRIG_6,
-//! \b I2C_FIFO_CFG_TX_TRIG_7, \b I2C_FIFO_CFG_TX_TRIG_8
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CTxFIFOConfigSet(uint32_t ui32Base, uint32_t ui32Config)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Clear transmit configuration data.
-    //
-    HWREG(ui32Base + I2C_O_FIFOCTL) &= 0xffff0000;
-
-    //
-    // Store new transmit configuration data.
-    //
-    HWREG(ui32Base + I2C_O_FIFOCTL) |= ui32Config;
-}
-
-//*****************************************************************************
-//
-//! Flushes the transmit (TX) FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//!
-//! This function flushes the I2C transmit FIFO.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CTxFIFOFlush(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Flush the TX FIFO.
-    //
-    HWREG(ui32Base + I2C_O_FIFOCTL) |= I2C_FIFOCTL_TXFLUSH;
-}
-
-//*****************************************************************************
-//
-//! Configures the I2C receive (RX) FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//! \param ui32Config is the configuration of the FIFO using specified macros.
-//!
-//! This configures the I2C peripheral's receive FIFO.  The receive FIFO can be
-//! used by the master or slave, but not both.  The following macros are used
-//! to configure the RX FIFO behavior for master or slave, with or without DMA:
-//!
-//! \b I2C_FIFO_CFG_RX_MASTER, \b I2C_FIFO_CFG_RX_SLAVE,
-//! \b I2C_FIFO_CFG_RX_MASTER_DMA, \b I2C_FIFO_CFG_RX_SLAVE_DMA
-//!
-//! To select the trigger level, one of the following macros should be used:
-//!
-//! \b I2C_FIFO_CFG_RX_TRIG_1, \b I2C_FIFO_CFG_RX_TRIG_2,
-//! \b I2C_FIFO_CFG_RX_TRIG_3, \b I2C_FIFO_CFG_RX_TRIG_4,
-//! \b I2C_FIFO_CFG_RX_TRIG_5, \b I2C_FIFO_CFG_RX_TRIG_6,
-//! \b I2C_FIFO_CFG_RX_TRIG_7, \b I2C_FIFO_CFG_RX_TRIG_8
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CRxFIFOConfigSet(uint32_t ui32Base, uint32_t ui32Config)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Clear receive configuration data.
-    //
-    HWREG(ui32Base + I2C_O_FIFOCTL) &= 0x0000ffff;
-
-    //
-    // Store new receive configuration data.
-    //
-    HWREG(ui32Base + I2C_O_FIFOCTL) |= ui32Config;
-}
-
-//*****************************************************************************
-//
-//! Flushes the receive (RX) FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//!
-//! This function flushes the I2C receive FIFO.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CRxFIFOFlush(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Flush the TX FIFO.
-    //
-    HWREG(ui32Base + I2C_O_FIFOCTL) |= I2C_FIFOCTL_RXFLUSH;
-}
-
-//*****************************************************************************
-//
-//! Gets the current FIFO status.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//!
-//! This function retrieves the status for both the transmit (TX) and receive
-//! (RX) FIFOs.  The trigger level for the transmit FIFO is set using
-//! I2CTxFIFOConfigSet() and for the receive FIFO using I2CTxFIFOConfigSet().
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return Returns the FIFO status, enumerated as a bit field containing
-//! \b I2C_FIFO_RX_BELOW_TRIG_LEVEL, \b I2C_FIFO_RX_FULL, \b I2C_FIFO_RX_EMPTY,
-//! \b I2C_FIFO_TX_BELOW_TRIG_LEVEL, \b I2C_FIFO_TX_FULL, and
-//! \b I2C_FIFO_TX_EMPTY.
-//
-//*****************************************************************************
-uint32_t
-I2CFIFOStatus(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Return the contents of the FIFO status register.
-    //
-    return(HWREG(ui32Base + I2C_O_FIFOSTATUS));
-}
-
-//*****************************************************************************
-//
-//! Writes a data byte to the I2C transmit FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//! \param ui8Data is the data to be placed into the transmit FIFO.
-//!
-//! This function adds a byte of data to the I2C transmit FIFO.  If there is
-//! no space available in the FIFO,  this function waits for space to become
-//! available before returning.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CFIFODataPut(uint32_t ui32Base, uint8_t ui8Data)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Wait until there is space.
-    //
-    while(HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_TXFF)
-    {
-    }
-
-    //
-    // Place data into the FIFO.
-    //
-    HWREG(ui32Base + I2C_O_FIFODATA) = ui8Data;
-}
-
-//*****************************************************************************
-//
-//! Writes a data byte to the I2C transmit FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//! \param ui8Data is the data to be placed into the transmit FIFO.
-//!
-//! This function adds a byte of data to the I2C transmit FIFO.  If there is
-//! no space available in the FIFO, this function returns a zero.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return The number of elements added to the I2C transmit FIFO.
-//
-//*****************************************************************************
-uint32_t
-I2CFIFODataPutNonBlocking(uint32_t ui32Base, uint8_t ui8Data)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // If FIFO is full, return zero.
-    //
-    if(HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_TXFF)
-    {
-        return(0);
-    }
-    else
-    {
-        HWREG(ui32Base + I2C_O_FIFODATA) = ui8Data;
-        return(1);
-    }
-}
-
-//*****************************************************************************
-//
-//! Reads a byte from the I2C receive FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//!
-//! This function reads a byte of data from I2C receive FIFO and places it in
-//! the location specified by the \e pui8Data parameter.  If there is no data
-//! available, this function waits until data is received before returning.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return The data byte.
-//
-//*****************************************************************************
-uint32_t
-I2CFIFODataGet(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Wait until there is data to read.
-    //
-    while(HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_RXFE)
-    {
-    }
-
-    //
-    // Read a byte.
-    //
-    return(HWREG(ui32Base + I2C_O_FIFODATA));
-}
-
-//*****************************************************************************
-//
-//! Reads a byte from the I2C receive FIFO.
-//!
-//! \param ui32Base is the base address of the I2C Master or Slave module.
-//! \param pui8Data is a pointer where the read data is stored.
-//!
-//! This function reads a byte of data from I2C receive FIFO and places it in
-//! the location specified by the \e pui8Data parameter.  If there is no data
-//! available, this functions returns 0.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return The number of elements read from the I2C receive FIFO.
-//
-//*****************************************************************************
-uint32_t
-I2CFIFODataGetNonBlocking(uint32_t ui32Base, uint8_t *pui8Data)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // If nothing in the FIFO, return zero.
-    //
-    if(HWREG(ui32Base + I2C_O_FIFOSTATUS) & I2C_FIFOSTATUS_RXFE)
-    {
-        return(0);
-    }
-    else
-    {
-        *pui8Data = HWREG(ui32Base + I2C_O_FIFODATA);
-        return(1);
-    }
-}
-
-//*****************************************************************************
-//
-//! Set the burst length for a I2C master FIFO operation.
-//!
-//! \param ui32Base is the base address of the I2C Master module.
-//! \param ui8Length is the length of the burst transfer.
-//!
-//! This function configures the burst length for a I2C Master FIFO operation.
-//! The burst field is limited to 8 bits or 256 bytes.  The burst length
-//! applies to a single I2CMCS BURST operation meaning that it specifies the
-//! burst length for only the current operation (can be TX or RX).  Each burst
-//! operation must configure the burst length prior to writing the BURST bit
-//! in the I2CMCS using I2CMasterControl().
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CMasterBurstLengthSet(uint32_t ui32Base, uint8_t ui8Length)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base) && (ui8Length < 255));
-
-    //
-    // Set the burst length.
-    //
-    HWREG(ui32Base + I2C_O_MBLEN) = ui8Length;
-}
-
-//*****************************************************************************
-//
-//! Returns the current value of the burst transfer counter.
-//!
-//! \param ui32Base is the base address of the I2C Master module.
-//!
-//! This function returns the current value of the burst transfer counter that
-//! is used by the FIFO mechanism.  Software can use this value to determine
-//! how many bytes remain in a transfer, or where in the transfer the burst
-//! operation was if an error has occurred.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-uint32_t
-I2CMasterBurstCountGet(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Get burst count.
-    //
-    return(HWREG(ui32Base + I2C_O_MBCNT));
-}
-
-//*****************************************************************************
-//
-//! Configures the I2C Master glitch filter.
-//!
-//! \param ui32Base is the base address of the I2C Master module.
-//! \param ui32Config is the glitch filter configuration.
-//!
-//! This function configures the I2C Master glitch filter.  The value passed in
-//! to \e ui32Config determines the sampling range of the glitch filter, which
-//! is configurable between 1 and 32 system clock cycles.  The default
-//! configuration of the glitch filter is 0 system clock cycles, which means
-//! that it's disabled.
-//!
-//! The \e ui32Config field should be any of the following values:
-//!
-//! - \b I2C_MASTER_GLITCH_FILTER_DISABLED
-//! - \b I2C_MASTER_GLITCH_FILTER_1
-//! - \b I2C_MASTER_GLITCH_FILTER_2
-//! - \b I2C_MASTER_GLITCH_FILTER_3
-//! - \b I2C_MASTER_GLITCH_FILTER_4
-//! - \b I2C_MASTER_GLITCH_FILTER_8
-//! - \b I2C_MASTER_GLITCH_FILTER_16
-//! - \b I2C_MASTER_GLITCH_FILTER_32
-//!
-//! \note Not all Tiva devices support this function.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CMasterGlitchFilterConfigSet(uint32_t ui32Base, uint32_t ui32Config)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Configure the glitch filter field of MTPR.
-    //
-    HWREG(ui32Base + I2C_O_MTPR) |= ui32Config;
-}
-
-//*****************************************************************************
-//
-//! Enables FIFO usage for the I2C Slave module.
-//!
-//! \param ui32Base is the base address of the I2C Slave module.
-//! \param ui32Config is the desired FIFO configuration of the I2C Slave.
-//!
-//! This function configures the I2C Slave module to use the FIFO(s).  This
-//! function should be used in combination with I2CTxFIFOConfigSet() and/or
-//! I2CRxFIFOConfigSet(), which configure the FIFO trigger level and tell
-//! the FIFO hardware whether to interact with the I2C Master or Slave.  The
-//! application appropriate combination of \b I2C_SLAVE_TX_FIFO_ENABLE and
-//! \b I2C_SLAVE_RX_FIFO_ENABLE should be passed in to the \e ui32Config
-//! field.
-//!
-//! The Slave I2CSCSR register is write-only, so any call to I2CSlaveEnable(),
-//! I2CSlaveDisable or I2CSlaveFIFOEnable() overwrites the slave configuration.
-//! Therefore, application software should call I2CSlaveEnable() followed by
-//! I2CSlaveFIFOEnable() with the desired FIFO configuration.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CSlaveFIFOEnable(uint32_t ui32Base, uint32_t ui32Config)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Enable the FIFOs for the slave.
-    //
-    HWREG(ui32Base + I2C_O_SCSR) = ui32Config | I2C_SCSR_DA;
-}
-
-//*****************************************************************************
-//
-//! Disable FIFO usage for the I2C Slave module.
-//!
-//! \param ui32Base is the base address of the I2C Slave module.
-//!
-//! This function disables the FIFOs for the I2C Slave.  After calling this
-//! this function, the FIFOs are disabled, but the Slave remains active.
-//!
-//! \note Not all Tiva devices have an I2C FIFO.  Please consult the
-//! device data sheet to determine if this feature is supported.
-//!
-//! \return None.
-//
-//*****************************************************************************
-void
-I2CSlaveFIFODisable(uint32_t ui32Base)
-{
-    //
-    // Check the arguments.
-    //
-    ASSERT(_I2CBaseValid(ui32Base));
-
-    //
-    // Disable slave FIFOs.
-    //
-    HWREG(ui32Base + I2C_O_SCSR) = I2C_SCSR_DA;
 }
 
 //*****************************************************************************

@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<Component>
+  <Name>QEI</Name>
+  <Description>Driver for the Quadrature Encoder with Index</Description>
+  <Category>Peripheral</Category>
+  <Version>1.0.0</Version>
+  <Tags>QEI</Tags>
+  
+  <files>
+  	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\hw_memmap.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\hw_qei.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\debug.h</File>
+	<File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\include\qei.h</File>
+    <File>$REPO_ROOT$\TI\TM4C123\cmsis_lib\lib\src\qei.c</File>
+  </files>
+  
+  <CoIDEFiles>
+    <File>$PROJECT_ROOT$cmsis_lib\include\hw_memmap.h</File>
+    <File>$PROJECT_ROOT$cmsis_lib\include\hw_qei.h</File>
+	<File>$PROJECT_ROOT$cmsis_lib\include\debug.h</File>
+	<File>$PROJECT_ROOT$cmsis_lib\include\qei.h</File>
+    <File>$PROJECT_ROOT$cmsis_lib\source\qei.c</File>
+  </CoIDEFiles>
+  
+  <Dependencys>
+    <Dependency>CMSIS_BOOT</Dependency>
+    <Dependency>Interrupt</Dependency>
+	<Dependency>Sysctl</Dependency>
+  </Dependencys>
+  
+  <SupportDevices>
+    <Device>TM4C123AE6PM, TM4C123AH6PM, TM4C123BE6PM, TM4C123BH6PGE, TM4C123BH6PM, TM4C123BH6PZ, TM4C123BH6ZRB, TM4C123FE6PM, TM4C123FH6PM, TM4C123GE6PM, TM4C123GE6PZ, TM4C123GH6PGE, TM4C123GH6PM, TM4C123GH6PZ, TM4C123GH6ZRB</Device>
+  </SupportDevices>
+
+   
+</Component>
