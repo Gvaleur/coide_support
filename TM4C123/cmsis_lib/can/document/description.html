@@ -1,27 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body>
+<!-- XXXX help content begin XXXX -->
 <p>
-<link href="cox_series_component.css" type="text/css" rel="stylesheet" /></p>
-<h1>ADC</h1>
-<h2>What is this component</h2>
+<link rel="stylesheet" type="text/css" href="cox_series_component.css" /></p>
+<h1>CAN</h1>
+<h2>Overview</h2>
+<p>The Basic Extended CAN peripheral, interfaces the CAN network. It supports the CAN protocols version 2.0 A and B. It has been designed to manage a high number of incoming messages efficiently with a minimum CPU load. It also meets the priority requirements for transmit messages.</p>
+<h2>API Reference</h2>
 <ul>
-    <li>A 12-bit ADC is an approximation method for Analog to Digital Converter. There are totally 10 multiplexed channels with 8 external channels which can measure signals from analog input and 2 internal sources. If the input voltage is beyond the thresholds, the feature of Analog Watchdog will detect the outranged signal. An interrupt will then be generated to warn that the input voltage is higher or lower then the thresholds. There are three conversion modes to translate a data from analog to digital. Various channels of the A/D conversion can be operated in one shot, continuous and discontinuous mode. A left-aligned or right-aligned 16-bit data register is provided to store the data after conversion.</li>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga700471831cd6155d8d6526a187bc9cf3">CANBitRateSet</a> (uint32_t ui32Base, uint32_t ui32SourceClock, uint32_t ui32BitRate)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the CAN bit timing values to a nominal setting based on a desired bit rate. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga6e3d8077b678c9b7a0c1377ab2b7251d">CANBitTimingGet</a> (uint32_t ui32Base, tCANBitClkParms* psClkParms)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Reads the current settings for the CAN controller bit timing. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga743ff924c5de77fdcf3ab0366dac4aa2">CANBitTimingSet</a> (uint32_t ui32Base, tCANBitClkParms* psClkParms)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the CAN controller bit timing. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#gaeaef3afaec247a8b70f0b40143fd88d6">CANDisable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the CAN controller. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#gacae7f0dec4777da94a4cb5fd37d2f396">CANEnable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the CAN controller. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#gac1b3551968b82b460dcc65f90ac3e2c5">CANErrCntrGet</a> (uint32_t ui32Base, uint32_t* ui32RxCount, uint32_t* ui32TxCount)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Defines the ADC digital comparator regions. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga9145d4c9eeb26d82c7380adaa2d36c7c">CANInit</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Initializes the CAN controller after reset. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#gaba19b088c06e1a7384e956447bf00925">CANIntClear</a> (uint32_t ui32Base, uint32_t ui32IntClr)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears a CAN interrupt source. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga3c2ea0c4692882c05aee64671e78fef9">CANIntDisable</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables individual CAN controller interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#gadcd40ec4c70f330ae37ebaa6f9db4e3b">CANIntEnable</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables individual CAN controller interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga922cb343caeba31e3fff78a0e4d19d9b">CANIntRegister</a> (uint32_t ui32Base, void(*)(void) pfnHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for the CAN controller. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga012ae41a1edb2e3daabcfb72a1944791">CANIntStatus</a> (uint32_t ui32Base, tCANIntStsReg eIntStsReg)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Returns the current CAN controller interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga1e71364bd82cea6019dce65f0d4e8ff4">CANIntUnregister</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Unregisters an interrupt handler for the CAN controller. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga70fdd8a4584e71e353ffce33c76c2a8f">CANMessageClear</a> (uint32_t ui32Base, uint32_t ui32ObjID)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears a message object so that it is no longer used. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga6507fad88a2123ac26c04411143be191">CANMessageGet</a> (uint32_t ui32Base, uint32_t ui32ObjID, tCANMsgObject* psMsgObject, bool bClrPendingInt)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Reads a CAN message from one of the message object buffers. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga7ea9b17d0737c0bc3f07862436f27cc5">CANMessageSet</a> (uint32_t ui32Base, uint32_t ui32ObjID, tCANMsgObject* psMsgObject, tMsgObjType eMsgType)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures a message object in the CAN controller. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga62c6ae2255afa872ef19b49d40f59d5f">CANRetryGet</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Returns the current setting for automatic retransmission. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga051e3e7b5e2749b9698e8ebe36257d22">CANRetrySet</a> (uint32_t ui32Base, bool bAutoRetry)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the CAN controller automatic retransmission behavior. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__can__api.html#ga690d72cb5ea790f9bd0ab6abd7caa68a">CANStatusGet</a> (uint32_t ui32Base, tCANStsReg eStatusReg)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Reads one of the controller status registers. <br />
+                &nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </ul>
-
-<h2>How to use this component</h2>
-<h3>1.Step</h3>
-<ul>
-    <li> a. ...</li>
-	<li> b. ...</li>
-	<li> c. ...</li>
-	<li> ...</li>
-</ul>
-
-<h3>2.Usage</h3>
-<ul>
-    <li> xGPIOPinRead();</li>
-	<li> ...</li>
-</ul>
-
-<h3>2....</h3>
-<ul>
-	<li> ...</li>
-</ul>
+<!-- XXXX help content end XXXX -->
+</body> </html>

@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+body,td{ font-family: Verdana, sans-serif;font-size: 11px;color: #000000;
+margin:5px;}
+td{padding:4px;}
+h1{font-size:165%;color:#0066CC; }
+h2{font-size:120%;color:#0066CC; }
+h3{color:#0066CC; }
+h5{color:#0066CC; }
+.blue4bold{ color:#0066CC;font-weight: bold;}
+table{   
+border-top:   1px   solid   silver;   
+border-right:   1px   solid   silver;   
+border-collapse:collapse;   
+border-spacing:0;   
+}   
+table   td{   
+border-left:   1px   solid   silver;   
+border-bottom:   1px   solid   silver;   
+}
+.pagefun{padding-left:15px; padding-top:10px; padding-right:10px; padding-bottom:10px; background-color:#d9ecff;font:normal; width:90%; margin-bottom:10px;margin-left:18px; line-height:20px;}
+pre{background-color:#FAFAFA;margin:0px;padding:0px;}
+UL
+{
+	margin-top:-10px;
+	margin-bottom:-10px;
+	margin-left:0px;
+}
+LI
+{
+	font-size:13px;
+	margin-left:20px;
+}
+A.el { 
+	text-decoration: underline; 
+	font-weight: normal; 
+	color: #0000ff; 
+}

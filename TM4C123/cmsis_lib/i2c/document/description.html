@@ -1,27 +1,368 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body>
+<!-- XXXX help content begin XXXX -->
 <p>
-<link href="cox_series_component.css" type="text/css" rel="stylesheet" /></p>
-<h1>ADC</h1>
-<h2>What is this component</h2>
+<link rel="stylesheet" type="text/css" href="cox_series_component.css" /></p>
+<h1>I2C</h1>
+<h2>Overview</h2>
+<p>The Inter-Integrated Circuit (I2C) bus provides bi-directional data transfer through a two-wire design, and interfaces to external I2C devices. The I2C bus may also be used for system testing and diagnostic purposes in product development andmanufacturing.</p>
+<h2>API Reference</h2>
 <ul>
-    <li>A 12-bit ADC is an approximation method for Analog to Digital Converter. There are totally 10 multiplexed channels with 8 external channels which can measure signals from analog input and 2 internal sources. If the input voltage is beyond the thresholds, the feature of Analog Watchdog will detect the outranged signal. An interrupt will then be generated to warn that the input voltage is higher or lower then the thresholds. There are three conversion modes to translate a data from analog to digital. Various channels of the A/D conversion can be operated in one shot, continuous and discontinuous mode. A left-aligned or right-aligned 16-bit data register is provided to store the data after conversion.</li>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga0d2b0e0e18ba83c8307f8e1eeef05c0a">I2CIntRegister</a> (uint32_t ui32Base, void(*)(void) pfnHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for the I2C module. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaf09693552b5d757f37fe7ab54f191619">I2CIntUnregister</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Unregisters an interrupt handler for the I2C module. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga7ba2163975eac91438b017ab22e61020">I2CMasterBusBusy</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Indicates whether or not the I2C bus is busy. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga487483843df9f0e057d2235218d3b183">I2CMasterBusy</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Indicates whether or not the I2C Master is busy. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga2ec6254eefae0f4776eba37ce365a7a7">I2CMasterControl</a> (uint32_t ui32Base, uint32_t ui32Cmd)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Controls the state of the I2C Master module. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga630e3dbdc9f3f93b1173ff53cb912c7e">I2CMasterDataGet</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Receives a byte that has been sent to the I2C Master. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga2b04622258dd620d1ee96a5a03eec3c3">I2CMasterDataPut</a> (uint32_t ui32Base, uint8_t ui8Data)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Transmits a byte from the I2C Master. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga799a7da56fe33a827e66120488b1bd98">I2CMasterDisable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the I2C master block. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga7effd5a21f10dd5398bc74275de5e29b">I2CMasterEnable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the I2C Master block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaf9555a0e3bb6efe55246b5ca249de6f1">I2CMasterErr</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the error status of the I2C Master module. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga73250bf554c0d1ebb7e55c45a258f38e">I2CMasterInitExpClk</a> (uint32_t ui32Base, uint32_t uiI2CClk, bool bFast)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Initializes the I2C Master block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gae50c838fb4a1b1eb0a343b5e5e0977d7">I2CMasterIntClear</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears I2C Master interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga0de86eea4a07416ab3cc09d6b85f90ee">I2CMasterIntClearEx</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears I2C Master interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga09d53c3aa4819243d8bd9a9ed44b39c3">I2CMasterIntDisable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the I2C Master interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga93ce97839e6ce8a602870558ac14c714">I2CMasterIntDisableEx</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables individual I2C Master interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaa5c52db760002449da1f7ec274a43917">I2CMasterIntEnable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the I2C Master interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaf172d65cf6fa81e70561f004ec8794cf">I2CMasterIntEnableEx</a> (void )</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables individual I2C Master interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaa97d17a331d54ec61721ab37909b81ca">I2CMasterIntStatus</a> (uint32_t ui32Base, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current I2C Master interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gafe6fd5834fbe9a89e27398af7fe9d571">I2CMasterIntStatusEx</a> (uint32_t ui32Base, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current I2C Master interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga020f1291ca0cfe718c1f893ca7d1d961">I2CMasterLineStateGet</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Reads the state of the SDA and SCL pins. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga71c9585a226d1ab8e7fe77728b0a9ca9">I2CMasterSlaveAddrSet</a> (uint32_t ui32Base, uint8_t ui8SlaveAddr, bool bReceive)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the address that the I2C Master places on the bus. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gad2d7c959996d278cee5869703c11a088">I2CMasterTimeoutSet</a> (uint32_t ui32Base, uint8_t ui8Value)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the Master clock timeout value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga6c70a55d6624915579c2fc64e38cc3a1">I2CSlaveACKOverride</a> (uint32_t ui32Base, bool bEnable)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures ACK override behavior of the I2C Slave. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga56951e3afb08694f4f9deb45e73112a3">I2CSlaveACKValueSet</a> (uint32_t ui32Base, bool bACK)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Writes the ACK value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gae525b18201bf108fbf20ec3be4cef092">I2CSlaveAddressSet</a> (uint32_t ui32Base, uint8_t ui8AddrNum, uint8_t ui8SlaveAddr)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the I2C slave address. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga7b1906ecd21737e3f4a8052ce4198c6b">I2CSlaveDataGet</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Receives a byte that has been sent to the I2C Slave. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaf00372537c4587a1d4fed0373997af1b">I2CSlaveDataPut</a> (uint32_t ui32Base, uint8_t ui8Data)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Transmits a byte from the I2C Slave. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaf8c7599fd4711c6c0a58199b2e6f7193">I2CSlaveDisable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the I2C slave block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga76d6fcf93130b74896a2857884582cca">I2CSlaveEnable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the I2C Slave block. <br />
+                &nbsp;</td>
+            </tr><tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga843d1157f288f31316c25c7df34d12f5">I2CSlaveInit</a> (uint32_t ui32Base, uint8_t ui8SlaveAddr)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Initializes the I2C Slave block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gad07e0bb27ba7beadac1713ac7187ba9c">I2CSlaveIntClear</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears I2C Slave interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga9988111d64e13ad076a8e09841fb830e">I2CSlaveIntClearEx</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears I2C Slave interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gadfb3fd03a5e1ad968bf062d5946a33f3">I2CSlaveIntDisable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the I2C Slave interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga8de6e8a6ee17e1ed5c7406066544bf0e">I2CSlaveIntDisableEx</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the currently configured wake conditions for the Hibernation module. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga8fa4ef36c2dec6429e6c1a3fa51640f5">I2CSlaveIntEnable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the I2C Slave interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga7f5987054c8be4c5ecc23ba66228285a">I2CSlaveIntEnableEx</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables individual I2C Slave interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#ga9c46ee46d1c14467a289024b80eb1b68">I2CSlaveIntStatus</a> (uint32_t ui32Base, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current I2C Slave interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gabbdbd0bd1a6597450d0f153633e5bfe5">I2CSlaveIntStatusEx</a> (uint32_t ui32Base, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current I2C Slave interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__i2c__api.html#gaa4e521681152d19d005a5adaafc4dc97">I2CSlaveStatus</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the I2C Slave module status <br />
+                &nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </ul>
-
-<h2>How to use this component</h2>
-<h3>1.Step</h3>
-<ul>
-    <li> a. ...</li>
-	<li> b. ...</li>
-	<li> c. ...</li>
-	<li> ...</li>
-</ul>
-
-<h3>2.Usage</h3>
-<ul>
-    <li> xGPIOPinRead();</li>
-	<li> ...</li>
-</ul>
-
-<h3>2....</h3>
-<ul>
-	<li> ...</li>
-</ul>
+<!-- XXXX help content end XXXX -->
+</body> </html>

@@ -1,27 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body>
+<!-- XXXX help content begin XXXX -->
 <p>
-<link href="cox_series_component.css" type="text/css" rel="stylesheet" /></p>
-<h1>ADC</h1>
-<h2>What is this component</h2>
+<link rel="stylesheet" type="text/css" href="cox_series_component.css" /></p>
+<h1>SysCtl</h1>
+<h2>Overview</h2>
+<p>System control determines the overall operation of the device. It provides information about the device, controls of clock for the core and individual peripherals, handles reset detection and report.</p>
+<h2>API Reference</h2>
 <ul>
-    <li>A 12-bit ADC is an approximation method for Analog to Digital Converter. There are totally 10 multiplexed channels with 8 external channels which can measure signals from analog input and 2 internal sources. If the input voltage is beyond the thresholds, the feature of Analog Watchdog will detect the outranged signal. An interrupt will then be generated to warn that the input voltage is higher or lower then the thresholds. There are three conversion modes to translate a data from analog to digital. Various channels of the A/D conversion can be operated in one shot, continuous and discontinuous mode. A left-aligned or right-aligned 16-bit data register is provided to store the data after conversion.</li>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga1cf1505ac8dcfa2ff75a1bae9686e805">SysCtlADCSpeedGet</a> (bool)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the sample rate of the ADC. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gae710b89722000d24eb23ff2f6d6554dc">SysCtlADCSpeedSet</a> (uint32_t ui32Speed)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the sample rate of the ADC. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga97d96b02b249a16354577bde88ece728">SysCtlClockGet</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the processor clock rate. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gab9c9f4e4588e1e9c5b42e3c3b109e5c1">SysCtlClockSet</a> (uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the clocking of the device. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gac54fcca75df0066bd2b2ecdf92c0eda2">SysCtlDeepSleep</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Puts the processor into deep-sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga744cd0f180b45ce693702fd074acb1db">SysCtlDeepSleepClockSet</a> (uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the clocking of the device while in deep-sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gadd2e0ff17f85017c043a3a318806d428">SysCtlFlashSizeGet</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the size of the flash. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga319195ed040b6d8ddaee3ca5ea562606">SysCtlGPIOAHBDisable</a> (uint32_t ui32GPIOPeripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables access to a GPIO peripheral via the AHB. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gadf2447348f48b339b8e7a73ed5e80afd">SysCtlGPIOAHBEnable</a> (uint32_t ui32GPIOPeripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables access to a GPIO peripheral via the AHB. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gad6c94773880c951cdfe70b387626d081">SysCtlIntClear</a> (uint32_t ui32Ints)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears system control interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaae3131c668931a976c6005d17135693b">SysCtlIntDisable</a> (uint32_t ui32Ints)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables individual system control interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga4d75a6ab7e4a0d8fb88d7ef9359b2adb">SysCtlIntEnable</a> (uint32_t ui32Ints)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables individual system control interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaad3caf3c0e7eddea266b7dc2fcb121c4">SysCtlIntRegister</a> (void(*)(void) pfnHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for the system control interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gab10bfca29c2ba2a5ad80f8c57192ef7d">SysCtlIntStatus</a> (bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga96fa0579c653617672244b6a280d9897">SysCtlIntUnregister</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Unregisters the interrupt handler for the system control interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaa5ea49a00d023774f052fc53a2ccb953">SysCtlMOSCConfigSet</a> (uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Provides a small delay. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga0ad7b6dcec84339f2bbb8663551cc7d8">SysCtlPeripheralClockGating</a> (bool bEnable)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Controls peripheral clock gating in sleep and deep-sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga8f46fff4f83f6e6771b9839fe58d209a">SysCtlPeripheralDeepSleepDisable</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables a peripheral in deep-sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gad412f63e83618b3085f324778b1fd606">SysCtlPeripheralDeepSleepEnable</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables a peripheral in deep-sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga41000fce023961157e6031ac94ff1f3a">SysCtlPeripheralDisable</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables a peripheral. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga2fbae61db465e1d861a62785d28e3ad6">SysCtlPeripheralEnable</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables a peripheral. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga18c4cbb616f0b37b806914543e2a09b4">SysCtlPeripheralPowerOff</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Powers off a peripheral. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga0cf69aace5f096e92b7908fbe5e7fdc5">SysCtlPeripheralPowerOn</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Powers on a peripheral. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga8b1d6a1177370abf4bdda1bdf49236c6">SysCtlPeripheralPresent</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Determines if a peripheral is present. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga7ddf1f06376894c31e5596f562c299ac">SysCtlPeripheralReady</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Determines if a peripheral is ready. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gab8c537abe40caacd5dfa7ffdedefb6b9">SysCtlPeripheralReset</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Performs a software reset of a peripheral. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaa1131a3d12965af7cdaa02f0649dc237">SysCtlPeripheralSleepDisable</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables a peripheral in sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga88db79b809decde9d228ee2c3e58a727">SysCtlPeripheralSleepEnable</a> (uint32_t ui32Peripheral)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables a peripheral in sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaf5bd79f60945f405c34c89005b0eb50d">SysCtlPIOSCCalibrate</a> (uint32_t ui32Type)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Calibrates the precision internal oscillator. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaaccf3eef212a6be9e924103bd100f54f">SysCtlPWMClockGet</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current PWM clock configuration. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga444e7a242f14e945fcc7a909d13d2d3c">SysCtlPWMClockSet</a> (uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the PWM clock configuration. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga7e7eaf3273efa935f7bedfd3760d11b8">SysCtlReset</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Resets the device. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gab9735274e5c9468bb55ecde9ca07bfb1">SysCtlResetCauseClear</a> (uint32_t ui32Causes)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the PWM clock configuration. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga1afa3bfa9b77ae24b8acdb0147496f5a">SysCtlResetCauseGet</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the reason for a reset. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga90efcbaddc41095b9567cae626aaeb2c">SysCtlSleep</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Puts the processor into sleep mode. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gae9d9e3eec4d4b8d8c87720c767f4f36f">SysCtlSRAMSizeGet</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the size of the SRAM. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga980dda99cd999c319351c2c24992d9a6">SysCtlUSBPLLDisable</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Powers down the USB PLL. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga9af839cfa9e1635c3d437b7f466c0e03">SysCtlUSBPLLEnable</a> (void)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Powers up the USB PLL. <br />
+                &nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </ul>
-
-<h2>How to use this component</h2>
-<h3>1.Step</h3>
-<ul>
-    <li> a. ...</li>
-	<li> b. ...</li>
-	<li> c. ...</li>
-	<li> ...</li>
-</ul>
-
-<h3>2.Usage</h3>
-<ul>
-    <li> xGPIOPinRead();</li>
-	<li> ...</li>
-</ul>
-
-<h3>2....</h3>
-<ul>
-	<li> ...</li>
-</ul>
+<!-- XXXX help content end XXXX -->
+</body> </html>

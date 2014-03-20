@@ -1,27 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body>
+<!-- XXXX help content begin XXXX -->
 <p>
-<link href="cox_series_component.css" type="text/css" rel="stylesheet" /></p>
-<h1>ADC</h1>
-<h2>What is this component</h2>
+<link rel="stylesheet" type="text/css" href="cox_series_component.css" /></p>
+<h1>SSI</h1>
+<h2>Overview</h2>
+<p>Each SSI module is a master or slave interface for synchronous serial communication with peripheral devices that have either Freescale SPI, MICROWIRE, or Texas Instruments synchronous serial interfaces.</p>
+<h2>API Reference</h2>
 <ul>
-    <li>A 12-bit ADC is an approximation method for Analog to Digital Converter. There are totally 10 multiplexed channels with 8 external channels which can measure signals from analog input and 2 internal sources. If the input voltage is beyond the thresholds, the feature of Analog Watchdog will detect the outranged signal. An interrupt will then be generated to warn that the input voltage is higher or lower then the thresholds. There are three conversion modes to translate a data from analog to digital. Various channels of the A/D conversion can be operated in one shot, continuous and discontinuous mode. A left-aligned or right-aligned 16-bit data register is provided to store the data after conversion.</li>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">bool&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga29159753a8c5831a4460663c22f9e52c">SSIBusy</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Determines whether the SSI transmitter is busy or not. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga1254e7ea5b8cc1b52b41d29389aba3c2">SSIClockSourceGet</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the data clock source for the specified SSI peripheral. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#gaaaaf45725698f4c264582a58c9a359bb">SSIClockSourceSet</a> (uint32_t ui32Base, uint32_t ui32Source)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the data clock source for the specified SSI peripheral. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga920b241b9d99f0b19f1c0a6f3779bc10">SSIConfigSetExpClk</a> (uint32_t ui32Base, uint32_t ui32SSIClk, uint32_t ui32Protocol, uint32_t ui32Mode, uint32_t ui32BitRate, uint32_t ui32DataWidth)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the synchronous serial interface. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#gaf4db324f4a44eff242c29fefc54885e6">SSIDataGet</a> (uint32_t ui32Base, uint32_t* pui32Data)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets a data element from the SSI receive FIFO. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">int32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#gadbf2638243a50eb412a9089d8d04184e">SSIDataGetNonBlocking</a> (uint32_t ui32Base, uint32_t* pui32Data)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets a data element from the SSI receive FIFO. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga53159a230743ad5a9106cecbbf70df34">SSIDataPut</a> (uint32_t ui32Base, uint32_t ui32Data)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Puts a data element into the SSI transmit FIFO. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">int32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga5ed9bc426f006597b17d722f04bc169c">SSIDataPutNonBlocking</a> (uint32_t ui32Base, uint32_t ui32Data)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Puts a data element into the SSI transmit FIFO. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga71320bfb623b3d5b957e52fdc5d6f869">SSIDisable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the synchronous serial interface. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga470e04b0fea55d1bd111712976017d9d">SSIDMADisable</a> (uint32_t ui32Base, uint32_t ui32DMAFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables SSI DMA operation. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga897bf9d2d751cb23cdef74c222ed141e">SSIDMAEnable</a> (uint32_t ui32Base, uint32_t ui32DMAFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables SSI DMA operation. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#gadc0373c0979c964baa2ae5aba2ecfe4a">SSIEnable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the synchronous serial interface. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga41e323c76b694802d20b607bf499b487">SSIIntClear</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears SSI interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga3939269b55ef5c73a6f2ee4eb52eaee3">SSIIntDisable</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables individual SSI interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga806b21cfa8c6be1219ce3633c61adb3d">SSIIntEnable</a> (uint32_t ui32Base, uint32_t ui32IntFlags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables individual SSI interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#gacdf1425d778fc513d2951759bd3d472b">SSIIntRegister</a> (uint32_t ui32Base, void(*)(void) pfnHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for the synchronous serial interface. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#ga200896dc08bf543ee7b175897a93c004">SSIIntStatus</a> (uint32_t ui32Base, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__ssi__api.html#gae682d0e169a70b235a92b11dbeb5daef">SSIIntUnregister</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Unregisters an interrupt handler for the synchronous serial interface. <br />
+                &nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </ul>
-
-<h2>How to use this component</h2>
-<h3>1.Step</h3>
-<ul>
-    <li> a. ...</li>
-	<li> b. ...</li>
-	<li> c. ...</li>
-	<li> ...</li>
-</ul>
-
-<h3>2.Usage</h3>
-<ul>
-    <li> xGPIOPinRead();</li>
-	<li> ...</li>
-</ul>
-
-<h3>2....</h3>
-<ul>
-	<li> ...</li>
-</ul>
+<!-- XXXX help content end XXXX -->
+</body> </html>

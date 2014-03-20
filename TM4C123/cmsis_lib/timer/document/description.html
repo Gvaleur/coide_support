@@ -1,27 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body>
+<!-- XXXX help content begin XXXX -->
 <p>
-<link href="cox_series_component.css" type="text/css" rel="stylesheet" /></p>
-<h1>ADC</h1>
-<h2>What is this component</h2>
+<link rel="stylesheet" type="text/css" href="cox_series_component.css" /></p>
+<h1>Timers</h1>
+<h2>Overview</h2>
+<p>Programmable timers can be used to count or time external events that drive the Timer input pins.</p>
+<h2>API Reference</h2>
 <ul>
-    <li>A 12-bit ADC is an approximation method for Analog to Digital Converter. There are totally 10 multiplexed channels with 8 external channels which can measure signals from analog input and 2 internal sources. If the input voltage is beyond the thresholds, the feature of Analog Watchdog will detect the outranged signal. An interrupt will then be generated to warn that the input voltage is higher or lower then the thresholds. There are three conversion modes to translate a data from analog to digital. Various channels of the A/D conversion can be operated in one shot, continuous and discontinuous mode. A left-aligned or right-aligned 16-bit data register is provided to store the data after conversion.</li>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga906bd1ce13ef11046b0d4b2722f3a9a8">TimerConfigure</a> (uint32_t ui32Base, uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the timer(s). <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaadd54928a2d2b06ea1ddccc440dd2d8b">TimerControlEvent</a> (uint32_t ui32Base, uint32_t ui32Timer, uint32_t ui32Event)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Controls the event type. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga5b4ed705f77f9b4ac9e4180c0d038e98">TimerControlLevel</a> (uint32_t ui32Base, uint32_t ui32Timer, bool bInvert)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Controls the output level. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga6987737e02bc6c83eaf585a4c052f37a">TimerControlStall</a> (uint32_t ui32Base, uint32_t ui32Timer, bool bStall)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Controls the stall handling. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaf4ae82873e7e2940b136302d4f6404bb">TimerControlTrigger</a> (uint32_t ui32Base, uint32_t ui32Timer, bool bEnable)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables or disables the ADC trigger output. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaa5dbb6f7d793cdfd038d89ceebfc35b9">TimerControlWaitOnTrigger</a> (uint32_t ui32Base, uint32_t ui32Timer, bool bWait)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Controls the wait on trigger handling. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaf0fe4544704e7015716be1afbd995add">TimerDisable</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the timer(s). <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga13a66ae0ebdd8467176d85e057ed212c">TimerEnable</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the timer(s). <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga57384a0128e97c9059b9a6b5152486c6">TimerIntClear</a> (uint32_t ui32Base, uint32_t ui32Flags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears timer interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga5bdf8fb309917c80b5026c0969517b90">TimerIntDisable</a> (uint32_t ui32Base, uint32_t ui32Flags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables individual timer interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaf5153c3e27648ca57b95adc691d0afdf">TimerIntEnable</a> (uint32_t ui32Base, uint32_t ui32Flags)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables individual timer interrupt sources. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga7802775703f5b161bd39e8ef3858ce8d">TimerIntRegister</a> (uint32_t ui32Base, uint32_t ui32Timer, void(*)(void) pfnHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for the timer interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaf96decff3251059ea7b928575148d162">TimerIntStatus</a> (uint32_t ui32Base, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga39e29286ff94f0cb483cce21a3253516">TimerIntUnregister</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Unregisters an interrupt handler for the timer interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga6f98f47c976fcc5aa4940f4cd13bca9b">TimerLoadGet</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the timer load value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint64_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaa0636000e4c79553f5c1384a9dd72e27">TimerLoadGet64</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the timer load value for a 64-bit timer. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga20a168e18a8d3502809ad53c031e4613">TimerLoadSet</a> (uint32_t 	ui32Base, uint32_t ui32Timer, uint32_t ui32Value)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the timer load value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gad33fc9d6fd1b079547a4a51c4754b5b1">TimerLoadSet64</a> (uint32_t ui32Base, uint64_t ui64Value)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the timer load value for a 64-bit timer. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gab1fb1ab94aa50aebee303767db637129">TimerMatchGet</a> (uint32_t 	ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the timer match value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint64_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gabab07f0999f23fcc338955de2d5047c0">TimerMatchGet64</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the timer match value for a 64-bit timer. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga9861af3764dc7247aa279fa11ebbf2b3">TimerMatchSet</a> (uint32_t ui32Base, uint32_t ui32Timer, uint32_t ui32Value)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the timer match value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga60bf284e4cdee5fae0f3eece82b3f97a">TimerMatchSet64</a> (uint32_t ui32Base, uint32_t ui32Value)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the timer match value for a 64-bit timer. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga322c688af7424a3228f17745f6c01697">TimerPrescaleGet</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Get the timer prescale value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga308ed5bb13bf4084ffa99a4088e95607">TimerPrescaleMatchGet</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Get the timer prescale match value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga98dab011e13fb097bbf6b4747150cef5">TimerPrescaleMatchSet</a> (uint32_t 	ui32Base, uint32_t ui32Timer, uint32_t ui32Value)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Set the timer prescale match value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gae04b6c4b5cd25c58910cd6789b359ae8">TimerPrescaleSet</a> (uint32_t 	ui32Base, uint32_t ui32Timer, uint32_t ui32Value)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Set the timer prescale value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga1e3eff01a91c67b3934cfffd63ba1d64">TimerRTCDisable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disable RTC counting. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaabc88016711729ff40fe67fb36b2aca0">TimerRTCEnable</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enable RTC counting. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#ga22ba9db9e3e01445e9d9be881ff3bba6">TimerSynchronize</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Synchronizes the counters in a set of timers. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gae2e97500dde91c8c2818d67579928bdd">TimerValueGet</a> (uint32_t ui32Base, uint32_t ui32Timer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current timer value. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint64_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__sysctl__api.html#gaa65ffa8e7fdfca67ba79562449aa3b85">TimerValueGet64</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current 64-bit timer value. <br />
+                &nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </ul>
-
-<h2>How to use this component</h2>
-<h3>1.Step</h3>
-<ul>
-    <li> a. ...</li>
-	<li> b. ...</li>
-	<li> c. ...</li>
-	<li> ...</li>
-</ul>
-
-<h3>2.Usage</h3>
-<ul>
-    <li> xGPIOPinRead();</li>
-	<li> ...</li>
-</ul>
-
-<h3>2....</h3>
-<ul>
-	<li> ...</li>
-</ul>
+<!-- XXXX help content end XXXX -->
+</body> </html>

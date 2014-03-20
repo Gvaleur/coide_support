@@ -6,7 +6,7 @@
       <Compile>
         <Option name="OptimizationLevel" value="0"/>
         <Option name="UseFPU" value="0"/>
-        <Option name="UserEditCompiler" value="-mcpu=cortex-m4; -mfpu=fpv4-sp-d16"/>
+        <Option name="UserEditCompiler" value="-mcpu=cortex-m4; -mfpu=fpv4-sp-d16; -mfloat-abi=hard"/>
         <Option name="SupportCPlusplus" value="0"/>
         <Includepaths>
           <Includepath path="."/>
@@ -32,7 +32,7 @@
           <Memory name="IROM2" type="ReadOnly" size="" startValue=""/>
           <Memory name="IRAM2" type="ReadWrite" size="" startValue=""/>
         </MemoryAreas>
-        <LocateLinkFile path="../../configuration/programdata/ti_blink_jlink/arm-gcc-link.ld" type="0"/>
+        <LocateLinkFile path="../../../../../../../../coocox/coide/configuration/programdata/ti_blink_jlink/arm-gcc-link.ld" type="0"/>
       </Link>
       <Output>
         <Option name="OutputFileType" value="0"/>
@@ -89,9 +89,9 @@
     <File name="src/sysctl.c" path="src/sysctl.c" type="1"/>
     <File name="include/hw_flash.h" path="include/hw_flash.h" type="1"/>
     <File name="src/gpio.c" path="src/gpio.c" type="1"/>
-    <File name="include/hw_memmap.h" path="include/hw_memmap.h" type="1"/>
     <File name="include/cpu.h" path="include/cpu.h" type="1"/>
     <File name="include/rom.h" path="include/rom.h" type="1"/>
+    <File name="include/hw_memmap.h" path="include/hw_memmap.h" type="1"/>
     <File name="include/debug.h" path="include/debug.h" type="1"/>
     <File name="include/interrupt.h" path="include/interrupt.h" type="1"/>
     <File name="main.c" path="main.c" type="1"/>

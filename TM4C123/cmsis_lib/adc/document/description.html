@@ -1,27 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body>
+<!-- XXXX help content begin XXXX -->
 <p>
-<link href="cox_series_component.css" type="text/css" rel="stylesheet" /></p>
+<link rel="stylesheet" type="text/css" href="cox_series_component.css" /></p>
 <h1>ADC</h1>
-<h2>What is this component</h2>
+<h2>Overview</h2>
+<p>The ADC is a Successive Approximation Register (SAR) architecture, with a resolution of up to 12 bits at up to one million samples per second.</p>
+<h2>API Reference</h2>
 <ul>
-    <li>A 12-bit ADC is an approximation method for Analog to Digital Converter. There are totally 10 multiplexed channels with 8 external channels which can measure signals from analog input and 2 internal sources. If the input voltage is beyond the thresholds, the feature of Analog Watchdog will detect the outranged signal. An interrupt will then be generated to warn that the input voltage is higher or lower then the thresholds. There are three conversion modes to translate a data from analog to digital. Various channels of the A/D conversion can be operated in one shot, continuous and discontinuous mode. A left-aligned or right-aligned 16-bit data register is provided to store the data after conversion.</li>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga2f6fd06e684c972624d070b1e080eb10">ADCComparatorConfigure</a> (uint32_t ui32Base, uint32_t ui32Comp, uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures an ADC digital comparator. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga33418393b43cacaa1ff2d5a21a7f236d">ADCComparatorIntClear</a> (uint32_t ui32Base, uint32_t ui32Status)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears sample sequence comparator interrupt source. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga01e7e020ab577fbee6e315ecdda2b0ac">ADCComparatorIntDisable</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables a sample sequence comparator interrupt. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gaa23c7794e50ff9c2980d50a4561d1372">ADCComparatorIntEnable</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables a sample sequence comparator interrupt. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga04bd11c27418d95e5dc4ef7c0374e68f">ADCComparatorIntStatus</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current comparator interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga43e38c9bf57f833cd17c5ae0a0392bdd">ADCComparatorRegionSet</a> (uint32_t ui32Base, uint32_t ui32Comp, uint32_t ui32LowRef, uint32_t ui32HighRef)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Defines the ADC digital comparator regions. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gab0d357766b25a044a384e7d0360475b3">ADCComparatorReset</a> (uint32_t ui32Base, uint32_t ui32Comp,bool bTrigger, bool bInterrupt)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Resets the current ADC digital comparator conditions. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gaaf4ccf4c4e4b5e5aab77e81653d96f96">ADCHardwareOversampleConfigure</a> (uint32_t ui32Base, uint32_t ui32Factor)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the hardware oversampling factor of the ADC. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga207d2cf2a807efe846f15200462166b0">ADCIntClear</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears sample sequence interrupt source. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga41d1a3386f32ee18f34f04cc6f5c547d">ADCIntDisable</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables a sample sequence interrupt. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga2ce4cfdfe4e47c998872215490121973">ADCIntEnable</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables a sample sequence interrupt. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gaf1483d72bc3c85d239b21eaa07d41e93">ADCIntRegister</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, void(*)(void) pfnHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for an ADC interrupt. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga10cececc7f912630401a2f0f6f90446f">ADCIntStatus</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the current interrupt status. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga0f763fe2999d69377cbf61fb1a0c7d1f">ADCIntUnregister</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Unregisters the interrupt handler for an ADC interrupt. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga09a690a1a0c4b67a2e7c7875fa0134b8">ADCPhaseDelayGet</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the phase delay between a trigger and the start of a sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga70e282b63591b311c8a756590e71f5cc">ADCPhaseDelaySet</a> (uint32_t ui32Base, uint32_t ui32Phase)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the phase delay between a trigger and the start of a sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga440fa9e04a1f5ebb18233e317159652d">ADCProcessorTrigger</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Causes a processor trigger for a sample sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gadfa7722bfa1c34b88125b1c4dafc2005">ADCReferenceGet</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Returns the current setting of the ADC reference. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga810a79075c912e3079a0eadfcffa9446">ADCReferenceSet</a> (uint32_t ui32Base, uint32_t ui32Ref)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Selects the ADC reference. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gad8ad8b940627697b2efddbf01f771d76">ADCSequenceConfigure</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t ui32Trigger, uint32_t ui32Priority)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the trigger source and priority of a sample sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">int32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gab6fb9d66d42093d8cf3a9ab58419fa38">ADCSequenceDataGet</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t *	pui32Buffer)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the captured data for a sample sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gafe10a7ac89541fa4824b923b1a1ae770">ADCSequenceDisable</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables a sample sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga3d9afeb0aeb2726e1713b936229bb412">ADCSequenceEnable</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables a sample sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">int32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga6a0a728833f89630c53b9c9a193b2e12">ADCSequenceOverflow</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Determines if a sample sequence overflow occurred. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gab350a6022880cd35f0cd497f5b247901">ADCSequenceOverflowClear</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears the overflow condition on a sample sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga1771f99a5228971b923b336d1bdbb4cd">ADCSequenceStepConfigure</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t ui32Step, uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configure a step of the sample sequencer. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">int32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga3fb7cdd1111bdd1bedf58cd1f2b2f4e4">ADCSequenceUnderflow</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Determines if a sample sequence underflow occurred. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga8a91676fd05e51b6fae497607497eb75">ADCSequenceUnderflowClear</a> (uint32_t ui32Base, uint32_t ui32SequenceNum)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears the underflow condition on a sample sequence. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gaca21bc3d5b266e21b7e38aa1b7323c1d">ADCSoftwareOversampleConfigure</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t ui32Factor)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the software oversampling factor of the ADC. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#ga2e26835fda7e53535d8104c683e259a4">ADCSoftwareOversampleDataGet</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t ui32Buffer, uint32_t ui32Count)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the captured data for a sample sequence using software oversampling. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__adc__api.html#gaa378d39edf95fa4aafdf1f280224dfdd">ADCSoftwareOversampleStepConfigure</a> (uint32_t ui32Base, uint32_t ui32SequenceNum, uint32_t ui32Step, uint32_t ui32Config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures a step of the software oversampled sequencer. <br />
+                &nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </ul>
-
-<h2>How to use this component</h2>
-<h3>1.Step</h3>
-<ul>
-    <li> a. ...</li>
-	<li> b. ...</li>
-	<li> c. ...</li>
-	<li> ...</li>
-</ul>
-
-<h3>2.Usage</h3>
-<ul>
-    <li> xGPIOPinRead();</li>
-	<li> ...</li>
-</ul>
-
-<h3>2....</h3>
-<ul>
-	<li> ...</li>
-</ul>
+<!-- XXXX help content end XXXX -->
+</body> </html>

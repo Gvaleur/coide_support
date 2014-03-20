@@ -1,27 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head><body>
+<!-- XXXX help content begin XXXX -->
 <p>
-<link href="cox_series_component.css" type="text/css" rel="stylesheet" /></p>
-<h1>ADC</h1>
-<h2>What is this component</h2>
+<link rel="stylesheet" type="text/css" href="cox_series_component.css" /></p>
+<h1>PWM</h1>
+<h2>Overview</h2>
+<p>Pulse width modulation (PWM) is a powerful technique for digitally encoding analog signal levels. High-resolution counters are used to generate a square wave, and the duty cycle of the square wave is modulated to encode an analog signal. Typical applications include switching power supplies and motor control.</p>
+<h2>API Reference</h2>
 <ul>
-    <li>A 12-bit ADC is an approximation method for Analog to Digital Converter. There are totally 10 multiplexed channels with 8 external channels which can measure signals from analog input and 2 internal sources. If the input voltage is beyond the thresholds, the feature of Analog Watchdog will detect the outranged signal. An interrupt will then be generated to warn that the input voltage is higher or lower then the thresholds. There are three conversion modes to translate a data from analog to digital. Various channels of the A/D conversion can be operated in one shot, continuous and discontinuous mode. A left-aligned or right-aligned 16-bit data register is provided to store the data after conversion.</li>
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga0330312868b4d7df496759563635690c">PWMDeadBandDisable</a> (uint32_t ui32Base, uint32_t ui32Gen)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the PWM dead band output. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gabe610ec6fd50251becf382a1479ca32f">PWMDeadBandEnable</a> (uint32_t ui32Base, uint32_t ui32Gen, uint16_t ui16Rise, uint16_t ui16Fall)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the PWM dead band output and sets the dead band delays. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gaf389ca1c69300d556fdc5113cccf5060">PWMFaultIntClear</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears the fault interrupt for a PWM module. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga9c0e721a969daed808a148607859e21d">PWMFaultIntClearExt</a> (uint32_t ui32Base, uint32_t ui32FaultInts)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears the fault interrupt for a PWM module. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gada200e22c312dd4015e26717821ffb39">PWMFaultIntRegister</a> (uint32_t ui32Base, void(*)(void) pfnIntHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for a fault condition detected in a PWM module. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gaa5b9971717f517bdac7c1f1e3885e541">PWMFaultIntUnregister</a> (uint32_t ui32Base)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Removes the PWM fault condition interrupt handler. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga4fb48f68ba82e698c6ce1913d5300754">PWMGenConfigure</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32config)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures a PWM generator. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga2829ffb434e65a7aa27ee69977fdc122">PWMGenDisable</a> (uint32_t ui32Base, uint32_t ui32Gen)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables the timer/counter for a PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gac83fa6b41c14ed89bb8c1882c59ac190">PWMGenEnable</a> (uint32_t ui32Base, uint32_t ui32Gen)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables the timer/counter for a PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga3c00a35459dd8714d57bb35c1b2e5621">PWMGenFaultClear</a> (uint32_t 	ui32Base, uint32_t ui32Gen, uint32_t ui32Group, uint32_t ui32FaultTriggers)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears one or more latched fault triggers for a given PWM generator. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga16ca060d2c4e997682912cba1d6d1962">PWMGenFaultConfigure</a> (uint32_t 	ui32Base, uint32_t ui32Gen, uint32_t ui32MinFaultPeriod, uint32_t ui32FaultSenses)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the minimum fault period and fault pin senses for a given PWM generator. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gaf2cd851dc65dccee7c2c885f15bbfc4a">PWMGenFaultStatus</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Group)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Returns the current state of the fault triggers for a given PWM generator. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga59e1b382bd20206868f6bb0af0af98df">PWMGenFaultTriggerGet</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Group)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Returns the set of fault triggers currently configured for a given PWM generator. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gae7fb9968efcd45b0525dc1f3bca86819">PWMGenFaultTriggerSet</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Group, uint32_t ui32FaultTriggers)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Configures the set of fault triggers for a given PWM generator. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga0d4748e1865ceae4814aef2296a9604a">PWMGenIntClear</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Ints)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Clears the specified interrupt(s) for the specified PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga1bd27374e6dce2e1a2689166b79be9f6">PWMGenIntRegister</a> (uint32_t ui32Base, uint32_t ui32Gen, void(*)(void) pfnIntHandler)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Registers an interrupt handler for the specified PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga645372a9dd99a0683d7c8e53006357ed">PWMGenIntStatus</a> (uint32_t ui32Base, uint32_t ui32Gen, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets interrupt status for the specified PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gafdd8f3c8343e5b06916bb6ba5ead9533">PWMGenIntTrigDisable</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32IntTrig)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Disables interrupts for the specified PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga31055ec13555e774fa6702e35b774518">PWMGenIntTrigEnable</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32IntTrig)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables interrupts and triggers for the specified PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga93c72c556d0febbd7d641df12f30d7b1">PWMGenIntUnregister</a> (uint32_t ui32Base, uint32_t ui32Gen)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Removes an interrupt handler for the specified PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga318c7e9cfc0c4abc0c1efc3154bc0810">PWMGenPeriodGet</a> (uint32_t ui32Base, uint32_t ui32Gen)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the period of a PWM generator block. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga0ec9d188f8e72f597f4f5bf41152468d">PWMGenPeriodSet</a> (uint32_t ui32Base, uint32_t ui32Gen, uint32_t ui32Period)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the period of a PWM generator. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gacaca72e1bc8b2f041b6e6ad290d54a12">PWMIntDisable</a> (uint32_t ui32Base, uint32_t ui32GenFault)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables generator and fault interrupts for a PWM module. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gaf66b481a351b0be5f06e163640319838">PWMIntEnable</a> (uint32_t ui32Base, uint32_t ui32GenFault)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables generator and fault interrupts for a PWM module. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gac90f2873671ff65e9225d8238e068a14">PWMIntStatus</a> (uint32_t ui32Base, bool bMasked)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the interrupt status for a PWM module. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga10e1cb93f663c916cf5403e29e1be898">PWMOutputFault</a> (uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bFaultSuppress)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Specifies the state of PWM outputs in response to a fault condition. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga35b6c40b99278f7d78c186cd275b7a05">PWMOutputFaultLevel</a> (uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bDriveHigh)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Specifies the level of PWM outputs suppressed in response to a fault condition. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gaf233159a77a070f2dc60d50da3939ba9">PWMOutputInvert</a> (uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bInvert)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Selects the inversion mode for PWM outputs. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga372c69ae52fe1136454b60230f38beb1">PWMOutputState</a> (uint32_t ui32Base, uint32_t ui32PWMOutBits, bool bEnable)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Enables or disables PWM outputs. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">uint32_t&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gae361688d19da3c776f82e31607392f3f">PWMPulseWidthGet</a> (uint32_t ui32Base, uint32_t ui32PWMOut)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Gets the pulse width of a PWM output. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga2abde7fc411bf9cad8de0c5dc070c78c">PWMPulseWidthSet</a> (uint32_t ui32Base, uint32_t ui32PWMOut, uint32_t ui32Width)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Sets the pulse width for the specified PWM output. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#gadd7281936c715b7286746bbae6c24a6a">PWMSyncTimeBase</a> (uint32_t ui32Base, uint32_t ui32GenBits)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Synchronizes the counters in one or multiple PWM generator blocks. <br />
+                &nbsp;</td>
+            </tr>
+			<tr>
+                <td class="memItemLeft" valign="top" align="right">void&nbsp;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="..\..\doxygen\group__pwm__api.html#ga32a04801267751f323f528cd3d5f2da5">PWMSyncUpdate</a> (uint32_t ui32Base, uint32_t ui32GenBits)</td>
+            </tr>
+            <tr>
+                <td class="mdescLeft">&nbsp;</td>
+                <td class="mdescRight">Synchronizes all pending updates. <br />
+                &nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </ul>
-
-<h2>How to use this component</h2>
-<h3>1.Step</h3>
-<ul>
-    <li> a. ...</li>
-	<li> b. ...</li>
-	<li> c. ...</li>
-	<li> ...</li>
-</ul>
-
-<h3>2.Usage</h3>
-<ul>
-    <li> xGPIOPinRead();</li>
-	<li> ...</li>
-</ul>
-
-<h3>2....</h3>
-<ul>
-	<li> ...</li>
-</ul>
+<!-- XXXX help content end XXXX -->
+</body> </html>
